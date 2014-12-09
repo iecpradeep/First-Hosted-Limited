@@ -1,0 +1,40 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/site/mrfothergills/css/default.css" rel="stylesheet" type="text/css">
+<link href="/site/mrfothergills/js/cloud-zoom.css" rel="stylesheet" type="text/css">
+<link href="/site/mrfothergills/js/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="/c.<NLCOMPANYID>/site/mrfothergills/mrfothergills.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/c.<NLCOMPANYID>/site/mrfothergills/mrfothergills.ico" type="image/x-icon">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/brand-specific.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/loginhelper.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/sitemapmenu.js"></script>
+
+<script type="text/javascript">
+function getTestDriveNum() {
+   var accountNumber = "<NLCOMPANYID>"; 
+   return accountNumber;
+}
+
+function getCustomerID() {
+   var customerID = "<%=getCurrentAttribute('customer','internalid')%>"; 
+   return customerID;
+}
+
+function confirmLogin() {
+   var loginEmail = "<%=getCurrentAttribute('customer','email')%>"; 
+   return loginEmail;
+}
+
+$(document).ready(function(){
+   $('.checkoutprogresstext').parent().parent().parent().parent().parent().parent().parent().css('margin', '0 20px');
+   $('#shippingmethodtable input').attr('disabled', 'disabled'); // Disable Shipping override
+});
+</script>
+
+<script type="text/javascript" src="https://system.netsuite.com/c.<NLCOMPANYID>/suitebundle3682/HtmlDecodeStripped.js"></script>
+<script type="text/javascript" src="https://system.netsuite.com/c.<NLCOMPANYID>/site/common/js/WishList_Web.js"></script>
+<!-- JQuery Plugins -->
+<script type="text/javascript" src="/site/mrfothergills/js/getUrlVars.jquery.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/cloud-zoom.1.0.2-sitello.js" id="zoom"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/jquery.colorbox-min.js"></script>

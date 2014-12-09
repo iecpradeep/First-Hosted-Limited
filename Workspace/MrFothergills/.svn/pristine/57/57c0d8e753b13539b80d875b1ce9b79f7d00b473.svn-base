@@ -1,0 +1,16 @@
+<td>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ if (!(page.hasPagination)){
+  page.lowItem = 1;
+  page.highItem++;
+  page.totalItems++;
+  page.updateTotalItems();
+ }
+});
+</script>
+
+<table><tr><td><a href="<%=getCurrentAttribute('infoitem','storeurl')%>"><img src="<%=getCurrentAttribute('infoitem','storedisplaythumbnail')%>" alt="<%=getCurrentAttribute('infoitem','itemid')%>"></a></td><td><h2><a href="<%=getCurrentAttribute('infoitem','storeurl')%>"><%=getCurrentAttribute('infoitem','itemid')%></a></h2><p><%=getCurrentAttribute('infoitem','storedetaileddescription')%></p></td></tr></table>
+
+</td>

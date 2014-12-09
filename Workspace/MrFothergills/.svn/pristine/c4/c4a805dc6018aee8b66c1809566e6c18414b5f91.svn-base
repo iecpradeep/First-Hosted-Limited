@@ -1,0 +1,30 @@
+<link rel="canonical" href="<%=getCurrentAttribute('item','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/infoitem.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/storefinder.js"></script>
+<!-- End addition_to_head -->
+<td>
+
+	<div id="breadcrumbs">
+		<MRFSOCIALHEADER2>
+	</div>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+			<MRFINFOMENU>
+		</div>
+		<div id="catright">
+			<form id="pcastorelocator" onsubmit="locateStore();return false;" action="javascript:void(0);">
+				<div class="infocontainer outline">
+					<h1><%=getCurrentAttribute('infoitem','itemid')%></h1>
+					<%=getCurrentAttribute('infoitem','storedetaileddescription')%>
+					<p>Please enter a postcode: <input type="text" id="postcode" name="postcode" value="" class="outline"> <input type="submit" value="Find" class="button" style="padding:0 15px;"></p>
+					<div class="clear"></div>
+				</div>
+				<div class="infocontainer outline">
+					<table id="pcastorelocatoroutput" style="width:100%;"><tr><td width="34%" style="padding:0 5px 20px 0;"></td><td width="33%" style="padding:0 5px 20px 0;"></td><td style="padding:0 0 20px 0;"></td></tr><tr><td style="padding:0 5px 20px 0;"></td><td style="padding:0 5px 20px 0;"></td><td style="padding:0 0 20px 0;"></td></tr></table>
+				</div>
+			</form>
+		</div>
+	</div>
+
+</td>

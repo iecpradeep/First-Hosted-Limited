@@ -1,0 +1,199 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/transaction_theme"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center_vertical|right"
+    android:layout_marginBottom="15dp"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:layout_marginTop="15dp"
+    tools:context=".Transaction" >
+
+    <!--
+         The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc.
+    -->
+
+    <!--
+         This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows.
+    -->
+
+	<!-- 
+    <TextView
+        android:id="@+id/tvHeadFD"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="60dp"
+        android:text="Transaction"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+ -->
+    <TextView
+        android:id="@+id/tvSaleType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TRANSACTION TYPE"
+        android:textSize="40sp"
+        android:textStyle="bold" />
+    
+    <TextView
+        android:id="@+id/tvCustomer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOMER NAME"
+        android:layout_marginTop="80dp"
+        android:textSize="17sp"
+    />
+    
+    <TextView
+        android:id="@+id/tvSalesRep"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="SALES REP"
+        android:layout_marginTop="110dp"
+        android:textSize="17sp"
+    />
+    
+	<TableLayout
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginTop="160dp"
+	     >
+	    
+	    <TableRow 
+	        android:id="@+id/tableRow77"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView76"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:text="Item"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/textView67"
+                android:layout_width="190dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:text="Price"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/textView56"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:background="@android:color/darker_gray"
+                android:text="Quantity"
+                android:textColor="@android:color/white" />        
+	    </TableRow>
+	    
+	</TableLayout>
+ 
+    
+    <!-- ListView (grid_items)-->
+    
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:layout_marginTop="180dp" 
+        >
+
+        <ListView
+            android:id="@+id/listview"
+            style="@style/transaction_theme"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:entries="@array/test_list_view" >
+
+        </ListView>
+    </LinearLayout>  
+    
+    
+    <!-- TEMP -->
+    <TextView
+        android:id="@+id/ItemName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Item Name"
+        android:layout_weight="1">
+    </TextView>
+    
+    <TextView
+        android:id="@+id/Description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Description"
+        android:layout_weight="2">
+    </TextView>
+    
+    <TextView
+        android:id="@+id/Qty"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Quantity"
+        android:layout_weight="1">
+    </TextView>
+    
+    <!-- TEMP END -->
+    
+        
+    <TextView
+        android:id="@+id/tvTranTotal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="350dp"
+        android:text="TRANSACTION TOTAL"
+        android:textSize="17sp" />
+    
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right|end"
+        android:layout_marginLeft="200dp"
+        android:layout_marginTop="420dp"
+        android:text="DATE"
+        android:textSize="10sp" />
+    
+    
+    <Spinner
+        android:id="@+id/payMethodSpin"
+        android:layout_width="155dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="380dp"
+        android:entries="@array/paymentmethod_array" />
+
+    <Button
+        android:id="@+id/btnOK"
+        android:layout_width="155dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="450dp"
+        android:drawableLeft="@drawable/tick48"
+        android:text="OK"
+        android:textSize="30sp" />
+        
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="155dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="170dp"
+        android:layout_marginTop="450dp"
+        android:drawableLeft="@drawable/cross48"
+        android:text="DEL"
+        android:textSize="30sp" />
+    
+</FrameLayout>

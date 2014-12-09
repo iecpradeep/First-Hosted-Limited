@@ -1,0 +1,71 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/common/js/slider.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//$('#special').prepend($('#nlcrumbtrail'));
+	//$('#nlcrumbtrail').show();
+	
+	// Re-format quantity pricing
+	$('.product3 table.bglt').each(function(){
+		var fromPrice = $(this).children().children(':last-child').prev().children(':last-child').html();
+		$(this).hide()
+			.siblings('.buttons').children('.price').html('from ' + fromPrice);
+	});
+});
+</script>
+<!-- End addition_to_head -->
+<td>
+
+<NLPROCESSONCE>
+	<div id="special"><p><%=getCurrentAttribute('sitecategory','description')%></p>
+		<DTBSOCIALHEADER>
+	</div>
+	<div id="featureright">
+		<div class="featuretext"><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.192/.f"><img src="/site/dtbrown/img/home/rhb_quickorder.jpg" alt="Quick Order Form"></a></div>
+		<div class="featuretext"><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.211/.f"><img src="/site/dtbrown/img/home/rhb_freecat.jpg" alt="Request a Catalogue"></a></div>
+		<div class="featuretext"><a href="#" class="newsletter"><img src="/site/dtbrown/img/home/rhb_news.jpg" alt="News &amp Offers"></a></div>
+		<div class="featuretext"><a href="http://gardenplanner.dtbrownseeds.co.uk/"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/DTB/rhb_gardenplanner.jpg" alt=Garden Planner"></a></div>
+		<div class="featuretext"><a href="/Free-seed-labels"><img src="/site/dtbrown/img/home/rhb_seedlabels.jpg" alt="Free Seed Labels with all seed purchases"></a></div>
+		<div class="featuretext"><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.194/.f"><img src="/site/dtbrown/img/home/rhb_gardeningclubs.jpg" alt="Gardening Clubs"></a></div>
+	</div>
+	<div id="slider">
+		<div id="slide_0" class="slide">
+			<a href="/Soft-Fruit/Blueberry-Legacy_2.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/DTB/DTB13-homebanner-blueberry.jpg" alt="Same Day despatch"></a>
+		</div>
+<div id="slide_1" class="slide">
+			<a href="/Catalogue-Request_2.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/DTB/DTB13-homebanner-newcats.jpg" alt="New Main Catalogue"></a>
+		</div>
+<div id="slide_2" class="slide">
+			<a href="/Despatch-Information_2.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/DTB/DTB13-homebanner-despatch.jpg" alt="Same Day despatch"></a>
+		</div>
+		<!--<div id="slider_control"><img src="/site/dtbrown/img/slider_control_84x24.png" alt=""></div>-->
+	</div>
+	<div id="featured">
+		<div id="products">
+<table>
+<tr>
+<NLITEMLIST>
+</tr>
+</table>
+		</div>
+	</div>
+	<div id="message">
+		<%=getCurrentAttribute('sitecategory','storedetaileddescription')%>
+	</div>
+	<ul id="menu">
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.192/.f" class="shadowbox"><div><div>Quick Order Form&gt;</div></div></a></li>
+		<li><a href="#" class="shadowbox newsletter"><div><div>eNewsletter<br>Sign Up&gt;</div></div></a></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.193/.f" class="shadowbox"><div><div>Free P&amp;P on all seed only orders</div></div></a></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.194/.f" class="shadowbox"><div><div>Gardening Clubs&gt;</div></div></a></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.200/.f" class="shadowbox"><div><div>Same Day Despatch&gt;</div></div></a></li>
+	</ul>
+	<ul id="menu2">
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.47/category.424189/SS.424189/ctype.SS/.f"><div><div>Sowing Now</div></div></a></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.47/category.424188/SS.424188/ctype.SS/.f"><div><div>Harvesting Now</div></div></a></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.47/category.424185/.f"><div><div>News &amp; Events</div></div></a></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.47/category.424187/.f"><div><div>Hints &amp; Tips</div></div></a></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.47/category.424183/.f"><div><div>Care &amp;amp; Cultivation</div></div></a></li>
+	</ul>
+
+</td>

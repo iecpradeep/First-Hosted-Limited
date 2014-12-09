@@ -1,0 +1,62 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/site/dtbrown/css/default.css" rel="stylesheet" type="text/css">
+<link href="/site/dtbrown/js/cloud-zoom.css" rel="stylesheet" type="text/css">
+<link href="/site/dtbrown/js/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="/c.<NLCOMPANYID>/site/dtbrown/dtbrown.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/c.<NLCOMPANYID>/site/dtbrown/dtbrown.ico" type="image/x-icon">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/site/dtbrown/js/brand-specific.js"></script>
+<script type="text/javascript" src="/site/common/js/loginhelper.js"></script>
+<script type="text/javascript" src="/site/common/js/cart.js"></script>
+<script type="text/javascript" src="/site/common/js/offershelper.js"></script>
+<script type="text/javascript" src="/site/dtbrown/js/pubsearch.js"></script>
+<script type="text/javascript" src="/site/common/js/carousel.js"></script>
+
+<script type="text/javascript">
+function getTestDriveNum() {
+   var accountNumber = "<NLCOMPANYID>"; 
+   return accountNumber;
+}
+
+function getCustomerID() {
+   var customerID = "<%=getCurrentAttribute('customer','internalid')%>"; 
+   return customerID;
+}
+
+function confirmLogin() {
+   var loginEmail = "<%=getCurrentAttribute('customer','email')%>"; 
+   return loginEmail;
+}
+
+function cartURL() {
+   var cartLink = "<NLCARTURL>";
+   return cartLink;
+}
+
+function isSandbox() {
+  var sandbox = window.location.hostname.search(/^(.+\.)*sandbox\.netsuite\.com$/);
+  if (sandbox < 0)
+  {
+    return false;
+  }
+  else
+  {
+    return true;
+  }
+}
+
+$(document).ready(function(){
+	$('.checkoutprogresstext').parent().parent().parent().parent().parent().parent().parent().css('margin', '0 20px');
+	$('#paymethhider').before('<div id="paymethnote"><p><img src="/site/common/img/big-arrow.png" alt="&gt;">Please note that payment will only be taken after you Confirm &amp; Submit your order on the next screen.</p></div><hr><p id="paytotal"></p>')
+	.parent().parent().parent().parent().css('position','relative');
+	$('#paymethhider').before('<div id="paymethbox"><p><a href="http://www.safebuy.org.uk/certificate/714becff-c8cc-4a09-b6b1-b6fbd332a9eb.html"><img alt="SafeBuy web code of practice" src="/site/dtbrown/img/safebuy.jpg"></a></p><p><a href="/s.nl/c.' + getTestDriveNum() + '/it.I/id.195/.f"><img alt="D.T. Brown Guarantee" src="/site/dtbrown/img/dtbrown_guarantee_76x112.gif"></a></p></div>');
+});
+</script>
+
+<script type="text/javascript" src="https://system.netsuite.com/c.<NLCOMPANYID>/suitebundle3682/HtmlDecodeStripped.js"></script>
+<script type="text/javascript" src="https://system.netsuite.com/c.<NLCOMPANYID>/site/common/js/WishList_Web.js"></script>
+<!-- JQuery Plugins -->
+<script type="text/javascript" src="/site/mrfothergills/js/getUrlVars.jquery.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/cloud-zoom.1.0.2-sitello.js" id="zoom"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/jquery.colorbox-min.js"></script>

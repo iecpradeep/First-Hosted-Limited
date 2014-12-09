@@ -1,0 +1,9 @@
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\bin\Debug\FirstPOS.exe
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\bin\Debug\FirstPOS.pdb
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\FirstPOS.FrmMain.resources
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\FirstPOS.Properties.Resources.resources
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\FirstPOS.csproj.GenerateResource.Cache
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\FirstPOS.exe
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\FirstPOS.pdb
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\FirstPOS.frmOrder.resources

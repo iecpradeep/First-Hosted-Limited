@@ -1,0 +1,25 @@
+<link rel="canonical" href="<%=getCurrentAttribute('item','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/johnsons/js/infoitem.js"></script>
+<!-- End addition_to_head -->
+<td>
+
+	<div id="breadcrumbs">
+		<JNSSOCIALHEADER>
+	</div>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+			<JNSINFOMENU>
+		</div>
+		<div id="catright">
+<style type="text/css">
+.checkoutbutton{display:none;}
+.campaignbox{width:745px;margin:0 20px;}
+</style>
+			<CAMPAIGNPROMPT>
+			<iframe src="/app/site/crm/externalleadpage.nl?compid=<NLCOMPANYID>&formid=5&h=98f1cefd7f25d19542aa" width="100%" height="970" scrolling="no" frameborder="0" marginwidth="0" marginheight="0" allowtransparency="true"></iframe>
+
+		</div>
+	</div>
+
+</td>

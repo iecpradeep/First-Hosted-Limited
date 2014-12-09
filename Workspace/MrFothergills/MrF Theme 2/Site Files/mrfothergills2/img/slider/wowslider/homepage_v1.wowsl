@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VisualLightBox>
+    <Gallery version="2.5">
+        <Settings>
+            <AppName>WOW Slider</AppName>
+            <AppUrlS>WOWSlider.com</AppUrlS>
+            <AppVersion>2.7.1</AppVersion>
+            <AutoPlay>true</AutoPlay>
+            <Captions>false</Captions>
+            <CaptionsEffect>slide</CaptionsEffect>
+            <Controls>false</Controls>
+            <GalleryName>homepage_v1</GalleryName>
+            <GallerySuffix>1</GallerySuffix>
+            <HtmlCharset>UTF-8</HtmlCharset>
+            <ImageAspectRatio>true</ImageAspectRatio>
+            <ImageEffect>fade</ImageEffect>
+            <ImageHeight>280</ImageHeight>
+            <ImageQuality>90</ImageQuality>
+            <ImageShrink2>true</ImageShrink2>
+            <ImageStretch>true</ImageStretch>
+            <ImageTemplate>C:/Program Files/WOW Slider/templates/backgnd/mac/</ImageTemplate>
+            <ImageTemplateName>Native</ImageTemplateName>
+            <ImageWidth>918</ImageWidth>
+            <Images>true</Images>
+            <OneLoop>false</OneLoop>
+            <OrderRandom>false</OrderRandom>
+            <Preloader>true</Preloader>
+            <PublishFileName>S:/workspace/SVN_MrFothergills/MrF Theme 2/Site Files/mrfothergills2/img/slider/wowslider/index.html</PublishFileName>
+            <PublishIndex>index.html</PublishIndex>
+            <PublishPath>S:/workspace/SVN_MrFothergills/MrF Theme 2/Site Files/mrfothergills2/img/slider/wowslider</PublishPath>
+            <PublishPreview>false</PublishPreview>
+            <PublishType>file</PublishType>
+            <RelativePath>true</RelativePath>
+            <ShowBullets>true</ShowBullets>
+            <ShowTooltips>true</ShowTooltips>
+            <SlideshowDelay>40</SlideshowDelay>
+            <SlideshowDuration>20</SlideshowDuration>
+            <SoundEnable>0</SoundEnable>
+            <SoundFileName></SoundFileName>
+            <StopOnHover>true</StopOnHover>
+            <TemplateName>mac</TemplateName>
+            <ThumbAlign>bottom</ThumbAlign>
+            <ThumbFormat>jpg</ThumbFormat>
+            <ThumbHeight>48</ThumbHeight>
+            <ThumbQuality>90</ThumbQuality>
+            <ThumbWidth>0</ThumbWidth>
+            <Thumbnails>false</Thumbnails>
+            <TooltipPos>top</TooltipPos>
+            <noFrame>1</noFrame>
+        </Settings>
+        <Images RelativePath="true">
+            <Image>
+                <url>../new-home-offer-bluebelle.jpg</url>
+                <description>Order 5 packs or more of seed potatoes and receive 10 tubers of Potato Blue Belle ABSOLUTELY FREE! (while stocks last)</description>
+                <userurl>/Potatoes/</userurl>
+            </Image>
+            <Image>
+                <url>../homepage_vegetableplants.jpg</url>
+                <description>Tasty amd nutricious vegetable plants!</description>
+                <userurl>/Vegetable-Plants/</userurl>
+            </Image>
+            <Image>
+                <url>../homepage_picnmix.jpg</url>
+                <description>BIG SAVINGS on Mr F's Pick 'n' Mix Bedding Plants</description>
+                <userurl>/Flower-Plants/</userurl>
+            </Image>
+            <Image>
+                <url>../homepage_sweetpea.jpg</url>
+                <description>Mr Fothergill's Year of the Sweet Pea!</description>
+            </Image>
+        </Images>
+    </Gallery>
+</VisualLightBox>

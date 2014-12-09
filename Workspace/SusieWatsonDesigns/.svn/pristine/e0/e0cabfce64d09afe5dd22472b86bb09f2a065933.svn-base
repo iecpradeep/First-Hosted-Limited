@@ -1,0 +1,178 @@
+.content-slider {
+	display:none;
+	width: 1200px;
+	height: 770px;
+	position: relative;
+	overflow: hidden;
+}
+
+.content-slider .slides {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.content-slider .slides .slide {
+	position: absolute;
+	left: 1200px;
+	margin: 0;
+	padding: 0;
+}
+
+.content-slider .slides .slide0 {
+	left: 0;
+}
+
+.content-slider .slides .slide .slide-img {
+	width: 1200px;
+	height: 770px;
+}
+
+.content-slider .left-arrow {
+	position: absolute;
+	top: 50%;
+	margin-top: -22px;
+	margin-left: 14px;
+	border: none;
+}
+
+.content-slider .right-arrow {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	margin-top: -22px;
+	margin-right: 14px;
+	border: none;
+}
+
+.content-slider .pause,
+.content-slider .play {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin-bottom: 14px;
+	margin-right: 14px;
+	border: none;
+}
+
+.content-slider .pause {
+	display: none;
+}
+
+.dot-control {
+	position: relative;
+	top: 742px;
+	margin: 0 auto;
+	display: table;
+}
+
+.title-box {
+	position: absolute;
+	top: 143px;
+	right: 837px;
+	min-width: 207px;
+	min-height: 100px;
+	max-width: 330px;
+}
+
+.title-box table,
+.dot-control table {
+	position: absolute;
+	border-collapse: collapse;
+}
+
+.title-box table {
+	right:0;
+	max-width: 330px;
+}
+
+.dot-control table {
+	width: 100%;
+	table-layout: fixed;
+}
+
+.title-box .box-content {
+	background-image: url('/c.917016/swd/images/fhl.homeslider/Heart-Line.png');
+	background-position: right bottom;
+	background-repeat: no-repeat;
+	margin: 0 8px 8px;
+	padding: 0 0 14px;
+}
+
+.title-box .box-content h1 {
+	color: #EFE9CE;
+	font-family: "Bookman Old Style","Baskerville Old Face",Georgia,Times,serif;
+	font-size: 2.3em;
+	text-transform: lowercase;
+	white-space: nowrap;
+}
+
+.title-box .box-content h2 {
+	color: #EFE9CE;
+	font-family: "Bookman Old Style","Baskerville Old Face",Georgia,Times,serif;
+	font-size: 1.8em;
+	text-transform: lowercase;
+	background: none;
+	float: none;
+}
+
+.title-box .box-content h2 a {
+	color: #EFE9CE;
+	font-weight: normal;
+}
+
+.title-box .box-content h2 a:hover {
+	color: #9CA36C;
+	text-decoration: none;
+}
+
+.title-box .box-content p {
+	color: #EFE9CE;
+	font-family: Georgia,Times,serif;
+	font-size: 1.2em;
+	line-height: 1.2em;
+}
+
+.title-box table td,
+.dot-control table td {
+	padding: 0;
+	width: 7px;
+}
+
+.title-box table td.dot-control-bg {
+	background-image: url('/c.917016/swd/images/fhl.homeslider/box-bg.png');
+	min-width: 7px;
+	width: auto;
+	text-align: right;
+}
+
+.dot-control table td.dot-control-bg {
+	background-image: url('/c.917016/swd/images/fhl.homeslider/box-bg.png');
+	min-width: 14px;
+	width: auto;
+}
+
+.dot-control ul {
+	position: relative;
+	margin: 0;
+	padding: 0;
+}
+
+.dot-control ul li {
+	float: left;
+	white-space: nowrap;
+	padding: 0;
+	margin: 3.5px 3.5px 0;
+	background-image: none;
+}
+
+.dot-control ul li div {
+	width: 7px;
+	height: 7px;
+	background-image: url('/c.917016/swd/images/fhl.homeslider/dot.png');
+	cursor: pointer;
+}
+
+.dot-control ul li.active div {
+	background-image: url('/c.917016/swd/images/fhl.homeslider/dot-white.png');
+}

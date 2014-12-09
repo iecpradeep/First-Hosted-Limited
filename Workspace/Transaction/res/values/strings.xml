@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FirstDroid</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="nameOfCustomer">Customer</string>
+    <string name="nameOfCashSale">Cash Sale</string>
+    <string name="nameOfSalesOrder">Sale on Account</string>
+    <string name="nameOfSynchronise">Synchronise</string>
+    <string name="syncAllData">Synchronise all data</string>
+    <string name="listAllCustomers">List all Customers</string>
+    <string name="newSalesOrder">New Sale on Account</string>
+    <string name="newCashSale">New Cash Sale</string>
+    <string name="saveCashSale">Save Cash Sale</string>
+    <string name="searchContacts">Search for Contacts</string>
+    <string name="viewAccountSettings">Account Settings</string>
+    <string name="selectItems">Select Items</string>
+    <string name="selectCustomer">Select Customer</string>
+    <string name="viewCustomer">View Customer</string>
+    <string name="newContact">New Contact</string>
+    <string name="netsuiteAccountNumber">Account Number:</string>
+    <string name="netsuiteLogin">Login Email Address:</string>
+    <string name="netsuiteRoleID">NetSuite Role ID:</string>
+    <string name="netsuitePassword">Password:</string>
+    <string name="accountSettingsName">FirstDroid Account Settings:</string>
+    <string name="cancelString">Cancel</string>
+    <string name="saveString">Save</string>
+    <string name="okString">OK</string>
+    <string name="yesString">Yes</string>
+    <string name="noString">No</string>
+    <string name="exitApplication">Exit FirstDroid</string>
+
+    <string-array name="role_array">
+        <item value="3">Administrator</item>
+        <item value="1021">MunsterSales Rep</item>
+    </string-array>
+    <string-array name="paymentmethod_array">
+        <item value="3">Credit Card</item>
+        <item value="4">Cash</item>
+        <item value="5">Cheque</item>
+        <item value="6">BACS</item>
+    </string-array>
+
+    <string-array name = "test_list_view">
+        <item value="0">HP 655</item>
+        <item value="1">Samsung E2220</item>
+        <item value="2">Sony Tablet S 16GB</item>
+        <item value="3">Cisco IP Phone 7940</item>
+        <item value="4">Logitech K200</item>
+        <item value="5">11" MacBook Air</item>
+        <item value="6">Apple iPhone 5 32GB</item>
+        <item value="7">Apple iPad 128GB</item>
+    </string-array>
+</resources>

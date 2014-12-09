@@ -1,0 +1,25 @@
+<!-- End addition_to_head -->
+
+<td valign="top">
+ <link rel="stylesheet" type="text/css" href="/c.917016/swd/styles/fhl.homeslider/fhl.homeslider.css" media="screen, projection">
+ <script type="text/javascript" src="/c.917016/swd/scripts/fhl.homeslider/fhl.homeslider.js"></script>
+ <style type="text/css">
+  /*.landing #outerwrapper {background-image:url(<%=getCurrentAttribute("site","welcomeimageurl","/swd/images/home/1.jpg")%>);}*/
+  .landing .header-wrapper,
+  .landing .navigation,
+  .landing .shadow,
+  .landing .footer-wrapper  {position:relative;z-index:10;}
+  .landing .container-wrapper,
+  .landing .container {position:static;}
+  #full-screen-background {position: absolute;width: 1200px;left: 50%;top: 0;margin-left: -600px;text-align: left;z-index:0;}
+  #full-screen-background div.container-wrapper {position:absolute;left:0;width:100%;top:653px;height:117px;min-height:117px;}
+  .landing .container {min-height: 652px;}
+ </style>
+
+ <div id="full-screen-background">
+  <a href="<HOME_FULLSCREENIMAGE_LINK_URL>"><%=getCurrentAttribute("site","welcomeimagehtml")%></a>
+  <div id="content-slider-1" class="content-slider"></div>
+  <!--<div class="container-wrapper"></div>-->
+ </div>
+
+</td>

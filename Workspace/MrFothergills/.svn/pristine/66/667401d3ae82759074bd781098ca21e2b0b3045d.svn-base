@@ -1,0 +1,5 @@
+<script type="text/javascript">
+if ("<%=getCartLineField('custcol_lineoffer')%>" != ""){
+ document.write("Offer: <%=getCartLineField('custcol_lineoffer')%>");
+}
+</script>

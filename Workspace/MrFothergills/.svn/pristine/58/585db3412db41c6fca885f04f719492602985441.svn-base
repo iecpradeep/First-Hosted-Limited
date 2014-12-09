@@ -1,0 +1,242 @@
+/*****************************************************************************
+ *	Name		:	pickPackShipReportSuitelet.js
+ *  Script Type	:	suitelet
+ *	Client		: 	Mr. Fothergills
+ *
+ *	Version		:	1.0.0 - 31/05/2013  First Release - AS
+ *				
+ * 	Author		:	FHL 
+ * 	Purpose		:	To Crete the Pick, Pack and Ship Reports
+ * 
+ *  Script		: 	
+ * 	Deploy		: 	
+ * 
+ * 	Library		: 	
+ * 
+ ***************************************************************************/
+//declaring global variables
+var selectionForm = '';
+var sr = '';
+var selectedLocation = '';
+var selectedStartBatchNo = 0 ;
+var selectedEndBatchNo = 0 ;
+var selectedReportName = 0;
+var selectedprinted = 'F';
+var loadedSavedSearch =  0;
+
+/***************************************************************************
+ * accessVATChecker Function - The main function
+ * 
+ * @param request
+ * @param response
+ **************************************************************************/
+function pickpackshipReport(request,response)
+{
+	try
+	{
+		//getting the method type
+		if (request.getMethod() == 'GET')
+		{
+			//Creates custom form
+			createSelectionForm();
+			response.writePage(selectionForm);			//writing the form 
+		}
+		//if 'POST' method called (clicking the button)
+		else
+		{
+			initialise();						//calling initialise function
+			//connectToVATCheckSite();				//calling connectToVATCheckSite function
+			loadResults();
+			processPPSRecords();
+		}
+	}
+	catch(e)
+	{
+		errorHandler('pickpackshipReport', e);
+	}
+
+}
+
+/***************************************************************************
+ * initialise Function - initialise the static variables used in the script
+ * 
+ **************************************************************************/
+function initialise()
+{
+	try
+	{
+
+	}
+	catch(e)
+	{
+		errorHandler('initialise', e);
+	}
+}
+
+
+
+
+/***************************************************************************
+ * createSelectionForm Function - creating the selection form to get the user input
+ * 
+ **************************************************************************/
+function createSelectionForm()
+{
+	//var batchNumbers = new Array();
+	
+	try
+	{
+		//batchNumbers = genericSearchColumnReturn('customrecord_mrf_pickpackship', 'custrecord_pps_process', 'F', 'custrecord_batchnumber');
+		selectionForm = nlapiCreateForm('Report Criteria Selection');			//creating the form
+		selectionForm.addField('custpage_ppslocation', 'select', 'Location', 'location');
+		selectionForm.addField('custpage_reportname', 'select', 'Report Name', 'customlist_ppsreportlist');
+		selectionForm.addField('custpage_ppsstartbatchnumber', 'text', 'Start Batch Number');
+		selectionForm.addField('custpage_ppsendbatchnumber', 'text', 'End Batch Number');
+		selectionForm.addField('custpage_markprinted', 'checkbox', 'Mark as Printed?');
+		selectionForm.addSubmitButton('Create Report');										//adding the submit button
+
+	}
+	catch(e)
+	{
+		errorHandler('createSelectionForm', e);
+	}
+}
+
+
+
+/*******************************************************
+ * get form data
+ * 
+ ********************************************************/
+function getFormData()
+{
+
+	try
+	{
+		//Get filter information from form
+		selectedLocation = request.getParameter('custpage_ppslocation');
+		selectedStartBatchNo = request.getParameter('custpage_ppsstartbatchnumber');
+		selectedEndBatchNo  = request.getParameter('custpage_ppsendbatchnumber');
+		selectedReportName = request.getParameter('custpage_reportname');
+		selectedprinted = request.getParameter('custpage_markprinted');
+		
+			
+	}
+	catch (e)
+	{
+		errorHandler('getFormData', e);
+	}
+
+}
+
+function loadResults()
+{
+	var ppsFilters = new Array();
+
+	var locationName = '';
+	var reportName = '';
+	var savedSearchID = '';
+	var savedSearchInternalID = 0;
+	var outputPage = '';
+	var confirmMessage = '';
+	
+	try
+	{
+		getFormData();
+
+		locationName = nlapiLookupField('location', selectedLocation, 'name');
+		reportName = nlapiLookupField('customlist_ppsreportlist', selectedReportName, 'name');
+		nlapiLogExecution('debug', 'locationName', locationName);
+		nlapiLogExecution('debug', 'reportName', reportName);
+
+		//setting the savedsearchID to load
+		if(locationName == 'KMO' && reportName == 'KMO - Bin Number Sequence')		
+		{
+			savedSearchID = 'customsearch_kmobinnumberlocation';
+		}
+		else if(locationName == 'KMO' && reportName == 'KMO - Delivery Reference Sequence')	
+		{
+			savedSearchID = 'customsearch_kmodeliveryreferencesequenc';
+		}
+		else if(locationName == 'JRH' && reportName == 'JRH - Pick Notes')	
+		{
+			savedSearchID = 'customsearch_jrhpicknotes';
+		}
+		else if(locationName == 'RKY' && reportName == 'RKY - Pre - Pick Note')	
+		{
+			savedSearchID = 'customsearch_prepicknote';
+		}
+		else if(locationName == 'RKY' && reportName == 'RKY - Clean Pick Note')	
+		{
+			savedSearchID = 'customsearch_rkycleanpicknote';
+		}
+		else
+		{
+			savedSearchID = 0;
+		}
+
+		//var setf = load.addFilters(fils);
+
+
+		nlapiLogExecution('debug', 'savedSearchID', savedSearchID);
+
+//		load.saveSearch('Align Ac view', 'customsearch230');
+		if(savedSearchID != 0)
+		{
+			loadedSavedSearch = nlapiLoadSearch('customrecord_mrf_pickpackship', savedSearchID);
+			//ppsFilters[0] = new nlobjSearchFilter('custrecord_batchnumber', null, 'between', selectedStartBatchNo, selectedEndBatchNo);
+			//loadedSavedSearch.addFilters(ppsFilters);
+
+			//loadedSavedSearch.saveSearch(reportName, savedSearchID);
+
+			
+			savedSearchInternalID = loadedSavedSearch.getId();
+			nlapiLogExecution('debug', 'savedSearchInternalID', savedSearchInternalID);
+			confirmMessage = '<html><body><script type="text/javascript">window.confirm("Do You Want To Mark These results As Printed?");</script>';
+			outputPage = confirmMessage;
+			outputPage += '<html><body><script type="text/javascript">window.location.href=\'https://system.sandbox.netsuite.com/app/common/search/searchresults.nl?searchid='+savedSearchInternalID + '&whence=\';</script><p>Error: No parameters passed.</p>';
+
+		}
+		else
+		{
+			outputPage = '<html><body><script type="text/javascript"></script><p>Error: The report doesn\'t exists.Please Please enter the correct details again.</p>';
+
+		}
+		response.write(outputPage);
+		
+	
+		
+	}
+	catch(e)
+	{
+		errorHandler('loadResults', e);
+	}
+}
+
+
+
+function processPPSRecords()
+{
+	var runSS = '';
+	var ssResults = '';
+	
+	try
+	{
+		if(selectedprinted == 'T')
+		{
+			runSS = loadedSavedSearch.runSearch();
+			ssResults = runSS.getResults(0,1000);
+			nlapiLogExecution('debug', 'ssResults length', ssResults.length);
+		}
+		
+	}
+	catch(e)
+	{
+		errorHandler('processPPSRecords', e);
+	}
+
+
+
+
+
+}

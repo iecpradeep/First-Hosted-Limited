@@ -1,0 +1,66 @@
+/*****************************************************************************
+ *	Name		:	getOldJournalsForRevRec.js
+ *	Script Type	:	user event - before Record Submit of invoice. 
+ *	Applies To	: 	invoices
+ *
+ *	Client		: 	Mr. Fothergills
+ *
+ *	Version		:	1.0.0 - 04/07/2013  First Release - AS
+ *				
+ *				
+ * 	Author		:	FHL 
+ * 	Purpose		:	To get the list of journals related to the invoice
+ * 
+ * 	Script		: 	
+ * 	Deploy		:   
+ * 
+ * 	Library		: library.js
+ * 
+ ***************************************************************************/
+
+
+/**********************************************************************
+ * getOldJournals Function - creating and posting the journals into NetSuite
+ * 
+ * @param amount - amount of the particular line item (the amount to be debited and credited)
+ **********************************************************************/
+function getOldJournals()
+{
+	var param = new Array();
+	var journalList = new Array();
+	var noOfLineItems = 0;
+	
+	try
+	{
+		noOfLineItems = nlapiGetLineItemCount('item');				//getting the no of line items 
+		
+		
+		nlapiLogExecution('debug', 'reaching?', 'reaching');
+
+		for(var x = 1; x <= noOfLineItems; x++)
+		{
+			existingJournalIntID = nlapiGetLineItemValue('item','custcol_revjournalref',x);
+			
+			if(existingJournalIntID > 0)
+			{
+				journalList[x-1] = existingJournalIntID + ',';
+				nlapiLogExecution('debug', 'oldJournalList length', journalList.length);
+				nlapiLogExecution('debug', 'existingJournalIntID', existingJournalIntID);
+				nlapiLogExecution('debug', 'x', x);
+				nlapiLogExecution('debug', 'oldJournalList[x-1] 1', journalList[x-1]);
+			}
+		}
+		nlapiSetFieldValue('custscript_oldjournallist', journalList);
+	
+	
+		
+	}
+	catch(e)
+	{
+
+		errorHandler('getOldJournals', e);
+	}
+
+
+
+}

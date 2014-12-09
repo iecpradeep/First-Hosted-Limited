@@ -1,0 +1,215 @@
+<meta name="description" content="<%=getCurrentAttribute('item','custitem_meta_description')%>">
+<meta name="keywords" content="<%=getCurrentAttribute('item','custitem_meta_keywords')%>">
+<link rel="canonical" href="<%=getCurrentAttribute('item','canonicalurl')%>">
+<%=declareCurrentAttribute('item','custitem_productreviews1')%>	    
+<%=declareCurrentAttribute('item','custitem_productreviews2')%>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/itemdrilldown.js"></script>
+<script type="text/javascript">
+$(function(){
+	// Add Cloud Zoom and Colorbox Enlarge function to image gallery
+	if ("<%=getCurrentAttribute('item','custitem_mrf_ext_storelargeimage')%>" != ''){
+		$('.cloud-zoom,.cloud-zoom-gallery').CloudZoom();
+		$('#photopanel').colorbox({opacity:.5,href:$('#zoom1').attr('href')});
+	}
+	// Make sure Colorbox changes selected image
+	$('.cloud-zoom-gallery').each(function(){
+		$(this).click(function(){
+			$('#photopanel').colorbox({opacity:.5,href:$(this).attr('href')});
+		});
+	});
+});
+
+// PRODUCT REVIEWS
+function productReviewIframe() {
+    var productId = escape("<%=getCurrentAttribute("item", "internalid")%>");               
+    var formurl = "/app/site/crm/externalcustrecordpage.nl?compid=<NLCOMPANYID>&formid=2&h=98ca3d0f989a8cb57540";
+    document.write('<iframe src="' + formurl + "&productId=" + productId + '" width="600" height="400" frameborder="0" scrolling="no" allowtransparency="true"></iframe>');
+}
+
+function displayReviews() {
+    var review1 = "<%=getCurrentAttribute("item","custitem_productreviews1")%>";            
+    var review2 = "<%=getCurrentAttribute("item","custitem_productreviews2")%>";
+        
+    return HtmlDecode(review1 + review2);
+}
+</script>
+<!-- End addition_to_head -->
+<td>
+
+<NLPROCESSONCE>
+	<div id="breadcrumbs">
+		<MRFSOCIALHEADER2>
+	</div>
+	<div id="itemwrapper">
+		<div id="itemleft">
+			<div id="photopanel" class="outline">
+				<a href="<%=getCurrentAttribute('item','custitem_mrf_ext_storelargeimage')%>" class="cloud-zoom" id="zoom1" rel="position: 'inside',showTitle:false,adjustX:-4,adjustY:-4"><img id="mainimg" src="<%=getCurrentAttribute("item","custitem_mrf_ext_storedisplayimage")%>" alt="<%=getCurrentAttribute('item','storedisplayname')%>" title="<%=getCurrentAttribute('item','storedisplayname')%>"></a>
+
+				<p id="zoommsg">Hover to zoom, click to enlarge</p>
+				<a href="<%=getCurrentAttribute('item','custitem_mrf_ext_storelargeimage')%>" class="cloud-zoom-gallery" title="Thumbnail 1" rel="useZoom: 'zoom1', smallImage: '<%=getCurrentAttribute('item','custitem_mrf_ext_storedisplayimage')%>' "><img id="thumb1" src="<%=getCurrentAttribute('item','custitem_mrf_ext_storedisplaythumbnail')%>" alt="Thumbnail 1"></a>
+				<a href="<%=getCurrentAttribute('item','custitem_mrf_ext_large2')%>" class="cloud-zoom-gallery" title="Thumbnail 2" rel="useZoom: 'zoom1', smallImage: '<%=getCurrentAttribute('item','custitem_mrf_ext_image2')%>' "><img id="thumb2" src="<%=getCurrentAttribute('item','custitem_mrf_ext_thumb2')%>" alt="Thumbnail 2"></a>
+				<a href="<%=getCurrentAttribute('item','custitem_mrf_ext_large3')%>" class="cloud-zoom-gallery" title="Thumbnail 3" rel="useZoom: 'zoom1', smallImage: '<%=getCurrentAttribute('item','custitem_mrf_ext_image3')%>' "><img id="thumb3" src="<%=getCurrentAttribute('item','custitem_mrf_ext_thumb3')%>" alt="Thumbnail 3"></a>
+			</div>
+			<div id="videopanel">
+				<%=getCurrentAttribute('item','custitem_mrf_store_video')%>
+			</div>
+		</div>
+		<div id="itemright">
+			<h1><%=getCurrentAttribute('item','storedisplayname')%></h1>
+			<!--<p id="emailfriend"><img src="/site/mrfothergills/img/email_25x25.gif" alt=""> <%=getCurrentAttribute('item','tellafriendlinkhtml')%></p>-->
+			<h2><span><span class="data"><%=getCurrentAttribute('item','custitem_mrf_store_popularname')%></span></span></h2>
+			<h3><span><span class="data"><%=getCurrentAttribute('item','custitem_mrf_store_botanicalname')%></span></span></h3>
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_1image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_1alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_1alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_2image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_2alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_2alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_3image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_3alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_3alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_4image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_4alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_4alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_5image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_5alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_5alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_6image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_6alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_6alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_7image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_7alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_7alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_8image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_8alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_8alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_9image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_9alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_9alttext')%>">
+			<img src="<%=getCurrentAttribute('item','custitem_mrf_item_icon_10image')%>" alt="<%=getCurrentAttribute('item','custitem_mrf_item_icon_10alttext')%>" title="<%=getCurrentAttribute('item','custitem_mrf_item_icon_10alttext')%>">
+			<p class="detail"><b><%=getCurrentAttribute('item','storedescription')%></b></p>
+			<p class="detail"><%=getCurrentAttribute('item','storedetaileddescription')%></p>
+			<p class="detail"><span><b>Height: </b><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_heightvalue')%></span> </span><span><b>Width: </b><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_width')%></span> </span><span><b>Depth: </b><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_depth')%></span></span><br>
+				<span><b>Plant Class: </b><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_plantclass')%></span>.<br></span>
+				<span><b>Habit: </b><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_habit')%></span>.<br></span>
+				<span><b>Early/Late Flowering: </b><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_earlylate')%></span>.<br></span>
+				<span><b>Flower Size: </b><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_flowersize')%></span>.<br></span>
+				<span><b>Despatch Option: </b><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_despoption')%></span>.<br></span>
+				<span><b><span class="caution">CAUTION: </span><span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_caution')%></span></b></span></p>
+			<div class="itemspecial">
+				<span class="data"><%=getCurrentAttribute('item','custitem_mrf_store_promohtml')%></span>
+			</div>
+			<div class="itemoption outline">
+				<div class="itemoptionleft">
+					<h2><%=getCurrentAttribute('item','storedisplayname')%></h2>
+					<p><%=getCurrentAttribute('item','custitem_mrf_store_pricedesc')%></p>
+					<p><span class="special"><%=getCurrentAttribute('item','custitem_mrf_store_promodesc')%></span></p>
+					<p><span><b>Last Order Date: <span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_lastorder')%></span></b><br></span>
+						<span><b>Despatch: <span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_despatch')%></span></b></span></p>
+				</div>
+				<div class="itemoptionright">
+					<p class="wishlist"><a id="buttonWL" href="javascript:AddToWishList('<%=getCurrentAttribute('item','internalID')%>');">Add to Wish List</a></p>
+				</div>
+			</div>
+			<div class="matrix">
+<table>
+<tr>
+<%=getCurrentAttribute('item','relatedItemsHTML')%>
+</tr>
+</table>
+			</div>
+			<div id="sowindoors" class="datahidden"><%=getCurrentAttribute('item','custitem_mrf_item_sowindoors')%></div>
+			<div id="sowoutside" class="datahidden"><%=getCurrentAttribute('item','custitem_mrf_item_sowoutside')%></div>
+			<div id="flowerharvest" class="datahidden"><%=getCurrentAttribute('item','custitem_mrf_item_flowerharvest')%></div>
+			<div id="datechart" class="outline shadowbox">
+				<h3>Sowing/Planting and Flowering/Harvesting Guide</h3>
+				<table>
+					<tr>
+						<th>JAN</th>
+						<th>FEB</th>
+						<th>MAR</th>
+						<th>APR</th>
+						<th>MAY</th>
+						<th>JUN</th>
+						<th>JUL</th>
+						<th>AUG</th>
+						<th>SEP</th>
+						<th>OCT</th>
+						<th>NOV</th>
+						<th>DEC</th>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				<hr>
+				<p>Key &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/site/mrfothergills/img/dcindoor_47x9.gif" alt=""> Sow Indoors &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/site/mrfothergills/img/dcoutdoor_47x9.gif" alt=""> Sow/Plant Outside &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/site/mrfothergills/img/dcflower_47x9.gif" alt=""> Flowers/Harvest</p>
+			</div>
+		</div>
+	</div>
+	<div id="itemdetail">
+		<div id="itemtabs">
+			<ul>
+				<li><a href="#itemtab1">Sow &amp; Grow</a></li>
+				<li><a href="#itemtab2">Hints &amp; Tips</a></li>
+				<li><a href="#itemtab3">Pest &amp; Disease Advice</a></li>
+				<li><a href="#itemtab4">Care &amp; Cultivation</a></li>
+				<li><a href="#itemtab5">Plant Types</a></li>
+				<li class="itemtabright"><a href="#itemtab6">Add a Review</a></li>
+				<li class="itemtabright"><a href="#itemtab7">Customer Reviews</a></li>
+			</ul>
+			<div id="itemtab1" class="itemtab outline shadowbox">
+				<%=getCurrentAttribute('item','custitem_mrf_item_sowgrow')%>
+			</div>
+			<div id="itemtab2" class="itemtab outline shadowbox">
+				<%=getCurrentAttribute('item','custitem_mrf_item_hintstips')%>
+			</div>
+			<div id="itemtab3" class="itemtab outline shadowbox">
+				<%=getCurrentAttribute('item','custitem_mrf_item_pestadvice')%>
+			</div>
+			<div id="itemtab4" class="itemtab outline shadowbox">
+				<%=getCurrentAttribute('item','custitem_mrf_item_cultivation')%>
+			</div>
+			<div id="itemtab5" class="itemtab outline shadowbox">
+				<%=getCurrentAttribute('item','custitem_mrf_item_planttypes')%>
+			</div>
+			<div id="itemtab6" class="itemtab outline shadowbox">
+				<script type="text/javascript">productReviewIframe();</script>
+			</div>
+			<div id="itemtab7" class="itemtab outline shadowbox">
+				<p><script type="text/javascript">document.write(displayReviews());</script></p>
+			</div>
+		</div>
+	</div>
+	<div id="products3">
+		<h2>Customers Who Bought This Item Also Bought</h2>
+<table>
+<tr>
+<%=getCurrentAttribute('item','correlateditemshtml')%>
+</tr>
+</table>
+	</div>
+
+</td>

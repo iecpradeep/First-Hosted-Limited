@@ -1,0 +1,7 @@
+INDEX VERSION 1.122+/Users/Morganti/Workspace/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
+3504402850.index
+326425441.index
+4064739553.index
+1971498200.index
+3055931853.index
+4210870300.index

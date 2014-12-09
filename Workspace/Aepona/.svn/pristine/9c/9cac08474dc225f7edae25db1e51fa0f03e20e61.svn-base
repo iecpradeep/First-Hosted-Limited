@@ -1,0 +1,397 @@
+/*******************************************************
+ * Name:		Aepona PR Release 2
+ * Script Type:	Client
+ * Version:		1.0.0
+ * Version:		1.0.1 - 25/04/2013 - Modified the button label - SA
+ * Version:		1.0.2 -  01/05/2013 - amended the PO send method  field disable - SA
+ * Version:		1.0.3 -  31/05/2013 - amended get field value for contact id - SA
+ * 
+ * Date:		25 March 2013
+ * Author:		FHL
+ *******************************************************/
+
+
+/**
+ * @param type
+ * @param name
+ * @returns {Boolean}
+ */
+function onChange(type, name)
+{
+
+		if (type == 'item' && name == 'item')
+		{
+			var item = nlapiGetCurrentLineItemValue('item','item');
+			if (item != '' && item != null)
+			{
+				var help = nlapiLookupField('customrecord_pr_item_help',item,'custrecord_pr_help_help');
+				nlapiSetFieldValue('custbody_help',help,false,false);
+			}//end if
+			return true;	
+		}//end if
+
+		if (name == 'entity')
+		{
+			var supplierId = nlapiGetFieldValue('entity');
+			// 1.0.1 -modified the button label
+			var supplierLink = '<input type="button" value="Edit Supplier Contact Details" onclick="editSupplier(' + supplierId + ')"></html>';
+
+			nlapiSetFieldValue('custbody_editsuppliercontactdetails',supplierLink,false,true);
+
+			return true;
+
+		} //if
+
+		if (name == 'custbody_shipselect')
+		{
+			var selection = nlapiGetFieldValue('custbody_shipselect');
+			if (selection != null && selection != '' && selection != 8)
+			{
+				var address = nlapiLookupField('customrecord_prshippingaddress',selection,'custrecord_address');
+				nlapiSetFieldValue('custbody_prshipaddress',address,false,false);
+				nlapiDisableField('custbody_prshipaddress', true);
+			} //end if
+			else
+			{
+				nlapiSetFieldValue('custbody_prshipaddress','',false,false);
+				nlapiDisableField('custbody_prshipaddress', false);
+			} //else
+
+		} //end if
+
+		if (name == 'custbody_pr_aepona_billto')
+		{
+			var billselection = nlapiGetFieldValue('custbody_pr_aepona_billto');
+			if (billselection != null && billselection != '')
+			{
+				var billaddress = nlapiLookupField('customrecord_pr_billing_address',billselection,'custrecord_bill_address');
+				nlapiSetFieldValue('custbody_prbillingaddress',billaddress,false,false);
+				nlapiDisableField('custbody_prbillingaddress', true);
+			} //end if
+			else
+			{
+				nlapiSetFieldValue('custbody_prbillingaddress','',false,false);
+				nlapiDisableField('custbody_prbillingaddress', false);
+			} //else
+		} //end if
+		if (name == 'custbody_sendtosupplier')
+		{
+			var sendtosupplier = nlapiGetFieldValue('custbody_sendtosupplier');
+			if (sendtosupplier == '3')
+			{
+				nlapiDisableField('custbody_suppliersendmethod', true);
+				nlapiSetFieldValue('custbody_suppliersendmethod', '');
+			} //end if
+			else
+			{
+				nlapiDisableField('custbody_suppliersendmethod', false);
+			} //else
+		} //end if
+
+		if (name == 'custbody_sendtosupplier' || name == 'custbody_suppliersendmethod')//send method and recipient combo
+		{
+			var sendtosupplier = nlapiGetFieldValue('custbody_sendtosupplier');
+			var contactvalue = nlapiGetFieldValue('custbody_pr_contact');
+			var sendmethod = nlapiGetFieldValue('custbody_suppliersendmethod');
+			var contactemail = nlapiGetFieldValue('custbody_pr_contact_email').length;
+			var supplieremail = nlapiGetFieldValue('custbody_pr_supplier_email');
+			var contactfax = nlapiGetFieldValue('custbody_pr_contact_fax');
+			var supplierfax = nlapiGetFieldValue('custbody_pr_supplier_fax');
+			
+			
+			//var realcontactid = nlapiGetFieldValue('custbody_prcontact_realid');
+			// Version:		1.0.3 - amended get field value for contact id - SA
+			var realcontactid = nlapiGetFieldValue('custbody_prsuppliercontactselect');
+			
+			var contactaddress = nlapiGetFieldValue('custbody_prsuppliercontactaddress');
+			var supplieraddress = nlapiGetFieldValue('billaddress');
+			var supplierid = nlapiGetFieldValue('entity');
+			
+			var billadrressList = nlapiGetFieldValue('billaddresslist');
+				
+
+			if (sendtosupplier == '1' && (contactaddress == '' || contactaddress == null)) //Contact Via Hard Copy (Post)
+			{
+				var confAddressCont = confirm('There is no Postal Address for this Contact or you have not yet selected a Contact\n\nClick OK to edit the Contact in Pop Up Window\n\nClick Cancel to continue entering information on this Form');
+				if (confAddressCont == true)
+				{
+				
+					window.open('/app/site/hosting/scriptlet.nl?script=83&deploy=1&compid=1246650&CID='+realcontactid+'&SID='+supplierid, '_blank',"dependant=yes,height=600,width=1100,scrollbars=0,titlebar=0,toolbar=no,menubar=0,resizable=no,location=no");
+				}
+			} //end if
+
+			if (sendtosupplier == '2' && (contactemail == '' || contactemail == null)) //Contact Via Email
+			{
+				var confFaxCont = confirm('There is no Email Address for this Contact or you have not yet selected a Contact\n\nClick OK to edit the Contact in Pop Up Window\n\nClick Cancel to continue entering information on this Form');
+				if (confFaxCont == true)
+				{
+					window.open('/app/site/hosting/scriptlet.nl?script=83&deploy=1&compid=1246650&CID='+realcontactid+'&SID='+supplierid, '_blank',"dependant=yes,height=600,width=1100,scrollbars=0,titlebar=0,toolbar=no,menubar=0,resizable=no,location=no");
+				}
+			} //end if
+
+			if (sendtosupplier == '3'&& (contactfax == '' || contactfax == null)) //Contact Via Fax
+			{
+				var confFaxCont = confirm('There is no Fax Number for this Contact or you have not yet selected a Contact\n\nClick OK to edit the Contact in Pop Up Window\n\nClick Cancel to continue entering information on this Form');
+				if (confFaxCont == true)
+				{
+					window.open('/app/site/hosting/scriptlet.nl?script=83&deploy=1&compid=1246650&CID='+realcontactid+'&SID='+supplierid, '_blank',"dependant=yes,height=600,width=1100,scrollbars=0,titlebar=0,toolbar=no,menubar=0,resizable=no,location=no");
+				}
+				
+			} //end if
+
+            
+			if (sendtosupplier == '4' && supplieraddress == '') //Supplier Via Hard Copy (Post)
+			{
+				var confAddressSupp = confirm('There is no Postal Address for this Supplier or you have not yet selected a Supplier\n\nClick OK to edit the Supplier in Pop Up Window\n\nClick Cancel to continue entering information on this Form');
+				if (confAddressSupp == true)
+				{
+					window.open('/app/site/hosting/scriptlet.nl?script=84&deploy=1&compid=1246650&SID='+supplierid, '_blank',"dependant=yes,height=600,width=1100,scrollbars=0,titlebar=0,toolbar=no,menubar=0,resizable=no,location=no");
+				}						
+			} //end if
+
+			if (sendtosupplier == '5' && supplieremail == '') //Supplier Via Email
+			{
+				var confEmailSupp = confirm('There is no Email Address for this Supplier or you have not yet selected a Supplier\n\nClick OK to edit the Supplier in Pop Up Window\n\nClick Cancel to continue entering information on this Form');
+				if (confEmailSupp == true)
+				{
+					window.open('/app/site/hosting/scriptlet.nl?script=84&deploy=1&compid=1246650&SID='+supplierid, '_blank',"dependant=yes,height=600,width=1100,scrollbars=0,titlebar=0,toolbar=no,menubar=0,resizable=no,location=no");
+				}						
+			} //end if
+
+			if (sendtosupplier == '6' && supplierfax == '') //Supplier Via Fax
+			{
+				var confFaxSupp = confirm('There is no Fax Number for this Supplier or you have not yet selected a Supplier\n\nClick OK to edit the Supplier in Pop Up Window\n\nClick Cancel to continue entering information on this Form');
+				if (confFaxSupp == true)
+				{
+					window.open('/app/site/hosting/scriptlet.nl?script=84&deploy=1&compid=1246650&SID='+supplierid, '_blank',"dependant=yes,height=600,width=1100,scrollbars=0,titlebar=0,toolbar=no,menubar=0,resizable=no,location=no");
+				}
+			} //end if
+		} //end send method and recipient combo if
+
+	
+
+		if (name == 'custbody_projectrelated')
+		{
+			var projectrelated = nlapiGetFieldValue('custbody_projectrelated');
+
+			if (projectrelated == '2') //project related = NO
+			{
+				nlapiDisableLineItemField('item', 'customer', true);
+				nlapiDisableLineItemField('item', 'custcol_prcustomerlist', true);
+				nlapiDisableLineItemField('item', 'custcol_prprojectlist', true);
+
+				nlapiSetCurrentLineItemValue('item','customer','',false,true);
+				nlapiSetCurrentLineItemValue('item','custcol_prcustomerlist','',false,true);
+				nlapiSetCurrentLineItemValue('item','custcol_prprojectlist','',false,true);
+			} //end if
+			if (projectrelated == '1')
+			{
+				nlapiDisableLineItemField('item', 'customer', false);
+				nlapiDisableLineItemField('item', 'custcol_prcustomerlist', false);
+				nlapiDisableLineItemField('item', 'custcol_prprojectlist', false);
+			}
+		} //end if
+
+		if (name == 'custbody_prdepartment')
+		{
+			var prdepartment = nlapiGetFieldValue('custbody_prdepartment');
+			if (prdepartment != null && prdepartment != '')
+			{
+				nlapiSetFieldValue('department',prdepartment,false,false);
+			} //end if
+			else
+			{
+				nlapiSetFieldValue('department','',false,false);
+			} //else
+		} //end if
+		if (name == 'custbody_prtype')
+		{
+			var prtype = nlapiGetFieldValue('custbody_prtype');
+			if (prtype != null && prtype != '')
+			{
+				var firstapprover = nlapiLookupField('customrecord_prapprovals',prtype,'custrecord_prapprovalfirstapprover');
+				nlapiSetFieldValue('custbody_prfirstapprover',firstapprover,false,false);
+				var secondapprover = nlapiLookupField('customrecord_prapprovals',prtype,'custrecord_prapprovalsecondapprover');
+				nlapiSetFieldValue('custbody_prsecondapprover',secondapprover,false,false);
+			} //end if
+		} //end if	
+		
+
+		if (type == 'item' && name == 'item')
+		{
+			nlapiSetCurrentLineItemValue('item','rate',0.00,false,true);
+			nlapiSetCurrentLineItemValue('item','tax1amt',0.00,false,true);
+			nlapiSetCurrentLineItemValue('item','grossamt',0.00,false,true);
+			//nlapiSetCurrentLineItemValue('item','taxrate1',0.00,false,true);
+			nlapiSetCurrentLineItemValue('item','amount',0.00,false,true);
+			//nlapiSetFieldValue('custbody_prquoteref', '');
+		} //end if
+
+
+
+	return true;
+
+} //function
+
+
+/**
+ * @param type
+ * @param name
+ */
+function postSourcing(type,name)
+{
+	var projecterelated = nlapiGetFieldText('custbody_projectrelated');
+	if (type == 'item' && name == 'item')
+	{
+		nlapiSetCurrentLineItemValue('item','rate',0.00,false,true);
+		nlapiSetCurrentLineItemValue('item','tax1amt',0.00,false,true);
+		nlapiSetCurrentLineItemValue('item','grossamt',0.00,false,true);
+		//	nlapiSetCurrentLineItemValue('item','taxrate1',0.00,false,true);
+		nlapiSetCurrentLineItemValue('item','amount',0.00,false,true);
+		//	nlapiSetFieldValue('custbody_prquoteref', '');
+	} //end if
+	if (type == 'item' && name == 'item' && projecterelated == 'No')
+	{
+		//alert(projecterelated);
+		nlapiDisableLineItemField('item','custcol_prcustomerlist',true);
+		nlapiDisableLineItemField('item','custcol_prprojectlist',true);
+	} //end if
+
+	if (type == 'item' && name == 'item' && projecterelated == 'Yes')
+	{
+		nlapiDisableLineItemField('item','custcol_prcustomerlist',false);
+		nlapiDisableLineItemField('item','custcol_prprojectlist',false);
+	} //end if
+
+} //function
+
+
+/**
+ * Version:		1.0.2 -  01/05/2013 - amended the PO send method  field disable - SA
+ */
+function onLoad()
+{
+	try
+	{
+		nlapiDisableLineItemField('item', 'tax1amt', true);
+		nlapiDisableLineItemField('item', 'grossamt', true);
+		nlapiDisableLineItemField('item', 'taxrate1', true);
+		nlapiDisableLineItemField('item', 'taxcode', true);
+		nlapiDisableLineItemField('item', 'amount', true);
+
+
+		var sendtosupplier = nlapiGetFieldValue('custbody_sendtosupplier');
+		var savedasdraft = nlapiGetFieldValue('custbody_pr_submitforreview');
+		
+		// 1.0.2 -  if save button field is submit for approval then disable the field, i.e only PR requestor can set the PO send method. '1' = submit for approval.
+		if (savedasdraft == '1')
+		{
+			nlapiDisableField('custbody_suppliersendmethod', true);
+		} //end if
+		else
+		{
+			nlapiDisableField('custbody_suppliersendmethod', false);
+		} //else
+
+	}
+	catch(e)
+	{
+		alert('onLoad ' + e.message);
+	}
+
+} //function
+
+
+/**
+ * @param type
+ * @param name
+ * @returns {Boolean}
+ */
+function validateLine(type,name)
+{
+	var projectselect = nlapiGetCurrentLineItemText('item','custcol_prprojectlist');
+	var linedesc = nlapiGetCurrentLineItemValue('item','description');
+	var projecterelated2 = nlapiGetFieldText('custbody_projectrelated');
+	var ddproject = nlapiGetCurrentLineItemValue('item','custcol_prprojectlist');
+	if (type == 'item' && projecterelated2 == 'Yes' && projectselect == 0)
+	{
+		alert("Please select a Customer and Project");
+		return false;
+	} //end if
+
+	/*		if (type == 'item' && projecterelated2 == 'No')
+		{
+			alert('You have selected Project Related as NO, Customer and Project details will be removed! Please re edit this line if necessary');
+			nlapiSetCurrentLineItemValue('item', 'custcol_prcustomerlist', '');
+			nlapiSetCurrentLineItemValue('item', 'custcol_prprojectlist', '');
+			nlapiSetCurrentLineItemValue('item', 'custcol_prprojectlist_display', '');
+			return true;		
+		} //end if
+	 */
+	nlapiSetFieldValue('custbody_help','',false,false);
+	nlapiSetCurrentLineItemValue('item','customer',ddproject);
+	return true;
+}//function
+
+
+///**
+//* @returns {Boolean}
+//*/
+//function onSave()
+//{
+//var sendtosupplier = nlapiGetFieldText('custbody_sendtosupplier');
+//var sendmethod = nlapiGetFieldValue('custbody_suppliersendmethod');
+//var suppliercontactemail = nlapiGetFieldValue('custbody_prsuppliercontactemail');
+//var supplieremail = nlapiGetFieldValue('custbody_prsupplieremail').length;
+//var suppliercontactfax = nlapiGetFieldValue('custbody_prsuppliercontactfax');
+//var supplierfax = nlapiGetFieldValue('custbody_prsupplierfax');
+//var shipaddressselect = nlapiGetFieldValue('custbody_shipselect');
+//var shipaddress = nlapiGetFieldValue('custbody_prshipaddress');
+//if (sendtosupplier != 'Do Not Issue' && (sendmethod =='' || sendmethod == null))
+//{
+//alert("Please select a method to send this PR to the Supplier");
+//return false;
+//} //end if
+//if (shipaddressselect == 8 && (shipaddress == '' || shipaddress == null))
+//{
+//alert("Please provide a Custom Ship Address or select a standard address from the list");
+//return false;				
+//}//end if
+//else
+//{
+//return true;
+//}
+
+//if (sendtosupplier == 1 && sendmethod == 3 && suppliercontactemail < 1)
+//{
+//alert("You need to enter a Contact Email Address");
+//return false;				
+//}//end if
+//else
+//{
+//return true;
+//}
+//}//function
+
+
+/**
+ * @param supplierId
+ * @returns {Boolean}
+ */
+function editSupplier(supplierId)
+{
+	var supplierLink = 'https://system.sandbox.netsuite.com/app/site/hosting/scriptlet.nl?script=110&deploy=1&custpage_supplierid=';
+	supplierLink += supplierId;
+	//alert(supplierLink);
+
+	window.open(supplierLink,"_blank","dependant=yes,height=200,width=400,scrollbars=0,titlebar=0,toolbar=no,menubar=0,resizable=no,location=no");
+
+	return true;
+}  //function
+
+
+//function test()
+//{
+//alert('test');
+//return true;
+//}

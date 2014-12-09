@@ -1,0 +1,52 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/common/js/slider.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	//$('#special').prepend($('#nlcrumbtrail'));
+	$('#nlcrumbtrail').remove();
+});
+</script>
+<!-- End addition_to_head -->
+<td>
+
+<NLPROCESSONCE>
+	<div id="special"><p><%=getCurrentAttribute('sitecategory','description')%></p>
+		<JNSSOCIALHEADER>
+	</div>
+	<div id="slider">
+		<div id="slide_0" class="slide">
+			<a href="#"><img src="/site/johnsons/img/slider/subcatbanner_littlegardeners-888w.jpg" alt="Little Gardners"></a>
+		</div>
+		<div id="slide_1" class="slide">
+			<a href="#"><img src="/site/johnsons/img/slider/homebanner_samedaydespatch-888w.jpg" alt="Same day despatch on seed-only orders placed on this web site"></a>
+		</div>
+		<div id="slide_2" class="slide">
+			<a href="#"><img src="/site/johnsons/img/slider/homebanner_SR-bees-butterflies-888w.jpg" alt="Sarah Raven's Brilliant for Bees &amp; Butterflies"></a>
+		</div>
+		<div id="slide_3" class="slide">
+			<a href="#"><img src="/site/johnsons/img/slider/homebanner_SR-cutflowers-888w.jpg" alt="Sarah Raven's Cut Flowers &amp; Gorgeous Gardens"></a>
+		</div>
+		<div id="slide_4" class="slide">
+			<a href="/World-Botanics/"><img src="/site/johnsons/img/slider/homebanner_worldbotanics-888w.jpg" alt="World Botanics"></a>
+		</div>
+		<div id="slide_5" class="slide">
+			<a href="/World-Kitchen/"><img src="/site/johnsons/img/slider/homebanner_worldkitchen-888w.jpg" alt="World Kitchen"></a>
+		</div>
+		<!--<div id="slider_control"><img src="/site/johnsons/img/slider_control_84x24.png" alt=""></div>-->
+	</div>
+	<div id="featurewrapper">
+		<div class="featuretext"><a href="/Postage-Packaging_2.html"><img src="/site/johnsons/img/home/but_freep-p.gif" alt="Free P&amp;P"></a></div>
+		<div class="featuretext"><a href="/Flower-Seed_0/Bees-Butterflies"><img src="/site/johnsons/img/home/but_wildlife.gif" alt="Gardening to Attract Wildlife"></a></div>
+		<div class="featuretext"><a href="/Little-Gardeners_2"><img src="/site/johnsons/img/home/but_children.gif" alt="Gardening with Children"></a></div>
+		<div class="featuretext"><a href="#"><img src="/site/johnsons/img/home/but_azproducts.gif" alt="A-Z of Products"></a></div>
+	</div>
+	<ul id="menu">
+		<li><a href="/Quick-Order-Form_4.html"><img src="/site/johnsons/img/home/bottabs_quickorder.gif" alt="Quick Order"></a></li>
+		<li><a href="/Store-Locator_2.html"><img src="/site/johnsons/img/home/bottabs_storelocator.gif" alt="Store Locator"></a></li>
+		<li><a href="/Home_4/Recipe-of-the-Month"><img src="/site/johnsons/img/home/bottabs_kitchencorner.gif" alt="Kitchen Corner"></a></li>
+		<li><a href="/About-Us_3.html"><img src="/site/johnsons/img/home/bottabs_aboutus.gif" alt="About Us"></a></li>
+		<li><a href="/Contact-Us_4.html"><img src="/site/johnsons/img/home/bottabs_contactus.gif" alt="Contact Us"></a></li>
+	</ul>
+
+</td>

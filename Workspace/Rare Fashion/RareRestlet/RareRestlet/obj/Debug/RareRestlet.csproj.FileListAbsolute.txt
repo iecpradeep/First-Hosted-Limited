@@ -1,0 +1,18 @@
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\bin\Debug\RestletSend.exe
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\bin\Debug\RestletSend.pdb
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\RareRestlet.frmMain.resources
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\RareRestlet.frmOrder.resources
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\RareRestlet.Properties.Resources.resources
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\RareRestlet.csproj.GenerateResource.Cache
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\RestletSend.exe
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\FirstPOS\obj\Debug\RestletSend.pdb
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\bin\Debug\RestletSend.exe
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\bin\Debug\RestletSend.pdb
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\obj\Debug\RareRestlet.frmMain.resources
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\obj\Debug\RareRestlet.Properties.Resources.resources
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\obj\Debug\RareRestlet.csproj.GenerateResource.Cache
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\obj\Debug\RestletSend.exe
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\obj\Debug\RestletSend.pdb
+C:\Documents and Settings\Games\My Documents\SVN\Rare Fashion\RareRestlet\RareRestlet\obj\Debug\RareRestlet.frmSettings.resources

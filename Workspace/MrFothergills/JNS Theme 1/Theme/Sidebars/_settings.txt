@@ -1,0 +1,3 @@
+Navigation Top-level Links = Categories
+Navigation Show Subcategories = true
+Navigation Show Items = false

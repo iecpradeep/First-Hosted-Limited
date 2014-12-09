@@ -1,0 +1,351 @@
+/**********************************************************************************************************
+ * Name:        salesOrderQuickAddSuitelet.js
+ * Script Type: Suitelet
+ * Client:      Mr Fothergills
+ * 
+ * Version:     1.0.0 - 14/05/2013 - first release - AM
+ *  
+ * Author:      FHL
+ * 
+ * Purpose:     Easy selection of items for the Sales Order.
+ * 
+ * Script:      customscript_salesorderquickaddsuitelet
+ * Deploy:     	customdeploy_salesorderquickaddsuitelet
+ * 
+ * Library:   	offersLibrary.js
+ **********************************************************************************************************/
+
+//Global Variables 
+var selectionForm = null;
+var itemCode = '';
+var itemEntered = '';
+var qty = 0;
+var quantityEntered = 0;
+var hiddencustomerBrand = 0;
+var hiddenCustomer = null;
+var customerBrand = 0;
+var custBrandParam = 0;
+var custParam = 0;
+var customer = 0;
+var errorText = '';
+var errorDisplay = '';
+
+var itemId = 0;
+var itemBrand = 0;
+var errorLabel = '';
+var stockStatus = 0;
+
+/**
+ * - itemSelector
+ * 
+ * Top-level function called by Script Deployment
+ * 
+ * @param request
+ * @param response
+ */
+function itemSelector(request, response)
+{
+	if (request.getMethod() == 'GET')
+	{
+//		Get the parameters and create the form
+		getParams(request, response);
+		createSelectionForm(request, response);
+		response.writePage(selectionForm);
+	}
+//	POST
+	else
+	{
+//		Check the Search Criteria
+		if(getSearchCriteria(request, response)==true)
+		{
+			postItems(request, response);
+		}
+		else
+		{
+			createSelectionForm(request, response);
+			response.writePage(selectionForm);
+		}
+	}
+}
+
+
+/**
+ * - getParams
+ * 
+ * Get the parameter information
+ * 
+ * @param request
+ * @param response
+ */
+function getParams(request, response)
+{
+	try
+	{
+		custBrandParam = request.getParameter('custparam_brand');		
+		customer = request.getParameter('custparam_cust');
+		
+//		Set errorDisplay display
+		errorDisplay = 'hidden';
+	}
+	catch (e)
+	{
+		errorHandler('checkCustomerBrand', e);
+	}
+}
+
+
+/**
+ * createSelectionForm
+ * 
+ * Create an item selection form
+ * 
+ * @param request
+ * @param response
+ */
+function createSelectionForm(request, response)
+{
+	var quantityDefault = 0;
+
+	try
+	{
+//		Set the default quantity to 1
+		quantityDefault = 1;
+
+//		CreateSselection Form
+		selectionForm = nlapiCreateForm('Add Item',true);
+
+//		Create Fields
+		itemCode = selectionForm.addField('custpage_item','text','Item Code');
+		selectionForm.getField('custpage_item').setDisplaySize(10, 10);
+		
+		errorLabel = selectionForm.addField('custpage_errorlabel','text', 'Error').setDefaultValue(errorText);
+		selectionForm.getField('custpage_errorlabel').setDisplaySize(37, 10);
+		selectionForm.getField('custpage_errorlabel').setDisplayType(errorDisplay);
+
+		hiddenCustomer = selectionForm.addField('custpage_hiddencustomer','integer','Customer Id').setDefaultValue(customer);
+		selectionForm.getField('custpage_hiddencustomer').setDisplaySize(10, 10);
+		selectionForm.getField('custpage_hiddencustomer').setDisplayType('hidden');
+
+		qty = selectionForm.addField('custpage_quantity','integer','Quantity').setDefaultValue(quantityDefault);
+		selectionForm.getField('custpage_quantity').setDisplaySize(10, 10);
+
+		hiddencustomerBrand = selectionForm.addField('custpage_hiddencustomerbrand','integer','Customer Brand Id').setDefaultValue(custBrandParam);
+		selectionForm.getField('custpage_hiddencustomerbrand').setDisplaySize(10, 10);
+		selectionForm.getField('custpage_hiddencustomerbrand').setDisplayType('hidden');
+		
+//		Create Buttons
+		selectionForm.addSubmitButton('Add');
+		selectionForm.addButton('custpage_btn', 'Close', 'window.close()');
+	}
+	catch(e)
+	{
+		errorHandler('createSelectionForm ', e);
+	}
+}
+
+
+/**
+ * - getSearchCriteria
+ * 
+ * Get the search criteria entered by the user
+ * 
+ * @param request
+ * @param response
+ * @returns {Boolean}
+ */
+function getSearchCriteria(request, response)
+{
+	var retVal = false;
+
+	try
+	{
+//		Get the parameters entered	
+		itemEntered = request.getParameter('custpage_item');
+		quantityEntered = request.getParameter('custpage_quantity');
+		customerBrand = request.getParameter('custpage_hiddencustomerbrand');
+		customer = request.getParameter('custpage_hiddencustomer');
+
+//		Check Item and customer Brands
+		lookUpItemBrand();
+		lookUpCustomerBrand();
+		lookUpStock();
+
+		retVal = custAndItemBrand(request, response);
+	}
+	catch(e)
+	{
+		errorHandler('getSearchCriteria ', e);
+	}
+
+	return retVal;
+}
+
+/**
+ * - lookUpItemBrand
+ * 
+ * Look up the Item Brand
+ * 
+ * @returns {Boolean}
+ */
+function lookUpItemBrand()
+{
+	var retVal = false;
+
+	try
+	{
+//		Get the item id and look up the Item Brand
+		itemId = genericSearch('item', 'itemid', itemEntered);
+		itemBrand = nlapiLookupField('item', itemId, 'department');	
+	}
+	catch(e)
+	{
+		errorHandler('lookUpCustromerBrand ', e);
+	}
+
+	return retVal;
+}
+
+/**
+ * - lookUpCustomerBrand
+ * 
+ * Reset the Customer Brand if wrong product code entered.
+ * 
+ * @returns {String}
+ */
+function lookUpCustomerBrand()
+{
+	var retVal = '';
+	
+	try
+	{
+//		Look up the customer Brand
+		custBrandParam = nlapiLookupField('entity', customer, 'custentity_mrf_cust_brand');
+		retVal = custBrandParam;
+	}
+	catch(e)
+	{
+		errorHandler('lookUpCustromerBrand ', e);
+	}
+	
+	return retVal;
+}
+
+/**
+ * - lookUpStock
+ * 
+ * 
+ * @returns {String}
+ */
+function lookUpStock()
+{
+	var retVal = '';
+	
+	try
+	{
+//		Look up the stock status on the item
+		itemId = genericSearch('item', 'itemid', itemEntered);
+		stockStatus = nlapiLookupField('item', itemId, 'custitem_applyoos');
+		
+		nlapiLogExecution('error', 'lookUpStock', stockStatus);
+		
+		retVal = stockStatus;
+	}
+	catch(e)
+	{
+		errorHandler('lookUpStock ', e);
+	}
+	
+	return retVal;
+}
+
+/**
+ * - custAndItemBrand
+ * 
+ * Check the Customers Brand against the Item Brand entered
+ * 
+ * @param request
+ * @param response
+ * @returns {Boolean}
+ */
+function custAndItemBrand(request, response)
+{
+	var retVal = false;
+
+	try
+	{
+//		Check if the parameters are empty
+		if( itemEntered.length != 0)
+		{
+//			Check if customer brand matches the Item Brand
+			if (customerBrand == itemBrand)
+			{
+				if(stockStatus == 'F')
+				{
+					errorDisplay = 'hidden';
+					retVal = true;
+				}
+				else
+				{
+					errorDisplay = 'disabled';
+					errorText = 'This item is not in Stock!';			
+				}
+			}
+			else
+			{
+				errorDisplay = 'disabled';
+				errorText = 'Please enter the correct branded item!';			
+			}
+		}
+		else
+		{
+			errorDisplay = 'disabled';
+			errorText = 'Please enter an item!';
+		}
+	}
+	catch(e)
+	{
+		errorHandler('custAndItemBrand ', e);
+	}
+
+	return retVal;
+}
+
+/**
+ * - postItems
+ * 
+ * Post the Item to the line
+ * 
+ * @param request
+ * @param response
+ */
+function postItems(request, response)
+{
+	var selectedItem = null;
+	var addNewScript = '';
+	var url = '';
+	
+	try
+	{
+//		Set the URL
+		url = '/app/site/hosting/scriptlet.nl?script=162&deploy=1&custparam_cust=' + customer + '&custparam_brand=' + customerBrand;
+		
+//		Search the Item Code Entered
+		selectedItem = genericSearch('item', 'itemid', itemEntered);
+
+//		Add the Item to the line
+		addNewScript = '<script type="text/javascript">';
+		addNewScript += "window.opener.nlapiSetCurrentLineItemValue(\'item\',\'item\',\'" + selectedItem + "\', true, true);";
+		addNewScript += "window.opener.nlapiSetCurrentLineItemValue(\'item\',\'custcol_itemdepartment\',\'" + selectedItem + "\', true, true);";
+		addNewScript += "window.opener.nlapiSetCurrentLineItemValue(\'item\',\'quantity\',\'" + quantityEntered + "\', true, true);";
+		addNewScript += "window.opener.nlapiCommitLineItem(\'item\');";
+		addNewScript += "window.location.href='" + url + "';";
+		addNewScript += '</script>';
+		response.write(addNewScript);	
+	}
+	catch(e)
+	{
+		errorHandler("postItems ", e);	
+	}
+}
+
+

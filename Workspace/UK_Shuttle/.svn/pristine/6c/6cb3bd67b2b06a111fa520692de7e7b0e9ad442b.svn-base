@@ -1,0 +1,29 @@
+<project info="SuiteCloud IDE generated file, do not edit." setAttributesOnUpdate="false">
+  <folder name="UK_Shuttle" bundleable="true">
+    <file name="CommonLibrary.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="ConsignmentManager_v2.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="EmailDepotsV1_Suitelet.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="ImportProcessPallets_v1.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="ImportProcess_v1.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="InvoicingProcess_v1.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="TransportManager_v2.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="TransportManager_v3.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="consignmentManager.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="consignmentmanager_redirect.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="convertConsignment.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="customerCenterLogin.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="formbuttons.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="labelAPCV2_Printer_suitelet.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="labelPalletPrinter_suitelet.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="labelPrinterAPC_suitelet.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="labelPrinter_suitelet.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="palletRate.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="parcelRate.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="parcelRate_event.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="postcodeValidate.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="printmanifest_v1.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="printmanifestpallets_v1.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="transportManager.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="webservicesForm.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+  </folder>
+</project>

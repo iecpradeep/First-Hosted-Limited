@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Newsletter Signup</title>
+<link href="/c.3322617/site/mrfothergills2/css/default.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+$('#globalsubscriptionstatus').val('1');
+$('#custentity_mrf_cust_brand').val('1');
+$('#salutation').val($('#title-select').val());
+
+$('#title-select').change(function(){
+	$('#salutation').val($(this).val());
+});
+
+var firstNameText = 'First Name';
+var lastNameText = 'Last Name';
+var emailText = 'Email';
+
+$('#firstname').val(firstNameText);
+$('#lastname').val(lastNameText);
+$('#email').val(emailText);
+
+$('#firstname').focus(function(){
+	if ($(this).val() == firstNameText)
+	{
+		$(this).val('');
+	}
+}).blur(function(){
+	if ($(this).val() == '')
+	{
+		$(this).val(firstNameText);
+	}
+});
+
+$('#lastname').focus(function(){
+	if ($(this).val() == lastNameText)
+	{
+		$(this).val('');
+	}
+}).blur(function(){
+	if ($(this).val() == '')
+	{
+		$(this).val(lastNameText);
+	}
+});
+
+$('#email').focus(function(){
+	if ($(this).val() == emailText)
+	{
+		$(this).val('');
+	}
+}).blur(function(){
+	if ($(this).val() == '')
+	{
+		$(this).val(emailText);
+	}
+});
+});
+</script>
+</head>
+<body style="background-color:transparent;">
+<div id="iframeouterwrapper">
+<div class="iframecontainer outline">
+<NLFORM>
+<h4>Sign Up for our Newsletter and Offers</h4>
+<div style="display:none;"><NLSALUTATION><NLGLOBALSUBSCRIPTIONSTATUS><NLCUSTENTITY_MRF_CUST_BRAND></div>
+<select id="title-select">
+<option value="Mr">Mr</option>
+<option value="Mrs">Mrs</option>
+<option value="Ms">Ms</option>
+<option value="Miss">Miss</option>
+</select>
+<NLFIRSTNAME>
+<NLLASTNAME><br>
+<NLEMAIL>
+<p style="text-align:center;margin-top:10px;"><input type="submit" value="Submit" class="button shadowbox" style="padding:10px 15px;"></p>
+</form>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,207 @@
+<!-- End addition_to_head -->
+<!--
+Added in to remove mandatory asterisks
+-->
+<script type="text/javascript">
+$(document).ready(function(){
+	$('.item-options .required_icon').hide();
+});
+</script>
+
+<!-- FHL Matrix Items WasPrice -->
+<script type="text/javascript">
+$(document).ready(function(){
+	// Get list of parent item IDs
+	var items = '';
+	
+	$('bbo').each(function(){
+		if (items)
+		{
+			items += ',';
+		}
+		items += $(this).attr('internalid');
+	});
+	
+	// Get JSON from Suitelet
+	var url = 'https://forms.sandbox.netsuite.com/app/site/hosting/scriptlet.nl?script=181&deploy=1&compid=917016&h=4daf2064e7068465a610';
+	$.ajax({dataType: 'jsonp',
+		url: url + '&items=' + items + '&callback=?',
+		success: matrixWasPriceSuccess});
+});
+
+function matrixWasPriceSuccess(data)
+{
+	$.each(data, function(index, item){
+		for (var i = 0; i < item.itemOptions.length; i++)
+		{
+			$('#' + item.itemOptions[i] + '_' + item.internalId + ' select').change(function(){
+				syncMatrixWasNow(item.internalId, data);
+			});
+		}
+		
+		syncMatrixWasNow(item.internalId, data);
+	});
+}
+
+function syncMatrixWasNow(itemId, data)
+{
+	$.each(data, function(index, item){
+		if (item.internalId == itemId)
+		{
+			for (var i = 0; i < item.childItems.length; i++)
+			{
+				var found = 0;
+				
+				for (var j = 0; j < item.childItems[i].itemOptions.length; j++)
+				{
+					if (item.childItems[i].itemOptions[j] == 
+						item.itemOptions[j] + ':' + $('#' + item.itemOptions[j] + '_' + item.internalId + ' select').val())
+					{
+						found++;
+					}
+				}
+				
+				if (found == item.itemOptions.length)
+				{
+					var wasPrice = item.childItems[i].wasPrice;
+					var salesPrice = $('#itemprice' + item.internalId).html();
+
+				    if (wasPrice)
+				    {
+				    	salesPrice = 'Was &pound;' + wasPrice + '<br><span style="color:#A92F2C;">Now ' + salesPrice + '</span>';
+				    	$('#itemprice' + item.internalId).html(salesPrice);
+				    }
+				}
+			}
+		}
+	});
+}
+</script>
+
+<td valign="top" class="no-padding">
+ <REMOVE_LANDING_CLASS>
+ <div id="products_container">
+  <NLPROCESSONCE>
+  <CRUMBTRAIL>
+  <h1><%=getCurrentAttribute('sitecategory','itemid')%></h1>
+  <div><%=getCurrentAttribute('sitecategory','storedetaileddescription')%></div>
+  </NLPROCESSONCE>
+  <div class="pagination clear"><p id="itemlist_count" class="results"></p><div class="right"><PAGINATION_LINKS></div></div>
+  <div id="products" class="products clear">
+   <table width="100%" cellpadding="0" cellspacing="0" border="0">
+    <tr><NLITEMLIST></tr>
+   </table>
+  </div>
+  <script type="text/javascript">
+  <!--
+   function bb1UpdateProductCount() {
+    if (typeof window["bb1_itemlist_count"] != "undefined")
+     document.getElementById("itemlist_count").innerHTML = "Showing "+window["bb1_itemlist_count"]+(window["bb1_itemlist_count"]>1?" items":" item");
+    else
+     document.getElementById("itemlist_count").innerHTML = "No items shown";
+   }
+   bb1UpdateProductCount();
+  //-->
+  </script>
+  <div class="pagination clear"><div class="right"><PAGINATION_LINKS></div></div>
+ </div>
+ <script type="text/javascript">
+ <!--
+  (function() {
+  
+   $("#products div.product").each(function() {
+   
+    // Display was/now pricing
+    
+    var $this = $(this);
+    var wasprice = $this.find("input[name=wasprice]").val().parseCurrency();
+    if (isNaN(wasprice) || wasprice == 0)
+     return; // no was price
+     
+    var ns_price = $this.find(".sale-price");
+    if (ns_price.find("table").length > 0) 
+     return; // do not display for qty pricing
+     
+    var price = ns_price.text().parseCurrency();
+    if (isNaN(price))
+     return; // Could not determine price
+     
+    if (price == wasprice)
+     return; // was price is the same as now price
+     
+    $this.find(".was-price").html("Was " + wasprice.formatCurrency() + "<br>");
+    $this.find(".sale-price").css({"color":"#A92F2C"}).prepend("Now ");
+    
+   }).each(function() {
+   
+    var $this = $(this);
+    
+    // Remove Sale status for trade
+    
+    var pricelevel = "<%=getCurrentAttribute("customer","pricelevel","")%>";
+    if (/Trade/i.test(pricelevel))
+     $this.find("div.image span.status:containsAny('Sale Special Offer Off special offer off')").remove();
+    
+   });
+   
+   function bb1DisplayPromoItem() {
+    var d = document;
+    var promo = d.getElementById("promo");
+    if (!promo) return;
+    var products = d.getElementById("products");
+    var details = products.getElementsByTagName("BBO");
+    if (!details || details.length<1) return;
+    var item = details[0];
+    var internalid = item.getAttribute("internalid");
+    var storeurl = item.getAttribute("storeurl");
+    var thumbnail = item.getAttribute("thumbnail");
+    var storethumbnail = item.getAttribute("storethumbnail");
+    thumbnail = thumbnail!="" ? thumbnail : (storethumbnail!="" ? storethumbnail+(/\?/.test(storethumbnail)?"&":"?")+"resizeid=-1&resizeh=170&resizew=170" : "");
+    var stockstatus = item.getAttribute("stockstatus");
+    stockstatus = (stockstatus!="") ? "<span class='status'>"+stockstatus+"</span>" : "";
+    var storedisplayname = item.getAttribute("storedisplayname");
+    var retailonly = item.getAttribute("retailonly");
+    var pricelevel = "<%=getCurrentAttribute('customer','pricelevel')%>";
+    var salesprice = (/Trade/i.test(pricelevel)) ? item.getAttribute("salespriceexvat") : item.getAttribute("salesprice");
+    var wasprice = item.getAttribute("wasprice");
+    if (wasprice != "")
+     salesprice = 'Was &pound;' + wasprice + '<br><span style="color:#A92F2C;">Now ' + salesprice + '</span>';
+    var mintradeqty = item.getAttribute("mintradeqty");
+    var addtocollection = '';
+    switch ("<%=getCurrentAttribute('request','ipaddress','')%>") {
+     case "60.240.144.149": case "81.136.176.112": case "79.74.240.63": case "81.137.82.242": case "60.240.144.6":
+      addtocollection = '<li><a class="design" href="#" onclick="bb1AddtoCollection(\'' + internalid + '\'); return false;">Add to collection</a></li>';
+      break;
+    }
+    var cart = (retailonly=="Yes" && (/Trade/i.test(pricelevel))) ? '<div class="retail-only">This product is retail only</div>' : '<form method="post" name="form_promo" id="form_promo" action="/app/site/backend/additemtocart.nl?c=917016&n=1" onsubmit="return bb1ValidateBuyQuantity(this, \'<%=getCurrentAttribute('customer','pricelevel','')%>\', \'<%=getCurrentAttribute('customer','custentity_bb1_overridemintradeqty','F')%>\', true);"><input type="hidden" name="buyid" id="buyid" value="'+internalid+'"><input type="hidden" name="qty" id="qty" value="1"><input type="hidden" name="custcol_bb1_trademinqty" id="custcol_bb1_trademinqty" value="' + mintradeqty + '"><ul><li><a href="#" onclick="var form=document.forms[\'form_promo\']; if (form.onsubmit()) form.submit(); return false;">Add to basket</a></li>' + addtocollection + '</ul></form>';
+    promo.innerHTML = '<div class="padding"><h2><PROMO_TITLE></h2><div class="image"><a href="'+storeurl+'"><img src="'+thumbnail+'" alt="'+storedisplayname+'" /></a>'+stockstatus+'</div><div class="clear"><p class="title">'+storedisplayname+'</p><p class="price">'+salesprice+'</p></div>'+cart+'</div>';
+    promo.style.display = "block";
+    if (details.length==1) d.getElementById("products_container").style.display = "none";
+   }
+   
+   bb1DisplayPromoItem();
+   
+   var $products = $("#products");
+   
+   $products.find(".item-options:has(select)").css({ display: "block" });
+   
+   $products.find(".item-options:has(input[type='text'])").css({ display: "none" }).closest("div.product").find("a.basket").each(function() {
+    this.innerHTML = "View to buy";
+    this.onclick = function() {
+     $(this).closest("div.product").find("div.image a")[0].click();
+     return false;
+    };
+   });
+   
+   $(window).load(function() {
+     $(".product div.image img").each(function() {
+       if (170-this.height > 0)this.style.paddingTop = 170-this.height+"px";
+      }
+     );
+    }
+   );
+   
+  })();
+ //-->
+ </script>
+</td>

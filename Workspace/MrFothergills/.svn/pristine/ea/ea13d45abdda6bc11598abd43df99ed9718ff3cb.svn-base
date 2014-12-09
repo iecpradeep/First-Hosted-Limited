@@ -1,0 +1,117 @@
+<link rel="canonical" href="<%=getCurrentAttribute('item','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/c.<NLCOMPANYID>/site/mrfothergills/js/infoitem.js"></script>
+<script type="text/javascript" src="/c.<NLCOMPANYID>/site/common/js/quickorder.js"></script>
+<!-- End addition_to_head -->
+<td>
+
+	<div id="breadcrumbs">
+		<MRFSOCIALHEADER2>
+	</div>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+			<MRFINFOMENU>
+		</div>
+		<div id="catright">
+			<div class="infocontainer outline">
+<%=getCurrentAttribute('item','storedisplayimagehtml')%>
+
+<h1><%=getCurrentAttribute('infoitem','itemid')%></h1>
+
+<p><%=getCurrentAttribute('infoitem','storedescription')%></p>
+
+<p><%=getCurrentAttribute('infoitem','storedetaileddescription')%></p>
+
+<p><%=getCurrentAttribute('infoitem','featureddescription')%></p>
+
+<!-- Quick Order Form Begin -->
+<form id="quickorderform" onsubmit="quickOrder();return false;" action="javascript:void(0);">
+<table>
+<tr><td>
+<table>
+<colgroup>
+<col style="width:20%;"></col>
+<col style="width:25%;"></col>
+<col style="width:20%;"></col>
+<col></col>
+</colgroup>
+<tr>
+<td><p>Code 1: </p></td><td><input type="text" id="code1" name="code1" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty1" name="qty1" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 2: </p></td><td><input type="text" id="code2" name="code2" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty2" name="qty2" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 3: </p></td><td><input type="text" id="code3" name="code3" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty3" name="qty3" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 4: </p></td><td><input type="text" id="code4" name="code4" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty4" name="qty4" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 5: </p></td><td><input type="text" id="code5" name="code5" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty5" name="qty5" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 6: </p></td><td><input type="text" id="code6" name="code6" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty6" name="qty6" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 7: </p></td><td><input type="text" id="code7" name="code7" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty7" name="qty7" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 8: </p></td><td><input type="text" id="code8" name="code8" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty8" name="qty8" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 9: </p></td><td><input type="text" id="code9" name="code9" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty9" name="qty9" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 10: </p></td><td><input type="text" id="code10" name="code10" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty10" name="qty10" value="1" class="outline qty"></td>
+</tr>
+</table>
+</td><td>
+<table>
+<colgroup>
+<col style="width:20%;"></col>
+<col style="width:25%;"></col>
+<col style="width:20%;"></col>
+<col></col>
+</colgroup>
+<tr>
+<td><p>Code 11: </p></td><td><input type="text" id="code11" name="code11" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty11" name="qty11" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 12: </p></td><td><input type="text" id="code12" name="code12" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty12" name="qty12" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 13: </p></td><td><input type="text" id="code13" name="code13" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty13" name="qty13" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 14: </p></td><td><input type="text" id="code14" name="code14" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty14" name="qty4" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 15: </p></td><td><input type="text" id="code15" name="code15" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty15" name="qty15" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 16: </p></td><td><input type="text" id="code16" name="code16" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty16" name="qty16" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 17: </p></td><td><input type="text" id="code17" name="code17" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty17" name="qty17" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 18: </p></td><td><input type="text" id="code18" name="code18" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty18" name="qty18" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 19: </p></td><td><input type="text" id="code19" name="code19" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty19" name="qty19" value="1" class="outline qty"></td>
+</tr>
+<tr>
+<td><p>Code 20: </p></td><td><input type="text" id="code20" name="code20" class="outline code"></td><td><p>Quantity: </p></td><td><input type="text" id="qty20" name="qty20" value="1" class="outline qty"></td>
+</tr>
+</table>
+</td></tr></table>
+<p style="text-align:center;"><input type="submit" value="Add to Basket" class="button shadowbox"> <input type="reset" value="Clear Form" onclick="if(!confirm('Are you sure you wish to clear all your values?')){return false;}" class="button shadowbox"></p>
+</form>
+<!-- Quick Order Form End -->
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+
+</td>

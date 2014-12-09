@@ -1,0 +1,100 @@
+/*************************************************************************************
+ * Name:		itemDemand.js
+ * Script Type:	Client
+ *
+ * Version:		1.0.000
+ *
+ * Author:		Peter Lewis, FHL
+ * 
+ * Purpose:		Compares the Out of Stock behaviour against the Out of Stock fields
+ * 
+ * Script: 		80
+ * Deploy: 		1
+ * 
+ * Notes:		Deployed against the Sales Order record as a Client Script
+ * 
+ * Library: 	Not used.
+ *************************************************************************************/
+
+var currentLine = 0;
+
+var outOfStockMessageFieldID = 'outofstockmessage';	//standard fields
+var outOfStockBehaviourFieldID = 'outofstockbehavior';	//standard fields
+var futureStockStatusFieldID = 'custitem_mrf_item_futurestockstatus';	//custom fields
+var currentStockStatusFieldID = 'custitem_mrf_item_currentstockstatus';	//custom fields
+
+var outOfStockMessageColumnID = 'custcol_outofstockmessage';	//custom fields - done on ns
+var outOfStockBehaviourColumnID = 'custcol_outofstockbehavior';	//custom fields - done on ns
+var futureStockStatusColumnID = 'custcol_futurestockstatus';	//custom fields - done on ns
+var currentStockStatusColumnID = 'custcol_currentstockstatus';	//custom fields - done on ns
+
+var outOfStockMessage ='';
+var outOfStockBehaviour = '';
+var futureStockStatus = '';
+var currentStockStatus = '';
+
+var context = '';
+var executionContext = '';
+
+
+/******************************************************
+ * 
+ * validate the line
+ * 
+ * @returns {Boolean} - Whether the Line Validate was successful or not
+ */
+function lineValidate(type)
+{
+	var retVal = true;
+	try
+	{
+		context = nlapiGetContext();
+		executionContext = context.getExecutionContext();
+
+		if(executionContext == 'userinterface')
+		{
+			if(type == 'item')
+			{
+				outOfStockMessage = nlapiGetCurrentLineItemValue(type, outOfStockMessageColumnID);
+				outOfStockBehaviour = nlapiGetCurrentLineItemValue(type, outOfStockBehaviourColumnID);
+				futureStockStatus = nlapiGetCurrentLineItemValue(type, futureStockStatusColumnID);
+				currentStockStatus = nlapiGetCurrentLineItemValue(type, currentStockStatusColumnID);
+				switch(currentStockStatus)
+				{
+				case '3':
+					switch(futureStockStatus)
+					{
+					case '3':
+						switch(outOfStockBehaviour)
+						{
+						case '3':
+							alert('This Item is on back order.\n\n' + outOfStockMessage);
+							break;
+						case '2':
+							alert('You cannot order this Item as it is out of stock.\n\n'  + outOfStockMessage);
+							retVal = false;
+							break;
+						case '4':
+							alert('You cannot order this Item.');
+							retVal = false;
+							break;
+						default:
+							break;				
+						}
+						break;
+					default:
+						break;
+					}
+					break;
+				default:
+					break;				
+				}
+			}
+		}
+	}
+	catch(e)
+	{
+		nlapiLogExecution('ERROR', 'Line Validate error', e.message);
+	}
+	return retVal;
+}

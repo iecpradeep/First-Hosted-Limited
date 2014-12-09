@@ -1,0 +1,236 @@
+/*******************************************************
+ * Name			:	SOAPScriptLibrary
+ * Script Type	:	Library
+ *
+ * Version		:	1.0.0 - 12/07/2013 - Created - AS
+ * 			
+ * Author		:	FHL
+ * Purpose		:	To use as the main Script Library that uses in the 
+ * 					different kinds of scripts related to Metapack Integration
+ * 
+ *******************************************************/
+
+/**************************************************************
+ * createSOAPMessage - create the template of the SOAP Message
+**************************************************************/
+function createSOAPMessageTemplate()
+{
+	try
+	{
+		
+	}
+	catch(e)
+	{
+		errorHandler('createSOAPMessageTemplate', e);
+	}
+
+}
+
+
+/**************************************************************
+ * getSoapFunctions - retrieve the soap functions from 'SOAP Message Library' custom record set
+**************************************************************/
+function getSoapFunctions()
+{
+	var soapHeader = '';
+	
+	
+	try
+	{
+		soapHeader = genericSearchReturnAnyField('customrecord_soapmessagelibrary', 'name', 'SOAP Header', 'custrecord_librarysoaprequest');
+		nlapiLogExecution('debug', 'getSoapFunctions soapHeader', soapHeader);
+	}
+	catch(e)
+	{
+		errorHandler('getSoapFunctions', e);
+	}
+
+}
+
+
+/**************************************************************
+ * createConsignmentPayload - create consignment payload record (saving the soap request and response)
+**************************************************************/
+function createConsignmentPayload()
+{
+	try
+	{
+		
+	}
+	catch(e)
+	{
+		errorHandler('createConsignmentPayload', e);
+	}
+
+}
+
+/*****************************************************************************
+ * sendSoapRequest Function - sending the soap request to metapack
+ * 
+ * @returns - response object
+ ****************************************************************************/
+function sendSoapRequest()
+{
+
+	//declaring local variables
+	var soapHeaders = new Array();
+	var responseObject = null; 
+	var recievingUrl = '';
+	var encodedCredentials = '';
+
+	try
+	{
+		//passing the credentials to Base 64 in order to pass trough SOAP
+		encodedCredentials = nlapiEncrypt(username + ":" + password, 'base64');
+		
+		//calling createSOAPMessageFormat function
+		createSOAPMessageFormat();
+		
+		// build SOAP request
+		buildSOAPRequest();
+
+		//initialising SOAP headers
+		soapHeaders['Content-type'] =  "text/xml";
+		soapHeaders['User-Agent-x'] = 'SuiteScript-Call';
+		soapHeaders['Authorization'] = 'Basic ' + encodedCredentials;
+		soapHeaders['soapAction'] = ' ';
+
+		//wsdl url of the destiny's qa account in metapack
+		recievingUrl = 'http://dm-api.metapack.com/api/4.x/services/AllocationService?wsdl';
+		//'http://dm-qa.metapack.com/api/4.x/services/AllocationService?wsdl';
+
+		//connecting to the metapack by sending the SOAP request and getting the response
+		responseObject = nlapiRequestURL(recievingUrl,postObject,soapHeaders,'POST');
+
+	}
+	catch(e)
+	{
+		errorHandler("sendSoapRequest : " , e);
+	} 
+
+	return responseObject;	
+
+}
+
+
+
+/*****************************************************************************
+ * makeSoapRequiredFields Function - make the fields that are required in the SOAP request to Metapack
+ * 
+ ****************************************************************************/
+function makeSoapRequiredData()
+{
+	try
+	{
+
+		//passing the values to floats inorder to make the calculations
+		dimension1 = parseFloat(dimension1);
+		dimension2 = parseFloat(dimension2);
+		dimension3 = parseFloat(dimension3);
+
+		//get the max dimension
+		maxDimension = Math.max(dimension1,dimension2,dimension3);
+		maxDimension = parseFloat(maxDimension);
+		//setting the flag if the max Dimension is greater than 1 metre
+		if(maxDimension > 1)
+		{
+			moreThanOneMetreGoodsFlag = true;
+		}
+
+		consignmentValue = parseFloat(averageCost);
+		consignmentWeight = parseFloat(volumetricWeight);
+		consignmentWeight = parseFloat(consignmentWeight);
+
+		if(consignmentWeight > 25 )
+		{
+			moreThanTwentyFiveKgGoodsFlag = true;
+		}
+
+		orderNumber = 1;
+		number = parseInt(number,0);
+		insuranceValue = parseFloat(insuranceValue);
+		parcelDepth = parseFloat(dimension1);
+		parcelHeight = parseFloat(dimension2);
+		parcelValue = parseFloat(averageCost);
+		parcelWeight = parseFloat(volumetricWeight);
+		parcelWidth = parseFloat(dimension3);
+
+		//getting the country code of the reciepient from the 'ISO Country' custom record set
+		reciepientCountryCode = nlapiLookupField('customrecord_isocountry', isoCountryCode, 'custrecord_ic_a3');
+
+		reciepientLine1 = shippingAddressLine1;
+		reciepientLine2 = shippingAddressCity;
+		reciepientPostCode = shippingAddressPostCode;
+
+		recipientName = 'Recipient A';
+
+	}
+	catch(e)
+	{
+		errorHandler("makeSoapRequiredFields : " , e);
+	} 
+
+}
+
+
+/**********************************************************************
+ * errorHandler - Used when an error has occurred
+ * 
+ * @param sourceFunctionName
+ * @param errorObject
+ * 
+ **********************************************************************/
+function errorHandler(sourceFunctionName , errorObject)
+{
+	try
+	{
+		nlapiLogExecution('ERROR', sourceFunctionName, errorObject.message);
+	}
+	catch(e)
+	{
+		nlapiLogExecution('ERROR', 'ErrorHandler', e.message);
+	}
+}
+
+
+
+/*********************************************************************
+ * genericSearchReturnAnyField - returns any field's value
+ * 
+ ********************************************************************/
+function genericSearchReturnAnyField(table, fieldToSearch, valueToSearch,returnField)
+{
+	var returningValue = null;
+
+	// Arrays
+	var searchFilters = new Array();
+	var searchColumns = new Array();
+
+	try
+	{
+		//search filters                  
+		searchFilters[0] = new nlobjSearchFilter(fieldToSearch, null, 'is',valueToSearch);                          
+
+		// return columns
+		searchColumns[0] = new nlobjSearchColumn(returnField);
+
+		// perform search
+		var searchResults = nlapiSearchRecord(table, null, searchFilters, searchColumns);
+
+		if(searchResults!=null)
+		{
+			if(searchResults.length>0)
+			{
+				searchResult = searchResults[ 0 ];
+				returningValue = searchResult.getValue(returnField);
+			}
+		}
+	
+	}
+	catch(e)
+	{
+		errorHandler("genericSearchReturnAnyField", e);
+	}     	      
+
+	return returningValue;
+}

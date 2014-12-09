@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NS.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NS_com_netsuite_webservices_NetSuiteService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://webservices.netsuite.com/services/NetSuitePort_2012_1</Value>
+    </Setting>
+    <Setting Name="NS_com_netsuite_sandbox_webservices_NetSuiteService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://webservices.sandbox.netsuite.com/services/NetSuitePort_2012_1</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,22 @@
+<td>
+
+<div id="wishlist"></div>
+<script type="text/javascript">
+var viewWishListURL = "/app/site/hosting/scriptlet.nl?script=14&deploy=1&compid=<NLCOMPANYID>&h=ff43603c401135d5dc06";
+
+$(document).ready(function(){
+	if("<%=getCurrentAttribute('customer','email')%>" == "")
+	{
+		window.location.href = 'https://checkout.netsuite.com/s.nl?c=<NLCOMPANYID>&n=' + siteId + '&login=T&reset=T&redirect_count=1&did_javascript_redirect=T';
+	}
+	else
+	{
+		var id = "<%=getCurrentAttribute('customer','internalid')%>";
+		var catalogue = "<NLCOMPANYID>";
+		var url="<iframe id=\"iframe_wishlist\" frameborder=\"0\" width=\"980\" height=\"600\" src=\"" + viewWishListURL + "&idCustomer=" + id + "&accountnbr=" + catalogue + "&wlid=" + WishList_ID + "&css=/site/woolmans/css/default.css\"></iframe>";
+		$('#wishlist').append(url);
+	}
+});
+</script>
+
+</td>

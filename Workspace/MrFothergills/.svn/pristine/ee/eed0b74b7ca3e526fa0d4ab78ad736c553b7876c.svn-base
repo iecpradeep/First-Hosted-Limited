@@ -1,0 +1,55 @@
+/**********************************************************************************************************
+ * Name:        Deposit Client (depositclient.js)
+ * Script Type: Client
+ * Client:      Mr. Fothergills Seeds Limited
+ * 
+ * Version:     1.0.0 - 12 Apr 2013 - first release - DB
+ * Author:      FHL
+ * Purpose:     checks that cheque batch field has been completed on save if payment type is cheque
+ * 
+ * Libraries:   library.js
+ **********************************************************************************************************/
+
+var chequePaymentMethod = '2';
+var chequeBatch = '';
+var paymentType = '';
+
+
+/**
+ * @returns {Boolean}
+ */
+function paymentMethodCheck()
+{
+	var retVal = false;
+	
+	try
+	{
+		paymentType = nlapiGetFieldValue('paymentmethod');
+
+		if (paymentType == chequePaymentMethod)
+		{
+			chequeBatch = nlapiGetFieldValue('custbody_mrf_tran_chequebatch');
+
+			if (chequeBatch == null || chequeBatch == '')
+			{
+				alert('Error:\n\nYou must enter a cheque batch number.');
+				retVal = false;
+			} //if
+			else
+			{
+				retVal = true;
+			}
+		} //if
+		else
+		{
+			retVal = true;
+		} //else		
+	} //try
+	catch(e)
+	{
+		alert('paymentMethodCheck '+ e.message);
+	} //catch
+
+	return retVal;
+}
+

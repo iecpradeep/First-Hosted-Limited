@@ -1,0 +1,30 @@
+.doc-head{color:#214571;font-weight:bold;float:left;font-size:12px;margin-bottom:4px;}
+#doc-head-0{width:132px;}
+#doc-head-1{width:90px;}
+#doc-head-2{width:85px;}
+#doc=head-3{width:400px;}
+
+#doc-main{clear:both;}
+.doc-node{width:132px;height:25px;clear:left;float:left;}
+.doc-node a{
+	display:block;
+	margin:0;
+	color:#214571;
+	background-color:#D0D6DE;
+	font-size:12px;
+	text-decoration:none;
+	line-height:25px;
+	border-style:solid;
+	border-width:2px 2px 0 0;
+	border-color:#fff;
+	padding:0 4px 0 4px;
+}
+.doc-folder a{color:#fff;background-color:#a5a9ac;}
+.doc-folder a:hover,.doc-folder a.doc-folder-open{color:#fff;background-color:#214571;}
+.doc-file{font-weight:bold;}
+.doc-file a:hover{color:#e87a04;}
+.doc-level-0 .doc-node{width:90px;}
+.doc-level-1 .doc-node{width:85px;}
+.doc-level-2{width:400px;}
+.doc-level-2 .doc-node{width:65px;text-align:center;clear:none;}
+.doc-children{clear:right;float:left;display:none;}

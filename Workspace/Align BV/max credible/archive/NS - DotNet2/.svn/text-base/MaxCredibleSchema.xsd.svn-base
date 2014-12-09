@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.MaxCredible.com/" elementFormDefault="qualified" targetNamespace="http://www.MaxCredible.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="HTTP_POSTS">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="CHUNK_NR" type="xs:string"  minOccurs="0"/>
+        <xs:element name="CHUNK_SIZE" type="xs:string"  minOccurs="0"/>
+        <xs:element name="NR_RECORDS" type="xs:string"  minOccurs="0"/>
+        <xs:element maxOccurs="unbounded" name="HTTP_POST">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="RECORD_NR" type="xs:string"  minOccurs="0"/>
+              <xs:element name="DEBITEURNUMMER" type="xs:string" />
+              <xs:element name="DEBITEURNAAM" type="xs:string" />
+              <xs:element name="DEBITEURVOORLETTERS" type="xs:string" />
+              <xs:element name="DEBITEURGEBOORTEDATUM" type="xs:string" minOccurs="0"/>
+              <xs:element name="DEBITEURADRES" type="xs:string" />
+              <xs:element name="DEBITEURHUISNUMMER" type="xs:string" />
+              <xs:element name="DEBITEURHUISNUMMERTOEVOEGING" type="xs:string" minOccurs="0" />
+              <xs:element name="DEBITEURPOSTCODE" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURPOSTBUS" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURPOSTBUSPOSTCODE" type="xs:string" />
+              <xs:element name="DEBITEURSTAD" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURLAND" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURTELEFOON" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURFAX" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURGSM" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURREKENINGNUMMER" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURREKENINGTYPE" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEUREMAIL" type="xs:string" />
+              <xs:element minOccurs="0" name="BEDRIJFPARTICULIER">
+                <xs:complexType>
+                  <xs:attribute name="type" use="required">
+                    <xs:simpleType>
+                      <xs:restriction base="xs:NMTOKEN">
+                        <xs:enumeration value="bedrijf" />
+                        <xs:enumeration value="particulier" />
+                      </xs:restriction>
+                    </xs:simpleType>
+                  </xs:attribute>
+                </xs:complexType>
+              </xs:element>
+              <xs:element minOccurs="0" name="DEBITEURCONTACTPERSOON" type="xs:string" />
+              <xs:element minOccurs="0" name="DEBITEURCONTACTPERSOONGESLACHT" type="xs:string" />
+              <xs:element name="FACTUURNUMMER" type="xs:string" />
+              <xs:element name="FACTUURBEDRAG" type="xs:string" />
+              <xs:element name="FACTUURDATUM" type="xs:string" />
+              <xs:element minOccurs="0" name="FACTUURVERVALDATUM" type="xs:string" />
+              <xs:element minOccurs="0" name="KENMERK" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="unbounded" name="ORDERREGEL">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ORDERREGELNUMMER" type="xs:string" />
+                    <xs:element name="ORDERREGELOMSCHRIJVING" type="xs:string" />
+                    <xs:element name="STUKSPRIJS" type="xs:string" />
+                    <xs:element name="AANTAL" type="xs:string" />
+                    <xs:element name="BTWPERSTUK" type="xs:string" />
+                    <xs:element name="TOTAALREGELBEDRAG" type="xs:string" />
+                    <xs:element name="TOTAALREGELBTW" type="xs:string" />
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="PROFILEID" type="xs:string" />
+              <xs:element name="VALUTA" type="xs:string" />
+              <xs:element name="CLASSIFYID" type="xs:string" />
+              <xs:element name="STARTDATUM" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION1" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION2" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION3" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION4" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION5" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION6" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION7" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION8" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION9" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION10" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION11" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION12" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION13" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION14" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION15" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION16" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION17" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION18" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION19" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION20" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION21" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION22" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION23" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION24" type="xs:string" minOccurs="0"/>
+              <xs:element name="CUSTOMER_OPTION25" type="xs:string" minOccurs="0"/>
+              <xs:element name="VALUTA_BASIS" type="xs:string" minOccurs="0"/>
+              <xs:element name="OPENSTAANDBEDRAG_BASIS" type="xs:string" minOccurs="0"/>
+              <xs:element name="FACTUURBEDRAG_BASIS" type="xs:string" minOccurs="0"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

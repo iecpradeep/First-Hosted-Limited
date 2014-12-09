@@ -1,0 +1,8 @@
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\MyFirstWindowsMobileApp-CS\bin\Debug\MyFirstWindowsMobileApp-CS.exe
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\MyFirstWindowsMobileApp-CS\bin\Debug\MyFirstWindowsMobileApp-CS.pdb
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\MyFirstWindowsMobileApp-CS\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\MyFirstWindowsMobileApp-CS\obj\Debug\MyFirstWindowsMobileApp_CS.Properties.Resources.resources
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\MyFirstWindowsMobileApp-CS\obj\Debug\MyFirstWindowsMobileApp-CS.csproj.GenerateResource.Cache
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\MyFirstWindowsMobileApp-CS\obj\Debug\MyFirstWindowsMobileApp-CS.exe
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\MyFirstWindowsMobileApp-CS\obj\Debug\MyFirstWindowsMobileApp-CS.pdb
+C:\Users\Petey\Desktop\MyFirstWindowsMobileApp-CS\MyFirstWindowsMobileApp-CS\obj\Debug\MyFirstWindowsMobileApp_CS.FrmMain.resources

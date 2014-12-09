@@ -1,0 +1,299 @@
+<meta property="og:title" content="<%=getCurrentAttribute("item","storedisplayname")%>" /> 
+<meta property="og:type" content="product" /> 
+<meta property="og:image" content="<%=getCurrentAttribute("item","storedisplayimage")%>" />
+<meta property="og:url" content="<%=getCurrentAttribute("item","storeurl")%>" />
+<meta property="og:site_name" content="<%=getCurrentAttribute("site","name")%>" /> 
+<meta property="fb:admins" content="" /> 
+<meta itemprop="name" content="<%=getCurrentAttribute("item","storedisplayname")%>">
+<meta itemprop="image" content="<%=getCurrentAttribute("item","storedisplayimage")%>">
+
+<link href="/swd/styles/magiczoomplus.css" rel="stylesheet" type="text/css" media="screen"/>
+<script src="/swd/scripts/magiczoomplus.js" type="text/javascript"></script>
+<script type="text/javascript">
+ MagicZoomPlus.options = {
+  'expand-size': 'width=650',
+  'hint-text': 'Zoom'
+ }
+</script>
+<!-- End addition_to_head -->
+<td valign="top" class="no-padding">
+
+ <REMOVE_LANDING_CLASS>
+ <CRUMBTRAIL>
+ 
+ <div class="product-intro2 clear">
+
+  <div class="image-gallery">
+  
+   <div class="image">
+    <a href="<%=getCurrentAttribute("item","custitem_bb1_zoomimagemain","#")%>" id="zoom-image" class="MagicZoomPlus" rel="zoom-position: right; zoom-width: 343px; zoom-height: 348px;"><%=getCurrentAttribute("item","storedisplayimagehtml")%></a>
+    <span id="itemstatus_<%=getCurrentAttribute("item","internalid")%>" class="status"><%=getCurrentAttribute("item","custitem_bb1_webstatus")%></span>
+   </div>
+   
+   <ul class="img-list">
+    <li><a href="<%=getCurrentAttribute("item","custitem_bb1_zoomimagemain","")%>" rel="zoom-id:zoom-image" rev="<%=getCurrentAttribute("item","storedisplayimage","#")%>"><img src="<%=getCurrentAttribute("item","storedisplayimage","#")%>" alt="<%=getCurrentAttribute("item","storedisplayname")%>" /></a></li>
+    <li><a href="<%=getCurrentAttribute("item","custitem_bb1_zoomimage01","")%>" rel="zoom-id:zoom-image" rev="<%=getCurrentAttribute("item","custitem_bb1_extraimage01","#")%>"><img src="<%=getCurrentAttribute("item","custitem_bb1_extraimage01","#")%>" alt="<%=getCurrentAttribute("item","storedisplayname")%>" /></a></li>
+    <li><a href="<%=getCurrentAttribute("item","custitem_bb1_zoomimage02","")%>" rel="zoom-id:zoom-image" rev="<%=getCurrentAttribute("item","custitem_bb1_extraimage02","#")%>"><img src="<%=getCurrentAttribute("item","custitem_bb1_extraimage02","#")%>" alt="<%=getCurrentAttribute("item","storedisplayname")%>" /></a></li>
+    <li><a href="<%=getCurrentAttribute("item","custitem_bb1_zoomimage03","")%>" rel="zoom-id:zoom-image" rev="<%=getCurrentAttribute("item","custitem_bb1_extraimage03","#")%>"><img src="<%=getCurrentAttribute("item","custitem_bb1_extraimage03","#")%>" alt="<%=getCurrentAttribute("item","storedisplayname")%>" /></a></li>
+    <li><a href="<%=getCurrentAttribute("item","custitem_bb1_zoomimage04","")%>" rel="zoom-id:zoom-image" rev="<%=getCurrentAttribute("item","custitem_bb1_extraimage04","#")%>"><img src="<%=getCurrentAttribute("item","custitem_bb1_extraimage04","#")%>" alt="<%=getCurrentAttribute("item","storedisplayname")%>" /></a></li>
+   </ul>
+   
+  </div>
+  
+  <DISPLAY_OUTOFSTOCK_STATUS>
+  
+  <div class="text">
+  
+   <form method="post" name="form<%=getCurrentAttribute("item", "internalid")%>" id="form<%=getCurrentAttribute("item", "internalid")%>" onsubmit="if (bb1ValidateBuyQuantity(this, '<%=getCurrentAttribute("customer","pricelevel","")%>', '<%=getCurrentAttribute("customer","custentity_bb1_overridemintradeqty","F")%>')) return checkmandatory<%=getCurrentAttribute("item", "internalid")%>();" action="/app/site/backend/additemtocart.nl">
+    
+    <div class="product-details">
+     
+     <h1 id="product-details" itemprop="name"><%=getCurrentAttribute("item","storedisplayname")%></h1>
+     
+     <div class="product-rating"><img src="<%=getCurrentAttribute("item","custitem_bb1_productratingimage","/swd/images/blank.gif")%>" /></div>
+     
+     <p class="review-count"><a href="#reviews"><%=getCurrentAttribute("item","custitem_bb1_reviewslinktext")%></a></p>
+    
+     <p class="write-review"><a href="<%=getAttribute("infoitem",48,"storeurl")%>">Write Your Review</a></p>
+     
+     <PRODUCT_DETAIL_SOCIAL_MEDIA_LINKS>
+     
+     <div class="description" itemprop="description"><%=getCurrentAttribute("item","storedescription")%></div>
+     
+     <ul class="tech-specs">
+      <li><%=getCurrentAttribute("item","custitem_bb1_itemsize","")%></li>
+      <li><%=getCurrentAttribute("item","custitem_LH_capacity","")%></li>
+     </ul>
+     
+     <p class="product-code"><%=getCurrentAttribute("item","itemid")%></p>
+     
+     <div class="item-options">
+      <table cellpadding="0" cellspacing="0" border="0"><%=getCurrentAttribute("item","addtocartoptionshtml")%></table>
+     </div>
+     
+    </div>
+    
+    <div class="cols clear">
+    
+     <p id="salesprice_<%=getCurrentAttribute("item","internalid")%>" class="price">
+      <span class="was-price"></span> 
+      <span class="sale-price"><span class="sale-price-label"></span><%=getCurrentAttribute("item","salespricehtml")%></span>
+     </p>
+     <DISPLAY_EXVAT_PRICE_IF_TRADE>
+     
+    </div>
+    
+    <div id="cart_<%=getCurrentAttribute("item","internalid")%>" class="cols clear">
+   
+     <div class="col1">
+      <div class="input quantity">
+       <%=getCurrentAttribute("item","addtocartitemid")%>
+       <%=getCurrentAttribute("item","addtocartquantityhtml")%>
+      </div>
+     </div>
+     
+     <div class="col2">
+     
+      <ul class="buttons">
+       <li class="add-to-basket"><a href="#" onclick="<%=getCurrentAttribute("item","addtocartclickscript")%>">add to my basket</a></li>
+      </ul>
+         
+      <ul class="links">
+       <WL_ADDTOLIST_BUTTON>
+       <CD_ADDTOLIST_BUTTON>
+      </ul>
+      
+     </div>
+      
+    </div>
+    
+    <HIDE_RETAIL_ONLY_IF_TRADE>
+    
+    <p class="links">
+     <a href="<%=getAttribute("infoitem",2,"storeurl")%>">Delivery and Returns</a>
+    </p>
+    
+    <input type="hidden" name="wasprice" value="<%=getCurrentAttribute("item","custitem_bb1_wasprice")%>" />
+  
+    <%=getCurrentAttribute("item","addtocartsubmitscript")%>
+      
+   </form>
+     
+  </div>
+  
+ </div>
+ 
+ <div class="related-info2 clear">
+
+  <div class="related-items">
+   <table cellpadding="0" cellspacing="0" border="0"><%=getCurrentAttribute("item","allrelateditemshtml")%></table>
+  </div>
+ 
+  <div class="information">
+   <div>
+    <h2>Popular links</h2>
+    <PRODUCT_DETAIL_POPULAR_LINKS>
+   </div>
+  </div>
+ 
+ </div>
+
+ <div id="reviews" class="user-reviews clear">
+
+  <h2 class="heading">Product Reviews</h2>
+
+  <p class="write-review"><a href="<%=getAttribute("infoitem",48,"storeurl")%>">Write Your Review</a></p>
+  
+  <div class="line"></div>
+
+  <div class="reviews"><%=getCurrentAttribute("item","custitem_bb1_feedback")%></div>
+  
+ </div>
+ 
+ <script type="text/javascript">
+ //<![CDATA[
+  (function() {
+   
+   //$("#cart_<%=getCurrentAttribute("item","internalid")%> .item-options:has(input[type!='hidden'],select)").css({ display: "block" });
+   
+   if (<%=getCurrentAttribute("item","quantityavailable","0")%><=0 && "<%=getCurrentAttribute("item","outofstockbehavior")%>"=="Disallow back orders but display out-of-stock message") $("#cart_<%=getCurrentAttribute("item","internalid")%> .add-to-basket, #cart_<%=getCurrentAttribute("item","internalid")%> .quantity").css({ display: "none" });
+   
+   window.orgpricerange<%=getCurrentAttribute("item","internalid")%> = $('#itemprice<%=getCurrentAttribute("item","internalid")%>').html();
+
+   try {
+    var matrixdata = eval('<%=getCurrentAttribute("item","custitem_bb1_matrixdata","")%>');
+   }
+   catch(e) {}
+   
+   var UpdatePricing = function(price, wasprice) {
+    
+    var container = $("div.product-intro2");
+    
+    if (price > 0 && wasprice > 0 && price != wasprice) {
+     if (!isNaN(price)) price = price.formatCurrency();
+     container.find(".price").addClass("marked-down");
+     container.find(".was-price").html("Was: " + wasprice.formatCurrency());
+     container.find(".sale-price-label").html("Now: ");
+    }
+    else {
+     if (!isNaN(price)) price = price.formatCurrency();
+     container.find(".price").removeClass("marked-down");
+     container.find(".was-price").html("");
+     container.find("sale-price-label").html("");      
+    }
+    
+   };
+   
+   if (matrixdata && matrixdata.length > 0) { // setup event handlers for matrix items
+    
+    $(".item-options select").each(function() { 
+     this.ns_onchange = this.onchange;
+     this.onchange = function(e) {
+      if (typeof this.ns_onchange == "function")
+       this.ns_onchange();
+      // get selected options
+      var options_l = {}, options_a = [];
+      $(".item-options select option:selected").each(function() {
+       var $this = $(this)
+       var val = $this.val();
+       if (val != "") {
+        options_a.push(val);
+        options_l[$this.parent().attr("id")] = val;
+       }
+      });
+      
+      if (options_a.length > 0 && typeof window.Item<%=getCurrentAttribute("item","internalid")%>_prices[options_a.join(":")] != "undefined") {
+      
+       var child_price = window.Item<%=getCurrentAttribute("item","internalid")%>_prices[options_a.join(":")].parseCurrency();
+       var child_wasprice = "";
+       
+       for (var i=0, l=matrixdata.length; i < l; i++) {
+       
+        var match = true;
+        for (opt in options_l) {
+         if (matrixdata[i][opt] != options_l[opt]) {
+          match = false;
+          break;
+         }
+        }
+        
+        if (match) {
+         child_wasprice = matrixdata[i]["wasprice"];
+         break;
+        }
+        
+       }
+       
+       UpdatePricing(child_price, child_wasprice);
+       
+      }
+      else {
+
+       UpdatePricing(0, 0);
+
+      }
+      
+     };
+    });
+   }
+   else { // display was pricing for non-matrix items
+    
+    var container = $("div.product-intro2");
+    var ns_price = container.find(".sale-price");
+   
+    if (ns_price.find("table").length == 0) {
+     var price = ns_price.text().parseCurrency();
+     var wasprice = container.find("input[name=wasprice]").val().parseCurrency();
+     UpdatePricing(price, wasprice);
+    }
+    
+   }
+   
+   var $imagegallery = $("div.image-gallery");
+  
+   $imagegallery.each(function() {
+   
+    var $this = $(this);
+    
+    // Remove Sale status for trade
+    
+    var pricelevel = "<%=getCurrentAttribute("customer","pricelevel","")%>";
+    if (/Trade/i.test(pricelevel))
+     $this.find("div.image span.status:containsAny(Sale Special Offer Off special offer off)").remove();
+    
+   });
+   
+   $imagegallery.find("#zoom-image").hover(function() {
+    $("#facebook_like_compact").css("visibility", "hidden");
+    $('[data-pin-log="button_pinit"]').css("visibility", "hidden");
+   }, function() {
+    $("#facebook_like_compact").css("visibility", "");
+    $('[data-pin-log="button_pinit"]').css("visibility", "");
+   });
+   
+   $imagegallery.find("ul.img-list li").hide().not(":has(img[src$='#'])").show().find("a").each(function() {
+    var resized_url = this.getAttribute("rev");
+    var parms = {"resizeid":"-2", "resizeh":"350", "resizew":"350"};
+    for (var key in parms)
+     resized_url = addParamToURL(resized_url, key, parms[key], true);
+    this.setAttribute("rev", resized_url);
+   }).find("img").each(function() {
+    var resized_url = this.src;
+    var parms = {"resizeid":"-9", "resizeh":"67", "resizew":"67"};
+    for (var key in parms)
+     resized_url = addParamToURL(resized_url, key, parms[key], true);
+    this.src = resized_url;
+   });
+   
+   $("div.product-rating img[src$='blank.gif']").parent().hide();
+   
+   $("ul.links li:last").addClass("last");
+   
+   $("#reviews .reviews:empty").parent().hide();
+   
+   $("input#qty[type='hidden']").before('<input type="text" id="qty" value="1" disabled />');
+   
+  })();
+ //]]>
+ </script>
+</td>

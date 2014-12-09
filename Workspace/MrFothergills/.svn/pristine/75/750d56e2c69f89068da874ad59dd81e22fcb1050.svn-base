@@ -1,0 +1,49 @@
+</form><!-- Workaround -->
+<tr>
+<td>
+
+	<div id="topmenu">
+		<p id="welcomemessage" class="leftmenu">Welcome <span id="welcomename"></span></p>
+		<p class="rightmenu"><NLUSERINFO2>
+		|&nbsp;&nbsp;<NLCUSTOMERCENTERLINKHTML>My Account</a>&nbsp;
+		|&nbsp;&nbsp;<NLCARTLINKHTML>View Basket</a>&nbsp;
+		|&nbsp;&nbsp;<a href="/My-Wish-List/">View Wish List</a></p>
+	</div>
+	<div id="header">
+		<a href="<%=getCurrentAttribute('site','logolinkurl')%>">
+			<img id="logoimg" src="<%=getCurrentAttribute('site','logoimageurl','/images/store/templates/common/lgo-your_company.gif')%>" alt="D.T. Brown - Quality &amp; Value - Seed Merchants Est. 1908">
+		</a>
+		<div id="basket" class="shadowbox">
+			<p id="baskettext"><NLCARTLINKHTML><img src="/site/dtbrown/img/basket_20x20.png" alt=""></a> <a href="<NLCARTURL>" target="_parent">Your basket</a><br>
+				<span id="cartitemcount"></span> items&nbsp;&nbsp;&nbsp;&nbsp;<span id="itemtotal"></span>
+<br>
+				<span class="lighter">Postage &amp;amp; Packing <span id="pandp"></span></span><br>
+				<span class="total">Total&nbsp;&nbsp;&nbsp;&nbsp;<span id="total"></span></span></p>
+			<input type="button" id="btn_checkout" class="button" value="Checkout" onclick="parent.window.location.href='<NLCARTURL>';">
+			<input type="button" id="btn_resetcheckout" class="button" value="Clear Basket" onclick="parent.clearBasket();">
+		</div>
+	</div>
+	<ul id="tabmenu">
+		<NLPAGETABS>
+	</ul>
+	<div id="searchbar">
+		<div id="searchbox">
+			<p><label for="search">Search for</label></p>
+			<div id="searchinput" class="shadowbox">
+				<!--<form id="searchportlettag" name="searchportlettag" onsubmit="window.location.href='/s.nl?ext=F&amp;c=<NLCOMPANYID>&amp;n=2&amp;search='+escape(document.forms['searchportlettag'].elements['search'].value);return false;">-->
+				<form id="searchportlettag" name="searchportlettag" action="/s.nl?ext=F&amp;c=<NLCOMPANYID>&amp;n=2" method="get">
+					<input type="text" id="search" name="search" class="intinput" autocomplete="off">
+					<input type="submit" class="button btn_go shadowbox" value="Go">
+				</form>
+			</div>
+		</div>
+		<div id="offersbox" class="shadowbox">
+			<div id="offersinput">
+				<p id="offerstext" class="intinput"><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.191/.f">SPECIAL OFFERS</a></p>
+			</div>
+		</div>
+	</div>
+	<p id="nlcrumbtrail"><NLCRUMBTRAIL></p>
+	<DTBHELPTEXT>
+</td>
+</tr>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Contact Us</title>
+<link href="/c.3322617/site/mrfothergills2/css/default.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+.input,.inputreq{font-size:inherit !important;color:inherit !important;}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#title').hide().val('Online Enquiry');
+	
+	$('#firstname').val('First');
+	$('#lastname').val('Last');
+
+	if (!$('#custevent_firstname').val())
+	{
+		$('#custevent_firstname').val('First Name');
+	}
+	if (!$('#custevent_lastname').val())
+	{
+		$('#custevent_lastname').val('Last Name');
+	}
+
+	$('#custevent_firstname').focus(function(){
+		$('#custevent_firstname').val('');
+	});
+
+	$('#custevent_lastname').focus(function(){
+		$('#custevent_lastname').val('');
+	});
+
+	$('#custevent_mrf_enquirytype>option:first').text('-- Please Select --');
+	
+	$('#custevent_mrf_campaign_brand').val(1);
+	
+	$('#salutation').val($('#custevent_salutation option:selected').text());
+
+	$('#custevent_salutation').change(function(){
+		$('#salutation').val($(this).children('option:selected').text());
+	});
+	
+	$('#country').change(function(){
+		$('#custevent_country').val($('#country').val());
+	});
+	
+	$('#country').val('GB');
+	$('#country').change();
+});
+</script>
+<script type="text/javascript" src="/c.3322617/site/common/js/WebStoreFinder.js"></script><script type="text/javascript">var pcaAccountCode="MRFOT11112"; var pcaLicenseKey="TM39-PP44-ET44-CG72"; pcaUseUKData = true;</script>
+</head>
+<body>
+<div id="iframeouterwrapper">
+<div class="iframecontainer">
+<NLFORM>
+<table>
+<tr><td width="250"><p>Enquiry Type:</p></td><td><NLCUSTEVENT_MRF_ENQUIRYTYPE></td></tr>
+<tr><td><p>Title:</p></td><td><NLCUSTEVENT_SALUTATION></td></tr>
+<tr><td><p>Your Name:</p></td><td><NLCUSTEVENT_FIRSTNAME><NLCUSTEVENT_LASTNAME></td></tr>
+<tr><td><p>Your E-mail:</p></td><td><NLEMAIL></td></tr>
+<tr><td><p>Your Telephone Number:</p></td><td><NLPHONE></td></tr>
+<tr><td><p>Your Message:</p></td><td><NLINCOMINGMESSAGE></td></tr>
+<tr><td colspan="2"><p style="margin:20px 0 10px 0;">The following information is optional, but will help us deal with your enquiry faster: </p></td></tr>
+<tr><td><p>Address:</p></td>
+<td>
+<table>
+<tr><td><p>Postcode: </p></td><td><NLCUSTEVENT_ZIP></td></tr>
+<tr><td><p>Address 1: </p></td><td><NLCUSTEVENT_ADDR1></td></tr>
+<tr><td><p>Address 2: </p></td><td><NLCUSTEVENT_ADDR2></td></tr>
+<tr><td><p>City: </p></td><td><NLCUSTEVENT_CITY></td></tr>
+<tr><td><p>County: </p></td><td><NLCUSTEVENT_STATE></td></tr>
+<tr><td><p>Country: </p></td><td><NLCOUNTRY></td></tr>
+<tr style="display:none;"><td><p>Brand: </p></td><td><NLCUSTEVENT_MRF_CAMPAIGN_BRAND><NLSALUTATION><NLFIRSTNAME><NLLASTNAME><NLCUSTEVENT_COUNTRY></td></tr>
+</table>
+<p><input type="submit" value="Submit" class="button shadowbox" style="padding: 10px 15px;margin-top:10px;"></p>
+</td>
+</tr>
+</table>
+<NLTITLE>
+</form>
+</div>
+</div>
+</body>
+</html>

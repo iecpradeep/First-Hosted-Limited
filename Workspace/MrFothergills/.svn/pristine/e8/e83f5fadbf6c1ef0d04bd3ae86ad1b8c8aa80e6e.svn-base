@@ -1,0 +1,496 @@
+/*****************************************************************************
+ *	Name		:	reverseRevenueInvoice_UE.js
+ *	Script Type	:	user event - After Record Submit of invoice. 
+ *	Applies To	: 	invoices
+ *
+ *	Client		: 	Mr. Fothergills
+ *
+ *	Version		:	1.0.0 - 06/05/2013  First Release - AS
+ *					1.0.1 - 21/06/2013 - setting the journal ref in the column in the invoice - AS
+ *					1.0.2 - 05/07/2013 - adding the creation, deletion and editing of the 
+ *										 journals according to the edit, create and delete of 
+ *										 the invoice and invoice lines - AS  
+ *				
+ * 	Author		:	FHL 
+ * 	Purpose		:	To reverse the revenue from the sales
+ * 
+ * 	Script		: 	customscript_reverserevenueinvoice
+ * 	Deploy		:   customdeploy_reverserevenueinvoice
+ * 
+ * 	Library		: library.js
+ * 
+ ***************************************************************************/
+
+var DEFERREDREVENUEACCOUNTNUMBER = 0;
+var ItemRevenueAccountIntID = 0;
+var deferredRevenueAccountIntID = 0;
+var customerIntID = 0;
+var departmentIntID = 0;
+var locationIntID = 0;
+var invoiceDate = '';
+var invoiceID = 0;
+var invoiceRecord = '';
+var noOfLineItems = 0;
+var oldJournalList = new Array();
+
+/**********************************************************************
+ * calculateKitPackAvgCost Function - the main function
+ * 
+ **********************************************************************/
+function reverseRevenue(type)
+{
+	//initialising the static variables use in the script
+	initialise(type);
+
+	//doing the processing
+	process(type);
+}
+
+
+
+/**********************************************************************
+ * initialise Function - initialising the static variables used in the script
+ * 
+ **********************************************************************/
+function initialise(type)
+{
+	var invoiceIntID = 0;
+	var context = '';
+	var oldJournals = '';
+	var indexOfComma = 0;
+	var arrayIndex = 0;
+	
+	try
+	{
+		context = nlapiGetContext();
+		DEFERREDREVENUEACCOUNTNUMBER = '24160';
+		
+		//if he invoice is not creating
+		if(type != 'create')
+		{
+			//reading the script parameter value
+			oldJournals = nlapiGetContext().getSessionObject('custscript_oldjournallist');
+	
+			//if the parameter is not empty
+			if(oldJournals != null)
+			{
+				//split the parameter value by comma to get each journal's internal ID
+				oldJournalList = oldJournals.split(',', oldJournals.length);
+			}
+		}
+				
+		//getting the internal id of the account to be credited
+		deferredRevenueAccountIntID = genericSearch('account', 'number', DEFERREDREVENUEACCOUNTNUMBER);
+		
+		if(type != 'delete')
+		{
+			//to get the transaction ID of the currently creating record
+			invoiceIntID = nlapiGetRecordId();						//getting internal id of the current invoice
+
+			invoiceRecord = nlapiLoadRecord('invoice', invoiceIntID);		//load the invoice
+			invoiceID = invoiceRecord.getFieldValue('tranid');				//getting the transaction id
+		}
+
+	}
+	catch(e)
+	{
+		errorHandler('initialise', e);
+	}
+
+}
+
+
+
+/**********************************************************************
+ * process Function - doing the processing 
+ * 
+ **********************************************************************/
+function process(type)
+{
+	try
+	{
+		//calling the getFieldsAndItemLines Function
+		getFieldsAndItemLines(type);
+
+	}
+	catch(e)
+	{
+		errorHandler('process', e);
+	}
+
+}
+
+
+
+/**********************************************************************
+ * getFieldAndItemLines Function - getting the required field values 
+ * 									and line item values, get accounts
+ * and post,delete or edit the journals for each line item depending on the 
+ * mode (create, edit,delete) of the record
+ * 								
+ * version 1.0.1 - setting the journal ref in the column in the invoice
+ * version 1.0.2 - adding the creation, deletion and editing of the 
+ *				   journals according to the edit, create and delete of 
+ *				   the invoice and invoice lines - AS  
+ **********************************************************************/
+function getFieldsAndItemLines(type)
+{
+	//declaring local variables
+	var itemIntId = 0;
+	var itemAmount = 0.00;
+	var existingJournalIntID = 0;
+	var journalExist = 'T';
+	var newJournalList = new Array();
+	var journalList = new Array();
+	
+	try
+	{
+		customerIntID = nlapiGetFieldValue('entity');				//getting customer's internal ID
+		departmentIntID = nlapiGetFieldValue('department');			//getting department int ID
+		locationIntID = nlapiGetFieldValue('location');				//getting location int ID
+		invoiceDate = nlapiGetFieldValue('trandate');				//getting invoiced date
+		noOfLineItems = nlapiGetLineItemCount('item');				//getting the no of line items 
+		
+	/*	
+		*//**********************************************************************************
+		 * To record the old journal List belongs to the invoice before making the changes
+		 **********************************************************************************//*
+		//looping though each line item
+		for(var x = 1; x <= noOfLineItems; x++)
+		{
+			//getting the journal's internal id
+			existingJournalIntID = nlapiGetLineItemValue('item','custcol_revjournalref',x);
+			
+		}*/
+
+		//looping through each line item
+		for(var i = 1; i <= noOfLineItems; i++)
+		{
+			itemIntId = nlapiGetLineItemValue('item', 'item', i);		//getting  line item internal id
+			itemAmount = nlapiGetLineItemValue('item', 'amount', i);	//getting the amount of the line item		
+			
+			existingJournalIntID = nlapiGetLineItemValue('item','custcol_revjournalref',i);
+			
+			if(existingJournalIntID > 0)
+			{
+				//put the journal IDs into an array
+				journalList[i-1] = existingJournalIntID;
+				newJournalList[i-1] = existingJournalIntID;
+			}
+			
+			//Calling getItemAccountsInternalIDs function
+			getItemAccountInternalID(itemIntId);		
+			
+			/******
+			 * when the invoice is created, a new journal will be created as well
+			 *****/ 
+			if(type == 'create')
+			{
+				//calling postJournals Function
+				journalIntID = postJournals(itemAmount);	
+				
+				//if a journal has created
+				if(journalIntID > 0)
+				{
+					//setting the journal reference in the invoice line item 
+					////version 1.0.1
+					invoiceRecord.setLineItemValue('item', 'custcol_revjournalref', i, journalIntID);		
+				}
+			}
+		
+			/*****
+			 * when the invoice is edited, if no journal found for each line item, 
+			 * then create new journal, otherwise edit the existing journal
+			 *****/
+			else if(type == 'edit')
+			{
+				//if no journal for the line item		
+				if(existingJournalIntID == null)
+				{
+					//calling postJournals Function
+					journalIntID = postJournals(itemAmount);	
+					
+					//if a journal has created
+					if(journalIntID > 0)
+					{
+						//setting the journal reference
+						invoiceRecord.setLineItemValue('item', 'custcol_revjournalref', i, journalIntID);		//version 1.0.1
+						
+						//put the newly created journal id to the newJournalList array
+						newJournalList[i-1] = journalIntID;
+					}
+					
+				}
+				//if there is an existing journal already 
+				else
+				{
+					//calling the editJournal function
+					editJournal(existingJournalIntID,itemAmount);
+				}
+						
+			}
+			/******
+			 * if the invoice is deleted
+			 * 
+			 *****/
+			else if(type == 'delete')
+			{
+				//deleting the particular journal
+				nlapiDeleteRecord('journalentry', existingJournalIntID);
+			}
+			
+		}
+		
+		//if the invoice is not deleted
+		if(type != 'delete')
+		{
+			nlapiSubmitRecord(invoiceRecord);			//submit the invoice to save the changes
+		}
+		
+		journalExist = checkJournals(newJournalList);	//calling checkJournals function 
+		
+		//if the invoice is edited/ deleted
+		if(type != 'create')
+		{
+			//assign the newJournalList to journalList array
+			journalList = newJournalList;
+		}
+		
+		//setting the journal list to a parameter to comparison purposes 
+		nlapiGetContext().setSessionObject('custscript_oldjournallist', journalList);
+
+		nlapiLogExecution('audit', 'journalList', journalList);
+
+	}
+	catch(e)
+	{
+		errorHandler('getFieldsAndItemLines', e);
+	}
+
+}
+
+
+
+/**********************************************************************
+ * checkJournals Function - compare the old and new journal arrays and 
+ * 							determine which journals needs to be deleted 
+ * 
+ **********************************************************************/
+function checkJournals(newJournal)
+{
+	var foundFlag = 'F';
+	
+	try
+	{
+		nlapiLogExecution('debug', 'checkJournals oldJournalList', oldJournalList);
+		nlapiLogExecution('debug', 'checkJournals newJournal', newJournal);
+		
+		//looping through the old journal list
+		for(var y = 0; y < oldJournalList.length; y++)
+		{
+			//looping through the new journal list 
+			for(var z = 0; z < newJournal.length; z++)
+			{
+				//if old journal id is found in the new journal list 
+				if(oldJournalList[y] == newJournal[z])
+				{
+					foundFlag = 'T';
+					
+					//to exit the current loop
+					z = newJournal.length -1;
+				}
+				else
+				{
+					foundFlag = 'F';
+				}
+				
+			}
+			
+			//if the old journal id is not found in the new journal list
+			if(foundFlag == 'F')
+			{
+				//delete the old journal
+				nlapiDeleteRecord('journalentry',oldJournalList[y]);
+			}
+		}
+	}	
+	catch(e)
+	{
+		errorHandler('checkJournals', e);
+
+	}
+
+}
+
+
+
+
+
+/**********************************************************************
+ * getItemAccountsInternalIDs Function - getting the revenue account of particular item
+ * 
+ * @param itemInternalID - internal id of the item in particular line item
+ **********************************************************************/
+function getItemAccountInternalID(itemInternalID)
+{
+	try
+	{
+		//getting revenue account id of the particular item in the line
+		ItemRevenueAccountIntID = nlapiLookupField('item', itemInternalID, 'incomeaccount');
+
+	}	
+	catch(e)
+	{
+		errorHandler('getItemAccountsInternalIDs', e);
+
+	}
+}
+
+
+/**********************************************************************
+ * postJournals Function - creating and posting the journals into NetSuite
+ * 
+ * @param amount - amount of the particular line item (the amount to be debited and credited)
+ **********************************************************************/
+function postJournals(amount)
+{
+	var journalDesc = '';
+	var journalID = 0;
+	
+	try
+	{
+
+		journalDesc = 'Item revenue account to deferred revenue account transfer for Invoice: ' +invoiceID;
+
+		/*
+		 * Creating the journal - Library Function
+		 * The format is  : createJournal(totalValue, creditingAccount, debitingAccount, dept, location, subsidiary, jClass, invDate, desc, entity)
+		 * 
+		 */
+
+		journalID = createJournal(amount, deferredRevenueAccountIntID, ItemRevenueAccountIntID, departmentIntID, locationIntID, 0, 0, invoiceDate, journalDesc, customerIntID);
+
+	}
+	catch(e)
+	{
+
+		errorHandler('postJournals', e);
+	}
+
+ return journalID;
+
+}
+
+
+
+
+/**********************************************************************
+ * editJournal Function - editing the existing journal in NetSuite
+ * 
+ * @param amount - amount of the particular line item (the amount to be debited and credited)
+ **********************************************************************/
+function editJournal(journalID, amount)
+{
+	var journalDesc = '';
+	var journalRecord = null;
+	var noOfJournalLines = 0;
+	
+	try
+	{
+		//convert everything to a float as we are dealing with currency
+		totalValue = parseFloat(amount);
+		debitingAccount = parseFloat(deferredRevenueAccountIntID);
+		creditingAccount = parseFloat(ItemRevenueAccountIntID);
+		
+		//loading the journal record
+		journalRecord = nlapiLoadRecord('journalentry', journalID);
+		
+		//getting the count of line items in the journal record
+		noOfJournalLines = journalRecord.getLineItemCount('line');
+				
+		for(var index = noOfJournalLines; index >= 1; index--)
+		{
+			journalRecord.selectLineItem('line', index);		//selecting the line item
+			journalRecord.removeLineItem('line', index);		//removing the line item
+			
+		}
+				
+		//calling the setJournalLineItems function
+		setJournalLineItems(journalRecord,amount, deferredRevenueAccountIntID, ItemRevenueAccountIntID, departmentIntID, locationIntID, customerIntID);
+		
+		//saveing the changes in the journal by submitting the journal
+		nlapiSubmitRecord(journalRecord,true);
+	}
+	catch(e)
+	{
+		errorHandler('editJournal', e);
+	}
+
+}
+
+
+/**********************************************************************
+ * setJournalLineItems Function - setting the journal line items
+ * 
+ ***********************************************************************/
+function setJournalLineItems(journalRecord, totalValue, creditingAccount, debitingAccount, dept, location, entity)
+{
+	try
+	{
+		
+		journalDesc = 'Item revenue account to deferred revenue account transfer for Invoice: ' +invoiceID;
+
+		// credit
+		journalRecord.selectNewLineItem('line');
+		journalRecord.setCurrentLineItemValue('line','account',creditingAccount);
+		journalRecord.setCurrentLineItemValue('line','credit',parseFloat(totalValue));
+		
+		if(dept!=0)
+		{
+			journalRecord.setCurrentLineItemValue('line','department',dept);
+		}
+		
+		if(location!=0)
+		{
+			journalRecord.setCurrentLineItemValue('line','location',location);
+		}
+		
+			if(entity!=0)
+		{
+			journalRecord.setCurrentLineItemValue('line','entity',entity);
+		}
+
+		journalRecord.setCurrentLineItemValue('line','memo', journalDesc);
+		journalRecord.commitLineItem('line');   
+		
+		// debit
+		journalRecord.selectNewLineItem('line');
+		journalRecord.setCurrentLineItemValue('line','account',debitingAccount);
+		journalRecord.setCurrentLineItemValue('line','debit',parseFloat(totalValue));
+
+		if(dept!=0)
+		{
+			journalRecord.setCurrentLineItemValue('line','department',dept);
+		}
+		
+		if(location!=0)
+		{
+			journalRecord.setCurrentLineItemValue('line','location',location);
+		}
+		
+		if(entity!=0)
+		{
+			journalRecord.setCurrentLineItemValue('line','entity',entity);
+		}
+
+		journalRecord.setCurrentLineItemValue('line','memo', journalDesc);
+		journalRecord.commitLineItem('line');                  
+
+	}
+	catch(e)
+	{
+		errorHandler('setJournalLineItems', e);
+	}             
+
+} 
+

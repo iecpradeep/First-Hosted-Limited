@@ -1,0 +1,7 @@
+<project info="SuiteCloud IDE generated file, do not edit." setAttributesOnUpdate="false">
+  <folder name="Typemaker" bundleable="false">
+    <file name="invoiceClient.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="transactionAfterSubmitUserEvent.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+    <file name="typemakerLibrary.js" bundleable="false" hideInBundle="false" isOnline="false"/>
+  </folder>
+</project>

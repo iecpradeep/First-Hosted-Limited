@@ -1,0 +1,33 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/common/js/slider.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/itemlist.js"></script>
+<!-- End addition_to_head -->
+<td>
+
+<NLPROCESSONCE>
+	<div id="breadcrumbs">
+		<MRFSOCIALHEADER>
+	</div>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+<MRFINFOMENU>
+		</div>
+		<div id="catright">
+			<div class="infocontainer outline">
+<h1><%=getCurrentAttribute('sitecategory','itemid')%></h1>
+<h2><%=getCurrentAttribute('sitecategory','description')%></h2>
+<table width="100%">
+<tr>
+<NLITEMLIST>
+</tr>
+</table>
+				<div id="pagination2" class="pagination">
+					<p><span class="pageTotalItems">1</span> item(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Showing Page <span class="pageCurrent">1</span> of <span class="pageTotal">1</span></p>
+					<p class="pager"><a class="pagerprev" href="#">&amp;lt;&amp;lt;Previous</a> <a href="?">1</a> <a class="pagernext" href="#">Next&gt;&gt;</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</td>

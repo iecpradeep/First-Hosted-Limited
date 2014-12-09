@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.MaxCredible.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" targetNamespace="http://www.MaxCredible.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.MaxCredible.com/">
+      <s:element name="XMLReceive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="txtUN" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="txtUP" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="txtXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XMLReceiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XMLReceiveResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XMLBatchReceive">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="BatchName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SendXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="XMLBatchReceiveResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="XMLBatchReceiveResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="XMLReceiveSoapIn">
+    <wsdl:part name="parameters" element="tns:XMLReceive" />
+  </wsdl:message>
+  <wsdl:message name="XMLReceiveSoapOut">
+    <wsdl:part name="parameters" element="tns:XMLReceiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="XMLBatchReceiveSoapIn">
+    <wsdl:part name="parameters" element="tns:XMLBatchReceive" />
+  </wsdl:message>
+  <wsdl:message name="XMLBatchReceiveSoapOut">
+    <wsdl:part name="parameters" element="tns:XMLBatchReceiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="XMLReceiveHttpGetIn">
+    <wsdl:part name="txtUN" type="s:string" />
+    <wsdl:part name="txtUP" type="s:string" />
+    <wsdl:part name="txtXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="XMLReceiveHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="XMLBatchReceiveHttpGetIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="BatchName" type="s:string" />
+    <wsdl:part name="SendXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="XMLBatchReceiveHttpGetOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="XMLReceiveHttpPostIn">
+    <wsdl:part name="txtUN" type="s:string" />
+    <wsdl:part name="txtUP" type="s:string" />
+    <wsdl:part name="txtXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="XMLReceiveHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:message name="XMLBatchReceiveHttpPostIn">
+    <wsdl:part name="Username" type="s:string" />
+    <wsdl:part name="Password" type="s:string" />
+    <wsdl:part name="BatchName" type="s:string" />
+    <wsdl:part name="SendXML" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="XMLBatchReceiveHttpPostOut">
+    <wsdl:part name="Body" />
+  </wsdl:message>
+  <wsdl:portType name="Invoer_mcSoap">
+    <wsdl:operation name="XMLReceive">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Ontvangt factuur informatie per stuk</documentation>
+      <wsdl:input message="tns:XMLReceiveSoapIn" />
+      <wsdl:output message="tns:XMLReceiveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="XMLBatchReceive">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Ontvangt factuur informatie in batch</documentation>
+      <wsdl:input message="tns:XMLBatchReceiveSoapIn" />
+      <wsdl:output message="tns:XMLBatchReceiveSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Invoer_mcHttpGet">
+    <wsdl:operation name="XMLReceive">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Ontvangt factuur informatie per stuk</documentation>
+      <wsdl:input message="tns:XMLReceiveHttpGetIn" />
+      <wsdl:output message="tns:XMLReceiveHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="XMLBatchReceive">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Ontvangt factuur informatie in batch</documentation>
+      <wsdl:input message="tns:XMLBatchReceiveHttpGetIn" />
+      <wsdl:output message="tns:XMLBatchReceiveHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="Invoer_mcHttpPost">
+    <wsdl:operation name="XMLReceive">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Ontvangt factuur informatie per stuk</documentation>
+      <wsdl:input message="tns:XMLReceiveHttpPostIn" />
+      <wsdl:output message="tns:XMLReceiveHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="XMLBatchReceive">
+      <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">Ontvangt factuur informatie in batch</documentation>
+      <wsdl:input message="tns:XMLBatchReceiveHttpPostIn" />
+      <wsdl:output message="tns:XMLBatchReceiveHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Invoer_mcSoap" type="tns:Invoer_mcSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="XMLReceive">
+      <soap:operation soapAction="http://www.MaxCredible.com/XMLReceive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XMLBatchReceive">
+      <soap:operation soapAction="http://www.MaxCredible.com/XMLBatchReceive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Invoer_mcHttpGet" type="tns:Invoer_mcHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="XMLReceive">
+      <http:operation location="/XMLReceive" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XMLBatchReceive">
+      <http:operation location="/XMLBatchReceive" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Invoer_mcHttpPost" type="tns:Invoer_mcHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="XMLReceive">
+      <http:operation location="/XMLReceive" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="XMLBatchReceive">
+      <http:operation location="/XMLBatchReceive" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:content part="Body" type="text/xml" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Invoer_mc">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/" />
+    <wsdl:port name="Invoer_mcSoap" binding="tns:Invoer_mcSoap">
+      <soap:address location="https://secure2.maxcredible.com/webservices_alg/invoer_MC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Invoer_mcHttpGet" binding="tns:Invoer_mcHttpGet">
+      <http:address location="https://secure2.maxcredible.com/webservices_alg/invoer_MC.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Invoer_mcHttpPost" binding="tns:Invoer_mcHttpPost">
+      <http:address location="https://secure2.maxcredible.com/webservices_alg/invoer_MC.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

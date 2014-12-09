@@ -1,0 +1,11 @@
+Page cellpadding = 0
+Colour Theme = Custom : Woolmans
+Site Font = Arial
+Default Item Drilldown Template = Woolmans PRODUCTS (item drilldown)
+Default Item Drilldown Template = Woolmans TEMPLATE B (info item drilldown)
+Default Item Drilldown Template = Woolmans PRODUCTS (item layout)
+Default Item Drilldown Template = Woolmans (null layout)
+Default Item Drilldown Template = Woolmans PRODUCTS (related item layout)
+Default Item Drilldown Template = Woolmans PRODUCTS (upsell item layout)
+Default Item Drilldown Template = Woolmans 2 WELCOME (item layout)
+Default Item Drilldown Template = Woolmans (null layout)

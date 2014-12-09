@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+	android:id="@+id/relativeLayout1" 
+	android:layout_height="fill_parent" 
+	android:layout_width="fill_parent"
+	android:weightSum="1.0"
+	xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--android:layout_width="250dp"-->
+    <!--android:layout_weight="1"-->
+    <TextView
+        android:id="@+id/FirstText"
+        android:layout_width="0dp"
+        android:layout_weight=".50"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:text="First"
+        android:textSize="15sp"
+        >
+    </TextView>
+    
+    
+    <!--android:layout_width="200dp"-->
+    <!--android:layout_weight="2"-->
+    <TextView
+        android:id="@+id/SecondText"
+        android:layout_width="0dp"
+        android:layout_weight=".30"
+        android:layout_height="wrap_content"
+        android:layout_gravity="clip_vertical"
+        android:textAlignment="center"
+        android:text="Second"
+        android:textSize="15sp"
+        >
+    </TextView>
+    
+    <!--android:layout_width="100dp"-->
+    <!--android:layout_weight="1"-->
+    <TextView
+        android:id="@+id/ThirdText"
+        android:layout_width="0dp"
+        android:layout_weight=".20"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:text="Third"
+        android:textSize="15sp"
+        >
+    </TextView>
+</LinearLayout>

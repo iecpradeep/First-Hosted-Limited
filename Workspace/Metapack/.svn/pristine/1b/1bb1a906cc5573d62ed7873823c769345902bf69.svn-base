@@ -1,0 +1,131 @@
+/*****************************************************************************
+ *	Name		:	conEngineUE.js
+ *	Script Type	:	user event - after record submit item fulfilment. 
+ *	Applies To	: 	item fulfilments
+ *
+ *	Client		: 	
+ *
+ *	Version		:	1.0.0 - 05/07/2013  First Release - AS
+ *						
+ * 	Author		:	FHL 
+ * 	Purpose		:	to integrate the Netsuite and Metapack
+ * 
+ * 	Script		: 	
+ * 	Deploy		:   
+ * 
+ * 	Library		: SOAPScriptLibrary.js
+ * 
+ ***************************************************************************/
+//declaring global variables
+var createdFrom = '';
+var username = '';
+var password = '';
+
+/**********************************************************************
+ * integrateMetapack - main Function 
+ **********************************************************************/
+function integrateMetapack(type)
+{
+	if(type == 'create' || type == 'edit')
+	{
+		
+		initialise();
+		process();
+	}
+
+}
+
+/**********************************************************************
+ * initialise Function - initialise the static variables used in the script 
+ **********************************************************************/
+function initialise()
+{
+	try
+	{
+		username = 'destinynetsuite';
+		password = 'fu2afrEt';
+
+	}
+	catch(e)
+	{
+		errorHandler("initialise", e);
+	}
+}
+
+/**********************************************************************
+ * process Function - doing the processing 
+ **********************************************************************/
+function process()
+{
+	try
+	{
+		getRequiredDate();
+
+	}
+	catch(e)
+	{
+		errorHandler("process", e);
+		
+	}
+}
+
+
+/**********************************************************************
+ * getRequiredDate Function - get the required data from NetSuite for creating the SOAP request
+ **********************************************************************/
+function getRequiredDate()
+{
+	try
+	{
+		getFulfilmentData();
+		getSalesOrderData();
+		getSoapFunctions();
+	}
+	catch(e)
+	{
+		errorHandler("getRequiredDate", e);
+		
+	}
+}
+
+/**********************************************************************
+ * getFulfilmentData Function - getting the data from the item fulfilment record 
+ **********************************************************************/
+function getFulfilmentData()
+{
+	var status = '';
+	
+	try
+	{
+		status = nlapiGetFieldValue('shipstatus');
+		createdFrom =  nlapiGetFieldValue('createdfrom');
+	}
+	catch(e)
+	{
+		errorHandler("getFulfilmentData", e);
+		
+	}
+}
+
+
+
+/**********************************************************************
+ * getSalesOrderData Function - getting the data from the related sales order record 
+ **********************************************************************/
+function getSalesOrderData()
+{
+	var salesOrderRecord = null;
+	
+	try
+	{
+		salesOrderRecord = nlapiLoadRecord('salesorder', createdFrom);
+		
+	}
+	catch(e)
+	{
+		errorHandler("getSalesOrderData", e);
+		
+	}
+}
+
+

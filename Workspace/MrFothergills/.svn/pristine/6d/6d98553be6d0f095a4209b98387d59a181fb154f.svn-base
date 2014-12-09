@@ -1,0 +1,840 @@
+/**********************************************************************************************************
+ * Name:        Pick, Pack & Ship Packing Slip (printPPSPackingSlip.js)
+ *
+ * Script Type: Suitelet
+ * 
+ * Client:      Mr. Fothergills Seeds Limited
+ * 
+ * Version:     1.0.0 - 11 Jun 2012 - first release - MJL
+ * 				1.1.0 - 17 Jun 2013 - added - hard-wire the location filter dependent on the menu link clicked by the user - MJL
+ * 				1.1.1 - 18 Jun 2013 - load default start and end batch numbers and save submitted numbers if different - MJL
+ * 				1.1.2 - 20 Jun 2013 - addition of sublist for selecting orders to print - MJL
+ * 		 
+ * Author:      FHL
+ * 
+ * Purpose:     Print packing slip for fulfilled orders
+ * 
+ * Script:     	customscript_pps_printpackingslip
+ * Deploy:      customdeploy_pps_printpackingslip
+ * 
+ * Queries:		Need information for barcodes - code type? value?
+ * 				Which selection fields need to be mandatory?
+ * 				How should be RKY be handled differently?
+ * 				Processed filter - talk to JM
+ * 
+ * Notes:		THIS HAS NOT BEEN UPLOADED YET. STILL IN TESTING - MJL
+ * 
+ * Libraries:   library.js
+ **********************************************************************************************************/
+
+var objRequest = null;
+var objResponse = null;
+
+//Default batch nos.
+var startBatch = null;
+var endBatch = null; 
+
+//Filters form
+var selectionForm = null;
+var fldLocation = null;
+var fldBatchNo = null;
+var fldOrderNo = null;
+var fldStartBatch = null;
+var fldEndBatch = null;
+
+//Sublist form
+var sublist = null;
+var subfldPrint = null;
+var subfldOrderNo = null;
+var subfldBatchNo = null;
+
+//Filter data
+var location = 0;
+var locationName = '';
+var batchNo = 0;
+var orderNo = 0;
+var selectedStartBatch = 0;
+var selectedEndBatch = 0;
+
+//search data
+var filters = new Array();
+var columns = new Array();
+var results = null;
+var resultCount = 0;
+var isProcessed = '';
+
+//Loaded sales order
+var tempOrderNo = 0;
+var salesOrderIntID = 0;
+var salesOrderRecord = null;
+
+//Parameter info
+var context = null; 
+var locationFromURL = null;
+var logoURL = '';
+
+//Brand address
+var brandAddress = '';
+var returnAddress = '';
+
+//SO header info
+var customerID = 0;
+var customerRef = '';
+var brand = 0;
+var accNo = 0; //get from customerRef
+var orderNo = 0;
+var orderDate = '';
+
+//SO line info
+var itemArray = new Array();
+var itemObj = new Object();
+var itemCount = 0;
+var currentCount = 0;
+
+//XML for barcode
+var barcodeTag = '';
+
+//Create XML structure
+var pdfxml = '';
+
+//Create PDF file
+var pdfFile = null;
+var errormsg = '';
+
+//Other stuff - may need deleting
+var searchResult = null;
+var searchResults = null; // saved search results
+var fulfillmentSearch = null;
+var fulfillmentSearchIntID = 0;		
+var itemQtys = new Array();
+var itemQtysCopy = new Array();
+var itemObj=new Object();
+var tempSalesOrder = 0;
+var qty = 0;
+var item = 0;
+var fulfillOrder = false;
+var salesOrderToFulfill = 0;
+var stagingIntID = 0;
+var staging = null;
+var processingError = '';
+var processMessage = '';
+var fulfillmentStatus = '';
+
+/**
+ * fulfill orders
+ * 
+ * @param {nlobjRequest} request Request object
+ * @param {nlobjResponse} response Response object
+ * @returns {Void} Any output is written via response object
+ */
+function printPPSPackingSlip(request, response)
+{
+	//Make request and response objects globally accessible
+	objRequest = request;
+	objResponse = response;
+
+	initialise();
+
+	nlapiLogExecution('AUDIT', 'Method', request.getMethod());
+
+	if (request.getMethod() == 'GET')
+	{
+		//create and display selection form
+		createPrintForm();
+		createSublist();
+		response.writePage(selectionForm);
+	}
+	else
+	{
+		if (getFormData(request, response))
+		{
+			executePPSSearch();
+			processPPSResults();
+		}
+	}
+}
+
+/**
+ * initialise
+ * 
+ * 1.1.0 get location ID from menu URL - MJL
+ * 1.1.1 load default start and end batch numbers - MJL
+ */
+function initialise()
+{
+	try
+	{
+		context = nlapiGetContext();
+		
+		//1.1.0 MJL
+		locationFromURL = objRequest.getParameter('custparam_locationid');
+		
+		//1.1.1 Load default start and end batch numbers - MJL
+		startBatch = loadBatchNumbers(locationFromURL, 'start');
+		endBatch = loadBatchNumbers(locationFromURL, 'end');
+	}
+	catch (e)
+	{
+		errorHandler('initialise', e);
+	}
+}
+
+/**
+ * Creates PPS selection form
+ * 
+ * 1.1.0 set location from URL and lock field - MJL
+ */
+function createPrintForm()
+{
+	try
+	{
+		//Create selection form
+		selectionForm = nlapiCreateForm('Pick Pack & Ship: Print Packing Slip');
+		fldLocation = selectionForm.addField('custpage_pps_location','select','Location','location');
+		fldBatchNo = selectionForm.addField('custpage_pps_batchno', 'integer', 'Batch Number');
+		fldOrderNo = selectionForm.addField('custpage_pps_orderno', 'integer', 'Sales Order Number');   //1.0.4 
+		fldStartBatch = selectionForm.addField('custpage_pps_startbatchno', 'integer', 'Start Batch No.');
+		fldEndBatch = selectionForm.addField('custpage_pps_endbatchno', 'integer', 'End Batch No.');
+		
+		//Set fields to mandatory
+		fldLocation.setMandatory(true);
+		//fldBatchNo.setMandatory(true);
+		//fldOrderNo.setMandatory(true);
+		fldStartBatch.setMandatory(true);
+		fldEndBatch.setMandatory(true);
+
+		//1.1.0 set location from URL and lock field - MJL
+		if (locationFromURL != null)
+		{
+			fldLocation.setDefaultValue(locationFromURL);
+			fldLocation.setDisplayType('inline'); //[TODO] This field may need to be editable; ask JM - MJL
+		}
+			
+		//1.1.1 set default values for start and end batch numbers
+		if (startBatch != -1 && endBatch != -1)
+		{
+			fldStartBatch.setDefaultValue(startBatch);
+			fldEndBatch.setDefaultValue(endBatch);
+		}
+		
+		//Create submit button
+		selectionForm.addSubmitButton('Click here to print packing slips');
+	}
+	catch (e)
+	{
+		errorHandler('createPrintForm', e);
+	}
+}
+
+/**
+ * Create sublist for selecting orders to print
+ * 
+ * 1.1.3 added
+ */
+function createSublist()
+{
+	sublist = selectionForm.addSubList('custpage_orders', 'list', 'Selected Orders');
+	subfldPrint = sublist.addField('custpage_orders_print', 'checkbox', 'Print');
+	subfldOrderNo = sublist.addField('custpage_orders_orderno', 'integer', 'Order Number');
+	subfldBatchNo = sublist.addField('custpage_orders_batchno', 'integer', 'Batch Number');
+	sublist.addMarkAllButtons();	
+}
+
+
+
+/**
+ * get form data
+ */
+function getFormData()
+{
+	var retVal = false;
+
+	try
+	{
+		//Get filter information from form
+		location = objRequest.getParameter('custpage_pps_location');
+		batchNo = objRequest.getParameter('custpage_pps_batchno');
+		orderNo = objRequest.getParameter('custpage_pps_orderno'); //1.0.4
+		selectedStartBatch = objRequest.getParameter('custpage_pps_startbatchno'); //1.1.1 MJL
+		selectedEndBatch = objRequest.getParameter('custpage_pps_endbatchno'); //1.1.1 MJL
+		
+		//1.1.0 save new start and end batch number if submitted numbers differ from saved - MJL
+		if (selectedStartBatchNo != startBatch && selectedEndBatchNo != endBatch)
+		{
+			saveBatchNumbers(selectedLocation, selectedStartBatchNo, selectedEndBatchNo);
+		}
+		
+		if (location != 0)
+		{
+			locationName = nlapiLookupField('location', location, 'name');
+			processMessage = 'Pick Pack & Ship: Fulfilment Complete';			
+			retVal = true;
+		}
+		else
+		{
+			processMessage = 'Pick Pack & Ship: You must select a location - no fulfillment records created';
+		}
+	}
+	catch (e)
+	{
+		errorHandler('getFormData', e);
+	}
+	return retVal;
+}
+
+/**
+ * Search for PPS records that match criteria
+ */
+function executePPSSearch()
+{
+	var search = null;
+	var resultsSet = null;
+
+	try
+	{
+		//Define filters
+		filters[0] = new nlobjSearchFilter('custrecord_pps_location', null, 'is', location);
+		//filters[1] = new nlobjSearchFilter('created', null, 'on', 'yesterday');
+		filters[1] = new nlobjSearchFilter('custrecord_batchnumber', null, 'between', selectedStartBatch, selectedEndBatch); //1.1.1 MJL
+		filters[2] = new nlobjSearchFilter('custrecord_pps_deliveryref', null, 'is', orderNo);
+		//filters[2] = new nlobjSearchFilter('custrecord_batchnumber', null, 'is', batchNo);
+		
+
+		//Define columns
+		columns[0] = new nlobjSearchColumn('custrecord_pps_item');
+		columns[1] = new nlobjSearchColumn('custrecord_pps_process');
+		columns[2] = new nlobjSearchColumn('custrecord_processingstatus');
+		columns[3] = new nlobjSearchColumn('custrecord_pps_quantity');
+		columns[4] = new nlobjSearchColumn('custrecord_customernumber');
+		columns[5] = new nlobjSearchColumn('custrecord_pps_date');
+		columns[6] = new nlobjSearchColumn('custrecord_pps_deliveryref');
+
+		//creating the saved search
+		search = nlapiCreateSearch('customrecord_mrf_pickpackship', filters, columns);
+
+		//Running search
+		resultsSet = search.runSearch();
+
+		//Get info from each search result
+		results = resultsSet.getResults(0, 1000);
+
+	}
+	catch(e)
+	{
+		errorHandler("runSavedSearch: ", e);
+	}
+}
+
+/**
+ * loop thru PPS search results and process orders
+ */
+function processPPSResults(eachResult)
+{
+	try
+	{
+		if (results != null)
+		{
+			resultCount = results.length;
+
+			for (var i = 0; i < resultCount; i++)
+			{
+				currentCount = i;
+				isProcessed = results[i].getValue(columns[1]); //1.1.1
+				
+				//1.1.1 check if record has been processed - MJL
+				if (isProcessed == 'T')
+				{
+					processResult();	
+				}
+			}
+		}
+
+	}
+	catch (e)
+	{
+		errorHandler('processPPSResults', e);
+	}
+}
+
+
+/**
+ * Callback function for search: get info from PPS records and create PDF
+ */
+function processResult()
+{	
+	//Get header info
+	getHeaderInformation();
+	getDetailInformation();
+	checkIfOrderHasChanged();
+}
+
+/**
+ * check If Order Has Changed
+ */
+function checkIfOrderHasChanged()
+{
+	try
+	{
+		// check if the order has changed
+		if (orderNo != tempOrderNo && currentCount==0)
+		{
+			// get company logo + address based on order brand
+			if (getReportHeaderInfo() == true)
+			{
+				getCustomerAddress();
+				createXMLNamespace();
+				createXMLHeader();
+				createXMLItemTable();
+			}
+			tempOrderNo = orderNo;
+			addLineToItemsTable();
+		}
+		
+		// check if the order has changed
+		if (orderNo == tempOrderNo && currentCount != 0)
+		{
+			addLineToItemsTable();
+		}
+
+		// check if the order has changed
+		if (orderNo != tempOrderNo && currentCount!=0)
+		{
+			//...end current XML and convert to PDF
+			if (pdfxml.length > 0)
+			{
+				createXMLFooter();
+				pdfxml += '</table><pbr />';
+			}
+			
+			// get company logo + address based on order brand
+			if (getReportHeaderInfo() == true)
+			{
+				getCustomerAddress();
+				createXMLHeader();
+				createXMLItemTable();
+			}
+			
+			tempOrderNo = orderNo;
+			addLineToItemsTable();
+		}
+
+		// check if the order has changed
+		if (currentCount == (resultCount - 1))
+		{
+			//...end current XML and convert to PDF
+			if (pdfxml.length > 0)
+			{
+				createXMLFooter();
+				createPDF();
+			}
+		}
+	}
+	catch (e)
+	{
+		errorHandler('checkIfOrderHasChanged', e);
+	}
+}
+
+/**
+ * get Header Information
+ */
+function getHeaderInformation()
+{
+	try
+	{
+		orderNo = results[currentCount].getValue(columns[6]);
+		customerRef = results[currentCount].getText(columns[4]);
+		customerID = results[currentCount].getValue(columns[4]);
+		orderDate = results[currentCount].getValue(columns[5]);
+		accNo = getAccNo(customerRef);
+		salesOrderIntID = genericSearch('salesorder', 'tranid', orderNo);
+	}
+	catch (e)
+	{
+		errorHandler('getHeaderInformation', e);
+	}
+}
+
+/**
+ * get detail Information
+ */
+function getDetailInformation()
+{
+	try
+	{
+		//Get detail info
+		itemObj = new Object();
+		itemObj.itemId = results[currentCount].getValue(columns[0]);
+		itemObj.itemCode = results[currentCount].getText(columns[0]);
+		itemObj.itemDesc = nlapiLookupField('item', itemObj.itemId, 'displayname');
+		itemObj.quantity = results[currentCount].getValue(columns[3]);
+		itemObj.total = getItemTotal(itemObj.itemId);
+	}
+	catch (e)
+	{
+		errorHandler('getDetailInformation', e);
+	}
+}
+
+
+/**
+ * Get the shipping address for the customer and escape for use in XML
+ */
+function getCustomerAddress()
+{
+	try
+	{
+		//Get customer address and escape for XML
+		customerAddress = lookupAddressInfo('customer', customerID, true, false, 'addrtext');
+		customerAddress = customerAddress.replace(/\n/g, '<br />');
+		customerAddress = customerAddress.replace(/&/gi, '&amp;'); 
+	}
+	catch (e)
+	{
+		errorHandler('getCustomerAddress', e);
+	}
+}
+
+/**
+ * Create XML namespace and BFO doctype for report
+ */
+function createXMLNamespace()
+{
+	try
+	{
+		//Namespace
+		pdfxml += '<?xml version="1.0"?>';
+		
+		//BFO doctype
+		pdfxml += '<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">';
+		
+		//Open PDF tag, create file head and open body tag
+		pdfxml += '<pdf>';
+		pdfxml += '<head>';
+		pdfxml += '<meta name="title" value="Packing Slip" />\n';
+		pdfxml += '</head>';
+		pdfxml += '<body background-color="white" font-size="12" size="A4">';
+	}
+	catch (e)
+	{
+		errorHandler('addLineToItemsTable', e);
+	}
+}
+
+/**
+ * Create report header for PDF
+ */
+function createXMLHeader()
+{
+	try
+	{
+		//Create table for header (logo and company address)
+		pdfxml += '<table style="width:100%;">';
+		pdfxml += '<tr><td><img display="inline" src="' + logoURL + '" /></td>';
+		pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px;">&nbsp;</td>';
+		pdfxml += '<td><p align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: large; font-weight: bold;">Packing Slip</p>';
+		pdfxml += '<p align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; ">' + brandAddress + '</p>';
+		pdfxml += '</td></tr>';
+		pdfxml += '</table><br />';
+
+		//Report Header (customer no, order no, order date)
+		pdfxml += '<table style="width:100%;">';
+		pdfxml += '<tr>';
+		pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: White;"><b>Account Number: </b>' + accNo + '</td>';
+		pdfxml += '<td align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: White;"><b>Order Number: </b>' + orderNo + '</td>';
+		pdfxml += '<td align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: White;"><b>Date: </b>' + orderDate + '</td>';
+		pdfxml += '</tr></table>';
+	}
+	catch (e)
+	{
+		errorHandler('createXMLHeader', e);
+	}
+}
+
+/**
+ * Create item table for PDF
+ */
+function createXMLItemTable()
+{
+	try
+	{
+		//Create table header for items
+		pdfxml += '<table style="border: thin solid #000000; width:100%;">';
+		pdfxml += '<tr>';
+		pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: White; background-color: Black;"><b>Quantity</b></td>';
+		pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: White; background-color: Black;"><b>Item Code</b></td>';
+		pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: White; background-color: Black;"><b>Product Description</b></td>';
+		pdfxml += '<td align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; color: White; background-color: Black;"><b>Total</b></td>';
+		pdfxml += '</tr>';
+	}
+	catch (e)
+	{
+		errorHandler('createXMLItemTable', e);
+	}
+}
+
+/**
+ * Add the current item to the table on the PDF
+ */
+function addLineToItemsTable()
+{
+	try
+	{
+		//Add new line
+		pdfxml += '<tr>';
+		pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: White;">' + itemObj.quantity + '</td>';
+		pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: White;">' + itemObj.itemCode + '</td>';
+		pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: White;">' + itemObj.itemDesc + '</td>';
+		pdfxml += '<td align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; background-color: White;">' + parseFloat(itemObj.total).toFixed(2) + '</td>';		
+		pdfxml += '</tr>';
+		
+		//If last result...
+		if (currentCount == (resultCount - 1))
+		{
+			//Complete items table
+			pdfxml += '</table><br />';
+		}
+		
+	}
+	catch (e)
+	{
+		errorHandler('addLineToItemsTable', e);
+	}
+}
+
+/**
+ * Create report footer for PDF
+ */
+function createXMLFooter()
+{
+	try
+	{	
+		//Create table for footer
+		pdfxml += '<table valign="bottom" style="width:100%;">';
+		
+			//Top row - Notes
+			pdfxml += '<tr>';
+				pdfxml += '<td><p style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold;">Notes</p>';
+				pdfxml += '<p style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; ">&nbsp;</p>'; //[TODO] Is this needed?
+				pdfxml += '<p></p></td>';
+			pdfxml += '</tr>';
+			
+			//Centre row
+			pdfxml += '<tr>';
+			
+				//Left cell - customer address
+				pdfxml += '<td><p style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; ">' + customerAddress + '</p></td>';
+				
+				//Centre cell - Barcode
+				//pdfxml += '<td align="center"><barcode /></td>'; [TODO] Barcode query
+				pdfxml += '<td align="center" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold;">Barcode</td>';
+				
+				//Right cell - Return Address
+				pdfxml += '<td><p align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold;">Return Address</p>';
+				pdfxml += '<p align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; ">' + returnAddress + '</p>';
+				pdfxml += '<p></p></td>';
+
+			pdfxml += '</tr>';
+			
+			//Bottom row
+			pdfxml += '<tr>';
+			
+				//Left cell - Delivery Instructions
+				pdfxml += '<td><p style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold;">Delivery Instructions</p>';
+				pdfxml += '<p style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; ">&nbsp;</p></td>'; //[TODO] Is this needed?
+				
+				//Centre cell - blank
+				pdfxml += '<td style="font-family: Arial, Helvetica, sans-serif; font-size: 10px;">&nbsp;</td>';
+				
+				//Right cell - Customer Account & Order Number
+				pdfxml += '<td><p align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold;">Customer Account</p>';
+				pdfxml += '<p align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; ">' + customerRef + '</p>';
+				pdfxml += '<p align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; font-weight: bold;">Order Number</p>';
+				pdfxml += '<p align="right" style="font-family: Arial, Helvetica, sans-serif; font-size: 10px; ">' + orderNo + '</p></td>';
+			
+			pdfxml += '</tr>';
+		
+		//Complete footer table
+		pdfxml += '</table>';
+	}
+	catch (e)
+	{
+		errorHandler('createXMLFooter', e);
+	}
+}
+
+/**
+ * Create PDF file from XML
+ * 
+ * @param request
+ * @param response
+ */
+function createPDF()
+{
+	try
+	{
+		//Close XML document
+		//pdfxml += '</table></body></pdf>';
+		pdfxml += '</body></pdf>';
+
+		//Create PDF report
+		pdfFile = nlapiXMLToPDF(pdfxml);
+		objResponse.setContentType('PDF', locationName + ' Packing Slips.pdf');
+		objResponse.write(pdfFile.getValue());
+	}
+	catch(e)
+	{
+		errorHandler('createPDF', e);
+		errormsg = "<html><body><p>PDF Error: " + e.message +"</p></body></html>";
+		objResponse.write(errormsg);
+	}
+}
+
+/**
+ * Get components of the report header
+ * 
+ * @returns {Boolean}
+ */
+function getReportHeaderInfo()
+{
+	var retVal = false;
+
+	try
+	{
+		brand = nlapiLookupField('salesorder', salesOrderIntID, 'department');
+
+		if (brand > 0)
+		{
+			getLogoURL();
+			getCompanyAndReturnAddresses(); //For header
+			retVal = true;
+		}
+	}
+	catch (e)
+	{
+		errorHandler('getReportHeader', e);
+	}
+	return retVal;
+}
+
+/**
+ * Get logo URL for relevant brand
+ */
+function getLogoURL()
+{
+	switch (brand)
+	{
+		case '1':		//MRF
+			logoURL = context.getSetting('SCRIPT', 'custscript_logourl_mrf');
+			break;
+
+		case '2':		//DTB
+			logoURL = context.getSetting('SCRIPT', 'custscript_logourl_dtb');
+			break;
+
+		case '3':		//WLMS
+			logoURL = context.getSetting('SCRIPT', 'custscript_logourl_wlms');
+			break;
+
+		case '4':		//JHNS
+			logoURL = context.getSetting('SCRIPT', 'custscript_logourl_jhns');
+			break;
+
+		default:
+			break;
+	}
+
+	//Encode URL for use in XML
+	logoURL = encodeXML(logoURL);
+}
+
+/**
+ * Get company and return addresses for relevant brand
+ */
+function getCompanyAndReturnAddresses()
+{
+	switch (brand)
+	{
+		case '1':		//MRF
+			brandAddress = context.getSetting('SCRIPT', 'custscript_compaddr_mrf');
+			returnAddress = context.getSetting('SCRIPT', 'custscript_retaddr_mrf');
+			break;
+
+		case '2':		//DTB
+			brandAddress = context.getSetting('SCRIPT', 'custscript_compaddr_dtb');
+			returnAddress = context.getSetting('SCRIPT', 'custscript_retaddr_dtb');
+			break;
+
+		case '3':		//WLMS
+			brandAddress = context.getSetting('SCRIPT', 'custscript_compaddr_wlms');
+			returnAddress = context.getSetting('SCRIPT', 'custscript_retaddr_wlms');
+			break;
+
+		case '4':		//Johnsons
+			brandAddress = context.getSetting('SCRIPT', 'custscript_compaddr_jhns');
+			returnAddress = context.getSetting('SCRIPT', 'custscript_retaddr_jhns');
+			break;
+
+		default:
+			break;
+	}
+
+	//Escape addresses for use in XML
+	brandAddress = brandAddress.replace(/\n/g, '<br />');
+	returnAddress = returnAddress.replace(/\n/g, '<br />');
+}
+
+/**
+ * Gets the amount from a specified item on the current Sales Order
+ * 
+ * @param itemCode
+ * @returns {Number}
+ */
+function getItemTotal(itemCode)
+{
+	var linenum = 0;
+	var total = 0;
+
+	try
+	{		
+		//Load sales order record from order no.
+
+		salesOrderRecord = nlapiLoadRecord('salesorder', salesOrderIntID);
+
+		//Find line number of relevant item
+		linenum = salesOrderRecord.findLineItemValue('item', 'item', itemCode);
+
+		//If item found, get total (Amount)
+		if (linenum != -1)
+		{
+			total = salesOrderRecord.getLineItemValue('item', 'amount', linenum);
+		}
+
+		//Parse as decimal and return
+		if (total > 0)
+		{
+			total = parseFloat(total);
+		}
+	}
+	catch (e)
+	{
+		errorHandler('getItemTotal', e);
+	}
+	return total;
+}
+
+/**
+ * Separates account number from customer reference
+ * 
+ * @param itemCode
+ * @returns {Number}
+ */
+function getAccNo(str)
+{
+	var pos = 0;
+
+	pos = str.indexOf(' ');
+	str = str.substring(0, pos);
+
+	return str;
+}

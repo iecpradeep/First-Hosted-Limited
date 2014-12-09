@@ -1,0 +1,48 @@
+</form><!-- Workaround -->
+<tr>
+<td>
+
+	<div id="topmenu">
+		<p id="welcomemessage" class="leftmenu">Welcome <span id="welcomename"></span></p>
+		<p class="rightmenu"><NLUSERINFO2>
+		|&nbsp;&nbsp;<NLCUSTOMERCENTERLINKHTML>My Account</a>&nbsp;
+		|&nbsp;&nbsp;<NLCARTLINKHTML>View Basket</a>&nbsp;
+		|&nbsp;&nbsp;<a href="/My-Wish-List_4.html">View Wish List</a></p>
+	</div>
+	<div id="header">
+		<a href="<%=getCurrentAttribute('site','logolinkurl')%>">
+			<img id="logoimg" src="<%=getCurrentAttribute('site','logoimageurl','/images/store/templates/common/lgo-your_company.gif')%>" alt="Mr. Fothergill's - TRADITIONAL FAMILY VALUES - quality and service assured">
+		</a>
+		<div id="basket" class="shadowbox">
+			<p id="baskettext"><NLCARTLINKHTML><img src="/site/johnsons/img/basket_20x20.png" alt=""></a> <a href="<NLCARTURL>" target="_parent">Your basket</a><br>
+				<span id="cartitemcount"></span> items&nbsp;&nbsp;&nbsp;&nbsp;<span id="itemtotal"></span>
+<br>
+				<span class="lighter">Postage &amp;amp; Packing <span id="pandp"></span></span><br>
+				<span class="total">Total&nbsp;&nbsp;&nbsp;&nbsp;<span id="total"></span></span></p>
+			<a href="<NLCARTURL>" target="_parent"><img id="btn_checkout" src="/site/johnsons/img/btn_checkout_108x47.png" alt="Checkout"></a>
+			<input type="button" id="btn_resetcheckout" class="button" value="Clear Basket" onclick="parent.clearBasket();">
+		</div>
+		<div id="searchbox">
+			<p><label for="search">Search</label></p>
+			<div id="searchinput" class="shadowbox">
+				<!--<form id="searchportlettag" name="searchportlettag" onsubmit="window.location.href='/s.nl?ext=F&amp;c=<NLCOMPANYID>&amp;n=1&amp;search='+escape(document.forms['searchportlettag'].elements['search'].value);return false;">-->
+				<form id="searchportlettag" name="searchportlettag" action="/s.nl?ext=F&amp;c=<NLCOMPANYID>&amp;n=4" method="get">
+					<input type="text" id="search" name="search" class="intinput" autocomplete="off">
+					<input type="submit" class="button btn_go" value="Go">
+				</form>
+			</div>
+		</div>
+		<!--<div id="offersbox">
+			<div id="offersinput">
+				<p id="offerstext" class="intinput"><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.189/.f">CLICK HERE FOR SPECIAL OFFERS!</a></p>
+			</div>
+		</div>-->
+	</div>
+	<ul id="tabmenu">
+		<NLPAGETABS>
+	</ul>
+	<p id="nlcrumbtrail"><NLCRUMBTRAIL></p>
+	<JNSHELPTEXT>
+	
+</td>
+</tr>

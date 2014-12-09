@@ -1,0 +1,41 @@
+/********************************************************************
+ * Name:		salesOrderQuickAddUE.js
+ * Script Type:	User Event
+ * Client:      Mr Fothergills
+ *
+ * Version:		1.0.0 - 14/05/2013 - 1st release - AM
+ *
+ * Author:		FHL
+ * 
+ * Purpose:		Add a button to the Sales Order in create and edit
+ * 
+ * Script: 		customscript_salesorderquickaddue
+ * Deploy: 		customdeploy_salesorderquickaddue
+ * 
+ * Library: 	offersLibrary.js
+ * 
+ * Form:		Sales Order
+ ********************************************************************/
+
+
+/**
+ * before record load
+ * 
+ * @param type
+ * @param form
+ */
+function beforeLoadBtn(type, form)
+{
+	try
+	{ 
+		if(type == 'create' || type == 'edit')
+		{     		
+			form.addButton('custpage_cust','Quick Item Add', "salesOrderQuickAddClient");
+			form.setScript('customscript_salesorderquickaddclient');	
+		}	
+	}
+	catch(e)
+	{
+		errorHandler("beforeLoadButton ", e);
+	}
+}

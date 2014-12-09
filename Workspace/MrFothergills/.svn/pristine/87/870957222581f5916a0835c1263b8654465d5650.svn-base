@@ -1,0 +1,112 @@
+/*****************************************************************************
+ *	Name		:	pickPackShipReportSuitelet.js
+ *  Script Type	:	suitelet
+ *	Client		: 	Mr. Fothergills
+ *
+ *	Version		:	1.0.0 - 31/05/2013  First Release - AS
+ *				
+ * 	Author		:	FHL 
+ * 	Purpose		:	To Crete the Pick, Pack and Ship Reports
+ * 
+ *  Script		: 	
+ * 	Deploy		: 	
+ * 
+ * 	Library		: 	
+ * 
+ ***************************************************************************/
+//declaring global variables
+var selectionForm = '';
+var sr = '';
+
+/***************************************************************************
+ * accessVATChecker Function - The main function
+ * 
+ * @param request
+ * @param response
+ **************************************************************************/
+function pickpackshipReport(request,response)
+{
+	try
+	{
+		//getting the method type
+		if (request.getMethod() == 'GET')
+		{
+			//Creates custom form
+			createSelectionForm();
+			response.writePage(selectionForm);			//writing the form 
+		}
+		//if 'POST' method called (clicking the button)
+		else
+		{
+			initialise();						//calling initialise function
+			//connectToVATCheckSite();				//calling connectToVATCheckSite function
+		//loadResults();
+		}
+	}
+	catch(e)
+	{
+		errorHandler('pickpackshipReport', e);
+	}
+
+}
+
+/***************************************************************************
+ * initialise Function - initialise the static variables used in the script
+ * 
+ **************************************************************************/
+function initialise()
+{
+	try
+	{
+
+	}
+	catch(e)
+	{
+		errorHandler('initialise', e);
+	}
+}
+
+
+
+
+/***************************************************************************
+ * createSelectionForm Function - creating the selection form to get the user input
+ * 
+ **************************************************************************/
+function createSelectionForm()
+{
+	try
+	{ var batchNumbers = new Array();
+		batchNumbers = genericSearchColumnReturn('customrecord_mrf_pickpackship', 'custrecord_pps_process', 'F', 'custrecord_batchnumber');
+		selectionForm = nlapiCreateForm('Report Criteria Selection');			//creating the form
+		selectionForm.addField('custpage_ppslocation', 'select', 'Location', 'location');
+		selectionForm.addField('custpage_ppsstartbatchnumber', 'multiselect', 'Start Batch Number',batchNumbers);
+		selectionForm.addField('custpage_ppsendbatchnumber', 'text', 'End Batch Number');
+		selectionForm.addSubmitButton('Create Report');										//adding the submit button
+
+	}
+	catch(e)
+	{
+		errorHandler('createSelectionForm', e);
+	}
+}
+
+
+
+function loadResults()
+{ var fils = new Array();
+	//nlapiRequestURL('https://system.na1.netsuite.com/app/common/search/searchresults.nl?searchid=230',null,null,'POST');
+	//response.sendRedirect('RECORD', 'savedsearch', '230');
+	//response.write('<html><body><script type="text/javascript">self.close()</script></body></html>');
+	var load = nlapiLoadSearch('transaction', 'customsearch230');
+	fils[0] = new nlobjSearchFilter('type', null, 'is', 'Journal');
+	var setf = load.addFilters(fils);
+	
+
+	
+	
+load.saveSearch('Align Ac view', 'customsearch230');
+	var outputPage = '<html><body><script type="text/javascript">window.location.href="https://system.na1.netsuite.com/app/common/search/searchresults.nl?searchid=230";</script><p>Error: No parameters passed.</p>';
+
+response.write(outputPage);
+}

@@ -1,0 +1,197 @@
+/*****************************************************************************
+ *	Name		:	reverseRevenueInvoice_UE.js
+ *	Script Type	:	user event - After Record Submit of invoice. 
+ *	Applies To	: 	invoices
+ *
+ *	Client		: 	Mr. Fothergills
+ *
+ *	Version		:	1.0.0 - 06/05/2013  First Release - AS
+ *				
+ * 	Author		:	FHL 
+ * 	Purpose		:	To reverse the revenue from the sales
+ * 
+ * 	Script		: 	customscript_reverserevenueinvoice
+ * 	Deploy		:   customdeploy_reverserevenueinvoice
+ * 
+ * 	Library		: library.js
+ * 
+ ***************************************************************************/
+
+var DEFERREDREVENUEACCOUNTNUMBER = 0;
+var ItemRevenueAccountIntID = 0;
+var deferredRevenueAccountIntID = 0;
+var customerIntID = 0;
+var departmentIntID = 0;
+var locationIntID = 0;
+var invoiceDate = '';
+var invoiceID = 0;
+
+/**********************************************************************
+ * calculateKitPackAvgCost Function - the main function
+ * 
+ **********************************************************************/
+function reverseRevenue(type)
+{
+	
+	nlapiLogExecution('DEBUG', 'reverseRevenue type', type);
+	
+	if(type == 'create' || type == 'edit')
+	{
+		//initialising the static variables use in the script
+		initialise(type);
+
+		//doing the processing
+		process();
+	}
+
+}
+
+
+/**********************************************************************
+ * initialise Function - initialising the static variables used in the script
+ * 
+ **********************************************************************/
+function initialise(type)
+{
+	var invoiceIntID = 0;
+	var invoceRecord = '';
+	try
+	{
+		
+		
+		nlapiLogExecution('DEBUG', 'initialise type', type);
+		
+		DEFERREDREVENUEACCOUNTNUMBER = '24160';
+
+		//getting the internal id of the account to be credited
+		deferredRevenueAccountIntID = genericSearch('account', 'number', DEFERREDREVENUEACCOUNTNUMBER);
+
+		//to get the transaction ID of the currently creating record
+		invoiceIntID = nlapiGetRecordId();						//getting internal id of the current invoice
+		invoceRecord = nlapiLoadRecord('invoice', invoiceIntID);
+		invoiceID = invoceRecord.getFieldValue('tranid');
+
+	}
+	catch(e)
+	{
+		errorHandler('initialise', e);
+	}
+
+}
+
+
+
+/**********************************************************************
+ * process Function - doing the processing 
+ * 
+ **********************************************************************/
+function process()
+{
+	try
+	{
+		//calling the getFieldsAndItemLines Function
+		getFieldsAndItemLines();
+
+	}
+	catch(e)
+	{
+		errorHandler('process', e);
+	}
+
+}
+
+
+
+/**********************************************************************
+ * getFieldAndItemLines Function - getting the required field values 
+ * 									and line item values, get accounts
+ * 									and post the journals for each line item
+ * 
+ **********************************************************************/
+function getFieldsAndItemLines()
+{
+	//declaring local variables
+	var noOfLineItems = 0;
+	var itemIntId = 0;
+	var itemAmount = 0.00;
+
+	try
+	{
+		customerIntID = nlapiGetFieldValue('entity');				//getting customer's internal ID
+		departmentIntID = nlapiGetFieldValue('department');			//getting department int ID
+		locationIntID = nlapiGetFieldValue('location');				//getting location int ID
+		invoiceDate = nlapiGetFieldValue('trandate');				//getting invoiced date
+		noOfLineItems = nlapiGetLineItemCount('item');				//getting the no of line items 
+
+
+		//looping through each line item
+		for(var i = 1; i <= noOfLineItems; i++)
+		{
+			itemIntId = nlapiGetLineItemValue('item', 'item', i);		//getting  line item internal id
+			itemAmount = nlapiGetLineItemValue('item', 'amount', i);	//getting the amount of the line item		
+
+			getItemAccountInternalID(itemIntId);						//Calling getItemAccountsInternalIDs function
+			postJournals(itemAmount);									//calling postJournals Function
+		}
+
+	}
+	catch(e)
+	{
+		errorHandler('getFieldsAndItemLines', e);
+	}
+
+}
+
+
+
+/**********************************************************************
+ * getItemAccountsInternalIDs Function - getting the revenue accout of particular item
+ * 
+ * @param itemInternalID - internal id of the item in particular line item
+ **********************************************************************/
+function getItemAccountInternalID(itemInternalID)
+{
+	try
+	{
+		//getting revenue account id of the particular item in the line
+		ItemRevenueAccountIntID = nlapiLookupField('item', itemInternalID, 'incomeaccount');
+
+	}	
+	catch(e)
+	{
+		errorHandler('getItemAccountsInternalIDs', e);
+
+	}
+}
+
+
+/**********************************************************************
+ * postJournals Function - creating and posting the journals into NetSuite
+ * 
+ * @param amount - amount of the particular line item (the amount to be debited and credited)
+ **********************************************************************/
+function postJournals(amount)
+{
+	var journalDesc = '';
+
+	try
+	{
+
+		journalDesc = 'Item revenue account to deferred revenue account transfer for Invoice: ' +invoiceID;
+
+		/*
+		 * Creating the journal - Library Function
+		 * The format is  : createJournal(totalValue, creditingAccount, debitingAccount, dept, location, subsidiary, jClass, invDate, desc, entity)
+		 * 
+		 */
+
+		createJournal(amount, deferredRevenueAccountIntID, ItemRevenueAccountIntID, departmentIntID, locationIntID, 0, 0, invoiceDate, journalDesc, customerIntID);
+	}
+	catch(e)
+	{
+
+		errorHandler('postJournals', e);
+	}
+
+
+}

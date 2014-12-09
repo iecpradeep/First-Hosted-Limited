@@ -1,0 +1,114 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/common/js/slider.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+ $('#nlcrumbtrail').remove();
+});
+</script>
+<!-- End addition_to_head -->
+<td>
+
+<NLPROCESSONCE>
+	<div id="special"><p><%=getCurrentAttribute('sitecategory','description')%></p>
+		<MRFSOCIALHEADER>
+	</div>
+	<div id="slider" class="outline">
+		<div id="slide_0" class="slide">
+			<a href="#"><img src="/site/mrfothergills/img/slider/sweetpea_600x259.jpg" alt="Sweet Peas"></a>
+			<div class="slide_text">
+				<p><span class="slide_large">NEW</span><br><span class="slide_large">A-Z Flower &amp; Vegetable Seed Catalogue</span><br>
+					<span class="slide_large">OUT SOON!</span><br><span class="slide_black">click here to request a FREE copy</span></p>
+				<p><span class="slide_grey">Click Image to go to full description</span></p>
+				<p><span class="slide_grey">Sweet Pea 'Pandemonium' Superb for growing in pots!</span></p>
+			</div>
+		</div>
+		<div id="slide_1" class="slide" style="display: none;">
+			<a href="#"><img src="/site/mrfothergills/img/slider/marigolds_600x259.jpg" alt="Marigolds"></a>
+			<div class="slide_text">
+				<p><span class="slide_large">NEW</span><br><span class="slide_large">Summer Garden Plant Catalogue</span><br>
+					<span class="slide_large">OUT SOON!</span><p><span class="slide_black">click here to request a FREE copy</span></p>
+				<p><span class="slide_grey">Click Image to go to full description</span></p>
+				<p><span class="slide_grey">Marigold 'Vanilla' Superb for growing in borders!</span></p>
+			</div>
+		</div>
+		<div id="slider_control"><img src="/site/mrfothergills/img/slider_control_84x24.gif" alt=""></div>
+	</div>
+	<div id="featured" class="outline">
+		<div class="features">
+			<div class="featurebox outline">
+				<a href="<%=getAttribute('infoitem',1,'storedescription')%>"><img src="<%=getAttribute('infoitem',1,'storedisplaythumbnail')%>" alt="Product of the week">
+					<div class="featurecontent darken">
+						<%=getAttribute('infoitem',1,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+			<div class="featurebox outline">
+				<a href="<%=getAttribute('infoitem',2,'storedescription')%>"><img src="<%=getAttribute('infoitem',2,'storedisplaythumbnail')%>" alt="Product of the week">
+					<div class="featurecontent lighten">
+						<%=getAttribute('infoitem',2,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+			<div class="featurebox outline">
+				<a href="<%=getAttribute('infoitem',3,'storedescription')%>"><img src="<%=getAttribute('infoitem',3,'storedisplaythumbnail')%>" alt="Product of the week">
+					<div class="featurecontent darken">
+						<%=getAttribute('infoitem',3,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+			<div class="featurebox outline">
+				<a href="<%=getAttribute('infoitem',4,'storedescription')%>"><img src="<%=getAttribute('infoitem',4,'storedisplaythumbnail')%>" alt="Product of the week">
+					<div class="featurecontent lighten">
+						<%=getAttribute('infoitem',4,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="featuretext outline shadowbox"><h2>FREE P&amp;P</h2><p><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.8/.f">On all seed only orders<br>Click here for more information</a></p></div>
+		<div class="featuretext outline shadowbox"><h2>SAME DAY DESPATCH</h2><p><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.8/.f">On all seed orders placed<br>on the website before noon</a></p></div>
+		<div class="featuretext outline shadowbox"><h2>QUICK ORDER FORM</h2><p><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.20/.f">Click here if you already know what you would like to order</a></p></div>
+		<div class="featuretext outline shadowbox last"><h2>REQUEST A CATALOGUE</h2><p><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.22/.f">Click here for a FREE copy of our latest catalogue</a></p></div>
+	</div>
+	<div id="message">
+		<%=getCurrentAttribute('sitecategory','storedetaileddescription')%>
+	</div>
+	<ul id="menu" class="shadowbox">
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.20/.f">Quick Order Form&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><NLREGISTRATIONLINKHTML>eNewsletter<br>Sign Up&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.8/.f">Free P&amp;P on all seed only orders</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.23/.f">Store Locator&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.26/.f">Gardening Clubs&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.8/.f">Same Day Despatch&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills/img/menu_separator_3x45.gif" alt="|"></li>
+		<li class="last"><a href="#">Gardening Blog&gt;</a></li>
+	</ul>
+	<ul id="menu2" class="shadowbox">
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.288466/ctype.SS/SS.288466/.f">Sowing Now</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.288467/ctype.SS/SS.288467/.f">Flower/Harvest</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.6571/.f">News &amp; Events</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.288469/.f">Hints &amp; Tips</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.6205/.f">Care &amp;amp; Cultivation</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li class="last"><a href="http://mrfothergills.thegardenchannel.tv/">Video Guides</a></li>
+	</ul>
+
+	<div id="products" class="outline">
+		<h2>Recommended products</h2>
+<table>
+<tr>
+<NLITEMLIST>
+</tr>
+</table>
+	</div>
+
+</td>

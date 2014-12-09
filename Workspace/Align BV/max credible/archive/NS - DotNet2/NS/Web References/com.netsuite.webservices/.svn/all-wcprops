@@ -1,0 +1,383 @@
+K 25
+svn:wc:ra_dav:version-url
+V 110
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices
+END
+employeeTypes0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/employeeTypes0.xsd
+END
+customers.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/customers.xsd
+END
+common.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/common.xsd
+END
+customizationTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/customizationTypes.xsd
+END
+SessionResponse.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 137
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/SessionResponse.datasource
+END
+purchaseTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/purchaseTypes.xsd
+END
+bankTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/bankTypes.xsd
+END
+employees.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/employees.xsd
+END
+demandPlanningTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/demandPlanningTypes.xsd
+END
+communication.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/communication.xsd
+END
+support.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/support.xsd
+END
+coreTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/coreTypes.xsd
+END
+marketing.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/marketing.xsd
+END
+employees0.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/employees0.xsd
+END
+ReadResponse.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/ReadResponse.datasource
+END
+customerTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/customerTypes.xsd
+END
+fileCabinetTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 131
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/fileCabinetTypes.xsd
+END
+SearchResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/SearchResult.datasource
+END
+GetDeletedResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 138
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetDeletedResult.datasource
+END
+GetPostingTransactionSummaryResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 156
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetPostingTransactionSummaryResult.datasource
+END
+employeeTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/employeeTypes.xsd
+END
+WriteResponse.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 135
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/WriteResponse.datasource
+END
+sales.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 120
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/sales.xsd
+END
+messages.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/messages.xsd
+END
+schedulingTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/schedulingTypes.xsd
+END
+AsyncStatusResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 139
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/AsyncStatusResult.datasource
+END
+commonTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/commonTypes.xsd
+END
+inventoryTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/inventoryTypes.xsd
+END
+GetSavedSearchResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetSavedSearchResult.datasource
+END
+relationships.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/relationships.xsd
+END
+financial.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/financial.xsd
+END
+websiteTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/websiteTypes.xsd
+END
+faults.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 121
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/faults.xsd
+END
+supportTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 127
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/supportTypes.xsd
+END
+website.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/website.xsd
+END
+fileCabinet.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 126
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/fileCabinet.xsd
+END
+Reference.cs
+K 25
+svn:wc:ra_dav:version-url
+V 123
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/Reference.cs
+END
+AsyncResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/AsyncResult.datasource
+END
+customization.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 128
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/customization.xsd
+END
+saleTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/saleTypes.xsd
+END
+general.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 122
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/general.xsd
+END
+Reference.map
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/Reference.map
+END
+accountingTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 130
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/accountingTypes.xsd
+END
+GetServerTimeResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 141
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetServerTimeResult.datasource
+END
+GetCustomizationIdResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 146
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetCustomizationIdResult.datasource
+END
+GetConsolidatedExchangeRateResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 155
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetConsolidatedExchangeRateResult.datasource
+END
+GetItemAvailabilityResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 147
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetItemAvailabilityResult.datasource
+END
+GetBudgetExchangeRateResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 149
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetBudgetExchangeRateResult.datasource
+END
+scheduling.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/scheduling.xsd
+END
+relationshipTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 132
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/relationshipTypes.xsd
+END
+core.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/core.xsd
+END
+accounting.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/accounting.xsd
+END
+communicationTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 133
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/communicationTypes.xsd
+END
+purchases.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/purchases.xsd
+END
+inventory.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/inventory.xsd
+END
+faultTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 125
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/faultTypes.xsd
+END
+GetAllResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 134
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetAllResult.datasource
+END
+marketingTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/marketingTypes.xsd
+END
+GetSelectValueResult.datasource
+K 25
+svn:wc:ra_dav:version-url
+V 142
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/GetSelectValueResult.datasource
+END
+financialTypes.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/financialTypes.xsd
+END
+netsuite.wsdl
+K 25
+svn:wc:ra_dav:version-url
+V 124
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/netsuite.wsdl
+END
+bank.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 119
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/bank.xsd
+END
+demandPlanning.xsd
+K 25
+svn:wc:ra_dav:version-url
+V 129
+/svn/Test/!svn/ver/794/Align%20BV/max%20credible/NS%20-%20DotNet2/NS/Web%20References/com.netsuite.webservices/demandPlanning.xsd
+END

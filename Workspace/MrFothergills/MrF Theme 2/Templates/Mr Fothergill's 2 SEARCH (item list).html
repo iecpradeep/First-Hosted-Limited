@@ -1,0 +1,45 @@
+<style type="text/css">
+.item-drilldown{display: none;}
+.item-list{display: table-row !important;}
+</style>
+<!-- End addition_to_head -->
+<td>
+
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<script type="text/javascript">var categoryId=<%=getCurrentAttribute('sitecategory','internalid')%>;</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/getUrlVars.jquery.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/searchitemlist.js"></script>
+
+<NLPROCESSONCE>
+	<div id="breadcrumbs">
+		<MRFSOCIALHEADER2>
+	</div>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+<table width="100%">
+<tr>
+<NLSITENAVIGATIONHTML>
+</tr>
+</table>
+		</div>
+		<div id="catright">
+			<div id="newslist">
+				<h1><%=getCurrentAttribute('sitecategory','description')%></h1>
+			</div>
+			<div id="pagination1" class="pagination outline">
+				<p><span class="pageTotalItems">1</span> item(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Showing Page <span class="pageCurrent">1</span> of <span class="pageTotal">1</span></p>
+				<p class="pager"><a class="pagerprev" href="#">&amp;lt;&amp;lt;Previous</a> <a class="pagernext" href="#">Next&gt;&gt;</a> <select onchange="itemListSort(this);"><option value="">-- Sort by --</option><option value="Item_NAME">A-Z</option><option value="Item_ONLINECUSTOMERPRICE">Price</option></select></p>
+			</div>
+			<div class="spacer5 outline"></div>
+			<div id="items" class="outline">
+<table width="100%">
+<tr>
+<NLITEMLIST>
+</tr>
+</table>
+			</div>
+		</div>
+	</div>
+
+</td>

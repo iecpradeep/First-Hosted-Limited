@@ -1,0 +1,609 @@
+/**********************************************************************************************************
+ * Name:		offersClientValidation.js
+ * 
+ * Script Type:	client
+ * 
+ * 
+ * Version:		1.0.0 - 19/3/2013 - 1st version JM
+ * 				1.0.1 - 03 May 2013	- removed reference to custbody_mrf_brandcustomer
+ *
+ *	
+ * Author:		FHL
+ * 
+ * Purpose:		Validate Campaign Code Entered
+ * 
+ * Script: 		
+ * Deploy: 		
+ *
+ * Form: 		MRF Mr Fothergills Brand Sales Order (this is a scriptable record)
+ * 
+ * Libraries: 	offersLibrary.js
+ *
+ * 
+ **********************************************************************************************************/
+
+var user = nlapiGetUser();
+
+var filters = new Array();
+var columns = new Array();
+var searchResults = null; 			
+var campaignSearchResults = null; 	
+var campaignCode = '';
+var campaignIntID = 0;
+var customer = 0;
+
+//Global Variables
+var MRFCallCentreRoleCONST = '1015';// 1015 MRF F Call Centre Role Internal ID
+var userRole = 0; 
+var entity = 0;
+var customerBrand = 0;
+var role = 0;
+var formID = new Array(4);
+var department = 0;
+var salesOrderForm = 0;
+
+var grossamt = 0;
+var qty = 0;
+var startprice = 0;
+var partnerIntID = 0;
+
+var derivedCampaignCode = '';
+
+
+/**
+ * The recordType (internal id) corresponds to the "Applied To" record in your script deployment. 
+ * @appliedtorecord recordType 
+ * 
+ * @param {String} type Access mode: create, copy, edit
+ * @returns {Void}
+ */
+function clientPageInit(type)
+{
+//	var entityCustomer = 0;
+	var retVal = true;
+	
+	try
+	{
+//		entityCustomer = nlapiGetFieldValue('entity');
+//
+//		if(entityCustomer != '' || entityCustomer != null)
+//		{
+//			setBrand();
+//		}
+		
+		disableLineItemFields();	
+	}
+	catch(e)
+	{
+		errorHandler("clientPageInit", e);
+	}
+	return retVal;
+
+}
+
+/**************************************************************************************************************
+ * get item 
+ ***************************************************************************************************************/
+function fieldChanged(type, name, linenum)
+{
+	var retVal = true;
+	var itemdepartment = '';
+	
+	// Make the field in the Customer field.
+	if(name == 'entity')
+	{
+		initialise();
+		whichRole();
+		setBrand();
+		disableLineItemFields();
+	}
+
+	if (name == 'custbody_campaign')
+	{
+		checkCampaignCode();
+	}
+
+	if(type == 'item' && name == 'custcol_itemdepartment')
+	{
+		itemdepartment = nlapiGetCurrentLineItemValue('item', 'custcol_itemdepartment');
+		nlapiSetCurrentLineItemValue('item', 'item', itemdepartment, true, false);
+	}
+
+	return retVal;
+}
+
+/**
+ * The recordType (internal id) corresponds to the "Applied To" record in your script deployment. 
+ * @appliedtorecord recordType
+ *   
+ * @param {String} type Sublist internal id
+ * @returns {Void}
+ */
+function clientLineInit(type) 
+{
+	var retVal = true;
+
+	try
+	{
+		disableLineItemFields();
+	}
+	catch(e)
+	{
+		errorHandler("clientLineInit", e);
+	}
+	
+	return retVal;
+}
+
+/**
+ *	check Campaign Code
+ * 
+ */
+function checkCampaignCode()
+{
+	var retVal = false;
+
+	try
+	{
+		campaignCode = nlapiGetFieldValue('custbody_campaign');
+
+		if(campaignCode.length > 0)
+		{
+
+			customer = nlapiGetFieldValue('entity');
+			customer = customer.toUpperCase();
+
+			if(checkIfCampaignIsValid()==true)
+			{
+				partnerIntID = getPartnerFromCampaign(campaignCode);
+				if(partnerIntID!=0)
+				{
+					nlapiSetFieldValue('partner',partnerIntID);  //Set the Department (Brand) to Mr Fothergill's
+				}
+				retVal = true;
+			}
+			else
+			{
+				if(getPromotionsButtonClick()==true)
+				{
+					retVal = true;
+				}
+			}
+
+		}
+	}
+	catch(e)
+	{
+		errorHandler("checkCampaignCode", e);
+	}
+
+	return retVal;
+}
+
+
+function initialise()
+{
+	MRFCallCentreRoleCONST = 0;		// nlapiGetContext().getSetting('SCRIPT', 'custscript_callcentrerole');
+}
+
+
+//**********************************************************************************************************************************
+//1.3.8 - added 
+//search campaigns that are valid for this customer 
+//if only customer code supplied is used to deduce the latest campaign the customer is associated with
+//if both campaign and customer supplied - used to verify the customer is part of that campaign
+//where customer is not part of a campaign, default to 'Generic Campaign'
+//1.4.4 - amended 31/10 - check for valid campaign without customer
+
+
+//params:
+//campaign code = 'F13109'
+//customer internal ID = 2163
+//brandId = [-1=Ignore,1=MRF,2=DTB,3=WLM,4=JNS]
+
+//sets/returns:
+//success/failure
+//campaigncode
+
+//example use: runSavedSearchCampaigns('Summer into Autum', 2163);
+//**********************************************************************************************************************************
+
+
+/**
+ * @param campaignCode
+ * @param customer
+ * @param brandId
+ * @returns {Boolean}
+ */
+function runSavedSearchCampaigns(campaignCode, customer, brandId)
+{
+
+	var savedSearch = 'customsearch_latestcampaigns';
+	var genericCampaign = 'Generic Campaign';
+	var criteria = null;
+	var loadSearch = null;
+	var runSearch = null; 
+	var campaignSearchResults = null;
+	var retVal = false;
+	var searchResult = null;
+
+	try
+	{
+		// 1.5.0
+		switch(parseInt(brandId)) // 1.5.6
+		{
+		case 2:
+			genericCampaign = 'DTB Generic Campaign';
+			break;
+		case 3:
+			genericCampaign = 'WLM Generic Campaign';
+			break;
+		case 4:
+			genericCampaign = 'JNS Generic Campaign';
+			break;
+		default:
+			genericCampaign = 'Generic Campaign';
+		}
+
+		// if the customer has been entered without a campaign code
+		if (customer != 0 && campaignCode.length == 0)
+		{
+			criteria = [[ 'internalid', 'is', customer ]];
+		}
+
+		// campaign code entered without a valid campaign code 1.4.4
+		if (customer == 0 && campaignCode.length != 0)
+		{
+			criteria = [[ 'campaignresponse.title', 'is', campaignCode ]];
+		}
+
+		// if the customer has been entered with a campaign code
+		if (customer != 0 && campaignCode.length != 0)
+		{
+			criteria = [[ 'internalid', 'is', customer  ],'and',[ 'campaignresponse.title','is', campaignCode ]];
+		}
+
+		// if only a campaign has been entered - default to the generic campaign
+//		if(customer==0 && campaignCode.length!=0)
+//		{
+//		campaignCode = genericCampaign;
+//		criteria =[[ 'campaignresponse.title', 'is', campaignCode]];
+//		}
+
+		//Loading the saved search
+		loadSearch = nlapiLoadSearch('customer', savedSearch);
+
+		// default to the generic code if nothing found
+		derivedCampaignCode = genericCampaign;
+
+		// set the filter for the search
+		if(criteria != null)
+		{
+			loadSearch.setFilterExpression(criteria);
+
+			// Running the loaded search
+			runSearch = loadSearch.runSearch();
+
+			// Getting the first 100 results
+			campaignSearchResults = runSearch.getResults(0, 100);
+
+			if (campaignSearchResults != null)
+			{
+				if (campaignSearchResults.length > 0)
+				{
+					searchResult = campaignSearchResults[0];
+
+					// [hack] [magicnumber] - remove when time permits
+					var columns = searchResult.getAllColumns();
+					var column = columns[2];
+
+					// get the campaign code
+					derivedCampaignCode = searchResult.getValue(column);
+
+					retVal = true;
+				}
+
+			}
+		}
+		else
+		{
+			retVal = true;
+		}
+	}
+	catch(e)
+	{
+		errorHandler("runSavedSearchCampaigns", e);
+		retVal = false;
+	}
+
+
+	return retVal;
+}
+
+
+/**
+ * [TODO] - Check if entity field is populated or not
+ *	set brand 
+ * 
+ */
+function setBrand()
+{
+	try
+	{
+		entity = nlapiGetFieldValue('entity');
+		department = nlapiGetFieldValue('department');
+		salesOrderForm = nlapiGetFieldValue('customform');
+		customerBrand = nlapiLookupField('customer', entity, 'custentity_mrf_cust_brand');
+		nlapiSetFieldValue('entity', entity, false,true);
+
+		if ( customerBrand == '1')
+		{
+			nlapiSetFieldValue('department',1); //Set the Department (Brand) to Mr Fothergill's
+		}
+		if ( customerBrand == '2')
+		{
+			nlapiSetFieldValue('department',2); //Set the Department (Brand) to Mr Fothergill's
+		}
+		if ( customerBrand == '3')
+		{
+			nlapiSetFieldValue('department',3); //Set the Department (Brand) to Mr Fothergill's
+		}
+		if ( customerBrand == '4')
+		{
+			nlapiSetFieldValue('department',4); //Set the Department (Brand) to Mr Fothergill's
+		}
+	}
+	catch(e)
+	{
+		//alert("Please contact your system administrator, the call centre form is not setup.", e.message);
+	}
+}
+
+
+/** 
+ * 
+ * determine which forms to use
+ * 1.0.1 - added 23/11/2012
+ * 
+ */
+function whichRole()
+{
+	try
+	{
+		userRole = nlapiGetRole();		// 1.0.1 determine user role
+
+		// check if we are MR F Call Centre Role 
+		if(userRole == MRFCallCentreRoleCONST)
+		{
+			role = 1;
+		}
+		else
+		{
+			role = 0;
+		}
+	}
+	catch(e)
+	{
+		alert('determineWhichFormsToUse ', e.message);
+	}
+}
+
+
+/**
+ * 
+ * DisableLineItemFields
+ *
+ */
+function disableLineItemFields()
+{
+	try
+	{	
+//		Disable the line item field item
+		nlapiDisableLineItemField('item', 'item', true);
+		
+//		Check the user role
+		whichRole();
+
+//		Check if the role is MRF Call Centre Role
+		if(role == 1)
+		{
+//			Disable Line Item Fields
+			nlapiDisableLineItemField('item', 'grossamt', true);			
+			nlapiDisableLineItemField('item', 'options', true);
+			nlapiDisableLineItemField('item', 'item', true);
+			nlapiDisableLineItemField('item', 'custcol_offerpriceincvat', true);
+			nlapiDisableLineItemField('item', 'custcol_outofstockmessage', true);
+			nlapiDisableLineItemField('item', 'custcol_mrf_itemprice', true);
+			nlapiDisableLineItemField('item', 'tax1amt', true);
+			nlapiDisableLineItemField('item', 'custcol_mrf_itemcode', true);
+			nlapiDisableLineItemField('item', 'rate', true);
+			nlapiDisableLineItemField('item', 'giftcertfrom', true);
+			nlapiDisableLineItemField('item', 'giftcertmessage', true);
+			nlapiDisableLineItemField('item', 'giftcertrecipientemail', true);
+			nlapiDisableLineItemField('item', 'giftcertrecipientname', true);    
+			nlapiDisableLineItemField('item', 'location', true); 		// Location
+			nlapiDisableLineItemField('item', 'createwo', true); 		// Create WO
+			nlapiDisableLineItemField('item', 'price', true);	 		// Price Level
+			nlapiDisableLineItemField('item', 'description', true); 	// Description
+			nlapiDisableLineItemField('item', 'taxcode', true);			// *VAT Code
+			nlapiDisableLineItemField('item', 'altsalesamt', true); 	// Alt. Sales
+			nlapiDisableLineItemField('item', 'custcol_itemcodeprint', true); 	// Item Code			
+			nlapiDisableLineItemField('item', 'amount', true);
+
+//			Disable Shipping Fields
+			nlapiDisableField('shipcarrier', true);
+			nlapiDisableField('shipmethod', true);
+			nlapiDisableField('shippingcost', true);
+			nlapiDisableField('shippingtax1rate', true);
+			nlapiDisableField('shippingtaxcode', true);
+		}
+	}
+	catch(e)
+	{
+		alert('disableLineItemFields', e.message);
+	}
+}
+
+/**
+ * get Partner From Campaign
+ * 
+ * @param campCode
+ */
+function getPartnerFromCampaign(campCode)
+{
+	var partnerID = null;
+	var campIntID = 0;
+	var partnerCampaign = null;
+
+	try
+	{
+		campIntID = genericSearch('campaign', 'title', campCode);
+
+		if (campIntID) // 1.0.2
+		{
+			partnerCampaign = nlapiLoadRecord('campaign', campIntID);
+			partnerID = partnerCampaign.getFieldValue('custevent_mrf_campaign_partner');
+		}
+	}
+	catch(e)
+	{
+		errorHandler("getPartnerFromCampaign", e);
+	}
+
+	return partnerID; 
+}
+
+/**
+ * 
+ * check If Campaign Is Valid 
+ *
+ * 
+ */
+function checkIfCampaignIsValid()
+{
+	var campaignIntID = 0;
+	var startDate = null;
+	var endDate = null;
+	var campaignRecord = null;
+	var retVal = false;
+	var today = null;
+
+	try
+	{
+		today = nlapiDateToString( new Date() );
+		campaignIntID = genericSearch('campaign', 'title', campaignCode);
+		campaignRecord = nlapiLoadRecord('campaign', campaignIntID);
+
+		startDate = campaignRecord.getFieldValue('startdate');
+		endDate = campaignRecord.getFieldValue('enddate');
+
+
+		if(!startDate)
+		{
+			retVal=false;
+		}
+		else
+		{
+			if(!endDate)
+			{
+				endDate = today;
+			}
+
+			if(checkDates(startDate, endDate,today)==true)
+			{
+				retVal = true;
+			}
+		}
+
+	}
+	catch(e)
+	{
+		errorHandler("checkIfCampaignIsValid", e);
+	}
+
+	return retVal;
+}
+
+
+/**
+ * check date falls within params
+ * 
+ * @param startDate
+ * @param endDate
+ * @param tranDate
+ * @returns {Boolean}
+ */
+function checkDates(startDate,endDate, tranDate)
+{
+	var retVal = false;
+	var convertedStartDate = null;
+	var convertedEndDate = null;
+	var convertedTranDate = null;
+
+	try
+	{
+		// change the strings to dates	
+		convertedStartDate = nlapiStringToDate(startDate);
+		convertedEndDate = nlapiStringToDate(endDate);
+		convertedTranDate = nlapiStringToDate(tranDate);
+
+		// change the date into milliseconds since 1971..
+		startDate = Date.parse(convertedStartDate);
+		endDate = Date.parse(convertedEndDate);
+		tranDate = Date.parse(convertedTranDate);
+
+		// do a check to find out if the tranDate is within the specified start and end dates
+		if(tranDate >= startDate && tranDate <= endDate)
+		{
+			retVal = true;
+		}
+		else
+		{
+			retVal = false;
+		}
+	}
+	catch(e)
+	{
+		errorHandler("checkDate", e);
+	}
+
+	return retVal;
+}
+
+
+/** 
+ * apply promotion button click 
+ * @returns {Boolean}
+ */
+
+function getPromotionsButtonClick()
+{
+	var retVal = false;
+
+	try
+	{
+		campaignCode = nlapiGetFieldValue('custbody_campaign');
+		customer = nlapiGetFieldValue('entity');
+		customerBrand = nlapiGetFieldValue('department');
+
+
+		// check, get or set the campaign code
+		if(runSavedSearchCampaigns(campaignCode,customer, customerBrand) == false)
+		{
+			alert('No valid campaigns for customer, defaulting to Generic Campaign.');
+		}
+
+		nlapiSetFieldValue('custbody_campaign', derivedCampaignCode, false, true);
+
+		retVal = true;
+	}
+	catch(e)
+	{
+		errorHandler("getPromotionsButtonClick", e);		
+	}
+
+	return retVal;
+}
+
+
+

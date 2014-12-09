@@ -1,0 +1,129 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NS.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="NS_com_netsuite_webservices_NetSuiteService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://webservices.netsuite.com/services/NetSuitePort_2012_1</Value>
+    </Setting>
+    <Setting Name="NS_com_netsuite_sandbox_webservices_NetSuiteService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://webservices.sandbox.netsuite.com/services/NetSuitePort_2012_1</Value>
+    </Setting>
+    <Setting Name="NS_MaxCredible_Savedsearch" Type="System.String" Scope="User">
+      <Value Profile="(Default)">customsearch_maxcredibleinvoiceexport_v1</Value>
+    </Setting>
+    <Setting Name="NS_com_maxcredible_www_Invoer_mc" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://secure2.maxcredible.com/webservices_alg/invoer_MC.asmx</Value>
+    </Setting>
+    <Setting Name="NS_AccountID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3524453</Value>
+    </Setting>
+    <Setting Name="NS_UserEmail" Type="System.String" Scope="User">
+      <Value Profile="(Default)">blipeu@aligntech.com</Value>
+    </Setting>
+    <Setting Name="NS_Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">netsuite1</Value>
+    </Setting>
+    <Setting Name="NS_Role" Type="System.String" Scope="User">
+      <Value Profile="(Default)">3</Value>
+    </Setting>
+    <Setting Name="MC_CertificateFile" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\MaxCredibleAlignBV.cer</Value>
+    </Setting>
+    <Setting Name="MC_XMLOutputDir" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\MCXML\</Value>
+    </Setting>
+    <Setting Name="MC_XMLOutputPrefix" Type="System.String" Scope="User">
+      <Value Profile="(Default)">InvoicesChunkEUR_</Value>
+    </Setting>
+    <Setting Name="MC_DefaultCharLimit" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">50</Value>
+    </Setting>
+    <Setting Name="MC_DefaultProfileID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">87</Value>
+    </Setting>
+    <Setting Name="MC_DefaultClassifyID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="MC_CurrencyExtensionsID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">13</Value>
+    </Setting>
+    <Setting Name="MC_BaseCurrency" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EUR</Value>
+    </Setting>
+    <Setting Name="MC_CurrencySymbolsMax" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="APP_AutoSearch" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="APP_AutoUpload" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="APP_AutoFinish" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="APP_DefaultDateRange" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">-28</Value>
+    </Setting>
+    <Setting Name="MC_DefaultChunkSize" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">25</Value>
+    </Setting>
+    <Setting Name="MC_UserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">webservice349</Value>
+    </Setting>
+    <Setting Name="MC_Password" Type="System.String" Scope="User">
+      <Value Profile="(Default)">GVRE4MXF</Value>
+    </Setting>
+    <Setting Name="APP_XMLFileOnly" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="APP_LogFileName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MC_EXPORT.LOG</Value>
+    </Setting>
+    <Setting Name="MaxCredibleExport_com_maxcredible_secure6_Invoer_mc" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://secure6.maxcredible.com/webservices_alg_staging/invoer_MC.asmx</Value>
+    </Setting>
+    <Setting Name="MaxCredibleExport_com_maxcredible_secure5_Invoer_mc" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://secure5.maxcredible.com/webservices_alg/invoer_MC.asmx</Value>
+    </Setting>
+    <Setting Name="APP_LogTimeZoneCultureInfo" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Central European Standard Time</Value>
+    </Setting>
+    <Setting Name="APP_LogDateStamped" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="APP_DefaultDateOffset" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="APP_UseLiveWebServices" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="APP_LogCanDelete" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="APP_LogEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="APP_EmailSMTPServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="APP_EmailSMTPUser" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="APP_EmailSMTPPassword" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="APP_EmailToAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="APP_EmailCcAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="APP_DatesEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="APP_WindowsEventLogEnabled" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

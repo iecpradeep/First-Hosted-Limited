@@ -1,0 +1,48 @@
+<tr>
+<td>
+
+	<div id="topmenu">
+		<p><NLUSERINFO2>
+		|&nbsp;&nbsp;<NLCUSTOMERCENTERLINKHTML>My Account</a>&nbsp;
+		|&nbsp;&nbsp;<NLCARTLINKHTML>View Basket</a>&nbsp;
+		|&nbsp;&nbsp;<a href="/s.nl/c.<NLCOMPANYID>/it.I/id.10/.f">View Wish List</a></p>
+	</div>
+	<div id="header">
+		<a href="<%=getCurrentAttribute('site','logolinkurl')%>">
+			<img src="<%=getCurrentAttribute('site','logoimageurl','/images/store/templates/common/lgo-your_company.gif')%>" alt="Mr. Fothergill's - TRADITIONAL FAMILY VALUES - quality and service assured">
+		</a>
+		<div id="basket" class="shadowbox outline">
+			<p id="baskettext"><NLCARTLINKHTML><img src="/site/mrfothergills/img/basket_20x20.gif" alt=""></a> <NLCARTLINKHTML>Your basket</a><br>
+				<NLCARTITEMCOUNT> items&nbsp;&nbsp;&nbsp;&nbsp;&pound;<script type="text/javascript">document.write(Math.round((parseFloat(('<NLCARTDISCOUNTEDTOTAL>').replace('£',''))+parseFloat(('<NLCARTTAX>').replace('£','')))*100)/100);</script><br>
+				<span class="lighter">Postage &amp;amp; Packing <NLCARTSHIPPINGHANDLING></span><br>
+				Total&nbsp;&nbsp;&nbsp;&nbsp;<NLCARTGRANDTOTAL></p>
+			<form method="post" action="<NLCHECKOUTURL>">
+				<input type="submit" id="btn_checkout" class="button shadowbox" value="Checkout">
+			</form>
+		</div>
+		<div id="searchbox">
+			<p><label for="search">Search</label></p>
+			<div id="searchinput" class="shadowbox outline">
+				<!--<form id="searchportlettag" name="searchportlettag" onsubmit="window.location.href='/s.nl?ext=F&amp;c=<NLCOMPANYID>&amp;n=1&amp;search='+escape(document.forms['searchportlettag'].elements['search'].value);return false;">-->
+				<form id="searchportlettag" name="searchportlettag" action="/s.nl?ext=F&amp;c=<NLCOMPANYID>&amp;n=1" method="get">
+					<input type="text" id="search" name="search" class="intinput" autocomplete="off">
+					<input type="submit" class="button btn_go" value="Go">
+				</form>
+			</div>
+		</div>
+		<div id="offersbox">
+			<div id="offersinput" class="shadowbox outline">
+				<form action="http://shopping.netsuite.com/s.nl/c.<NLCOMPANYID>/n.1/sc.25/.f" method="post">
+					<p id="offerstext" class="intinput"><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.25/.f">Website exclusive SPECIAL OFFERS!</a></p>
+					<input type="submit" class="button btn_go" value="Go">
+				</form>
+			</div>
+		</div>
+	</div>
+	<ul id="tabmenu" class="shadowbox">
+		<NLPAGETABS>
+	</ul>
+	<p id="nlcrumbtrail"><a href="<%=getCurrentAttribute('site','homepageurl')%>">Home</a>&nbsp;&amp;gt;&nbsp;<NLCRUMBTRAIL></p>
+
+</td>
+</tr>

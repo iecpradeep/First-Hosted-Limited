@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Catalogue Request</title>
+<link href="/c.3322617/site/mrfothergills2/css/default.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+.input,.inputreq{font-size:inherit !important;color:inherit !important;}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/c.3322617/site/common/js/WebStoreFinder.js"></script><script type="text/javascript">var pcaAccountCode="MRFOT11112"; var pcaLicenseKey="TM39-PP44-ET44-CG72"; pcaUseUKData = true;</script>
+<script type="text/javascript">
+$(document).ready(function(){
+$('#country').val('GB');
+$('#country').attr('disabled', 'disabled');
+$('#custentity_mrf_cust_brand').val('1');
+$('#salutation').val($('#title-select').val());
+$('#custentity_catalogueall_fs_inp').prop('checked', true);
+$('#manselection input[type="checkbox"]').prop('checked', false);
+
+$('#title-select').change(function(){
+	$('#salutation').val($(this).val());
+});
+
+$('#custentity_catalogueall_fs_inp').change(function(){
+	if($('#custentity_catalogueall_fs_inp').prop('checked'))
+	{
+		$('#manselection input[type="checkbox"]').prop('checked', false);
+	}
+	else
+	{
+		$('#manselection input[type="checkbox"]').prop('checked', false);
+	}
+});
+
+$('#manselection input[type="checkbox"]').change(function(){
+	if ($('#custentity_cataloguea_fs_inp').prop('checked') &&
+		$('#custentity_catalogueb_fs_inp').prop('checked') &&
+		$('#custentity_cataloguec_fs_inp').prop('checked') &&
+		$('#custentity_catalogued_fs_inp').prop('checked'))
+	{
+		$('#manselection input[type="checkbox"]').prop('checked', false);
+		$('#custentity_catalogueall_fs_inp').prop('checked', true);
+	}
+	else if ($('#custentity_cataloguea_fs_inp').prop('checked') ||
+		$('#custentity_catalogueb_fs_inp').prop('checked') ||
+		$('#custentity_cataloguec_fs_inp').prop('checked') ||
+		$('#custentity_catalogued_fs_inp').prop('checked'))
+	{
+		$('#custentity_catalogueall_fs_inp').prop('checked', false);
+	}
+});
+
+// Get promocode and select leadsource
+var leadsourceFound = false;
+
+$('#leadsource option').each(function(){
+	var leadsourceBeginningRegEx = /^(\d)+ /; // ID of leadsource, then a space
+	var promoCode = getCookie('MRFccode');
+
+	if ($(this).text().replace(leadsourceBeginningRegEx, '') == promoCode && 
+			promoCode != '')
+	{
+		$('#leadsource').val($(this).val());
+		leadsourceFound = true;
+	}
+	// Select Generic Campaign by default if nothing is found
+	if (!leadsourceFound && $(this).text().replace(leadsourceBeginningRegEx, '') == 'Generic Campaign')
+	{
+		$('#leadsource').val($(this).val());
+	}
+});
+});
+
+function getCookie(c_name)
+{
+	var retVal = '';
+	var i, x, y; 
+	var ARRcookies = new Array();
+
+	ARRcookies = document.cookie.split(";");
+
+	for (i = 0; i < ARRcookies.length; i++)
+	{
+		x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+		y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+		x = x.replace(/^\s+|\s+$/g, "");
+		if (x == c_name)
+		{
+			retVal= unescape(y);
+			break;
+		}
+	}
+
+	return retVal;
+}
+</script>
+</head>
+<body style="background-color:transparent;">
+<div id="iframeouterwrapper">
+<div class="iframecontainer outline" style="margin:0 20px;">
+<NLFORM>
+<h1>Catalogue Request</h1>
+<table id="manselection" style="width:100%;">
+<tr>
+<td style="vertical-align:bottom;"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/MrF_Summer_into_Autumn_Plant_Catalogue_2013.jpg" alt="Summer into Autumn Plant Catalogue"></td>
+<td style="vertical-align:bottom;display:none;"><img src="/c.3322617/site/mrfothergills/img/info_item/catalogue2_159x210MrFPlant2013.jpg" alt="Plant Catalogue 2013"></td>
+<td style="vertical-align:bottom;display:none;"><img src="/c.3322617/site/mrfothergills/img/info_item/catalogue3_159x210MrFGarden2013.jpg" alt="Garden Equipment 2013 Catalogue"></td>
+<td style="vertical-align:bottom;display:none;"><img src="/c.3322617/site/mrfothergills/img/info_item/catalogue4_160x227.jpg" alt="Garden Equipment"></td>
+</tr>
+<tr>
+<td><p><NLCUSTENTITY_CATALOGUEA> <label for="custentity_cataloguea_fs_inp">Tick to select</label></p></td>
+<td style="display:none;"><p><NLCUSTENTITY_CATALOGUEB> <label for="custentity_catalogueb_fs_inp">Tick to select</label></p></td>
+<td style="display:none;"><p><NLCUSTENTITY_CATALOGUEC> <label for="custentity_cataloguec_fs_inp">Tick to select</label></p></td>
+<td style="display:none;"><p><NLCUSTENTITY_CATALOGUED> <label for="custentity_catalogued_fs_inp">Tick to select</label></p></td>
+</tr>
+</table>
+<p style="text-align:center;"><NLCUSTENTITY_CATALOGUEALL> <label for="custentity_catalogueall_fs_inp" style="font-weight:bold;">All Catalogues</label></p>
+<p>If you would like to receive a free copy of our current catalogue(s), please complete the form below. </p>
+<p>We regret that we are only able to send catalogues to addresses with a UK postcode. </p>
+<p>If you live at an address within the EU, you can order seed through the web site. Regrettably, we cannot accept orders for non-seed items such as plants, potatoes, fruit, onions, garden equipment or other items for delivery outside the UK. There are NO exceptions to this policy. </p>
+</div>
+<div class="iframecontainer outline" style="margin:20px;">
+<table>
+<tr><td colspan="2"><h2>Name</h2></td></tr>
+<tr style="display:none;"><td width="150"><p>Title </p></td><td><NLSALUTATION></td></tr>
+<tr><td width="150"><p>Title </p></td><td>
+<select id="title-select">
+<option value="Mr">Mr</option>
+<option value="Mrs">Mrs</option>
+<option value="Ms">Ms</option>
+<option value="Miss">Miss</option>
+</select>
+</td></tr>
+<tr><td><p>First Name </p></td><td><NLFIRSTNAME></td></tr>
+<tr><td><p>Last Name </p></td><td><NLLASTNAME></td></tr>
+<tr><td colspan="2"><h2>Address</h2></td></tr>
+<tr><td><p>Postcode </p></td><td><NLZIPCODE></td></tr>
+<tr><td><p>Address 1 </p></td><td><NLADDRESS1></td></tr>
+<tr><td><p>Address 2 </p></td><td><NLADDRESS2></td></tr>
+<tr><td><p>Address 3 </p></td><td><NLADDRESS3></td></tr>
+<tr><td><p>Town/City </p></td><td><NLCITY></td></tr>
+<tr><td><p>County </p></td><td><NLSTATE></td></tr>
+<tr><td><p>Country </p></td><td><NLCOUNTRY></td></tr>
+<tr><td><p>Telephone No. </p></td><td><NLPHONE></td></tr>
+<tr><td><p>Email </p></td><td><NLEMAIL></td></tr>
+</table>
+<NLCUSTENTITY_MRF_CUST_BRAND>
+<div style="display:none;"><NLLEADSOURCE></div>
+<p style="text-align:center;margin-top:10px;"><input type="submit" value="Submit" class="button shadowbox" style="padding:10px 15px;"></p>
+</form>
+</div>
+</div>
+</body>
+</html>

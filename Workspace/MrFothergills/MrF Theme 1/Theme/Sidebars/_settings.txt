@@ -1,0 +1,3 @@
+Navigation Top-level Links = Current Tab
+Navigation Show Subcategories = true
+Navigation Show Items = false

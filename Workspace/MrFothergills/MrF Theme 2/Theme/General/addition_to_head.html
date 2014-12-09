@@ -1,0 +1,81 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/site/mrfothergills2/css/default.css" rel="stylesheet" type="text/css">
+<link href="/site/mrfothergills/js/cloud-zoom.css" rel="stylesheet" type="text/css">
+<link href="/site/mrfothergills/js/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="/c.<NLCOMPANYID>/site/mrfothergills/mrfothergills.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/c.<NLCOMPANYID>/site/mrfothergills/mrfothergills.ico" type="image/x-icon">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/brand-specific.js"></script>
+<script type="text/javascript" src="/site/common/js/loginhelper.js"></script>
+<script type="text/javascript" src="/site/common/js/cart.js"></script>
+<script type="text/javascript" src="/site/common/js/offershelper.js"></script>
+<script type="text/javascript" src="/site/mrfothergills2/js/sitemapmenu.js"></script>
+<script type="text/javascript" src="/site/mrfothergills2/js/pubsearch.js"></script>
+<script type="text/javascript" src="/site/common/js/carousel.js"></script>
+<script type="text/javascript" src="/site/common/js/Slides-SlidesJS-3/source/jquery.slides.min.js"></script>
+
+<script type="text/javascript">
+function getTestDriveNum() {
+   var accountNumber = "<NLCOMPANYID>"; 
+   return accountNumber;
+}
+
+function getCustomerID() {
+   var customerID = "<%=getCurrentAttribute('customer','internalid')%>"; 
+   return customerID;
+}
+
+function confirmLogin() {
+   var loginEmail = "<%=getCurrentAttribute('customer','email')%>"; 
+   return loginEmail;
+}
+
+function cartURL() {
+   var cartLink = "<NLCARTURL>";
+   return cartLink;
+}
+
+function isSandbox() {
+  var sandbox = window.location.hostname.search(/^(.+\.)*sandbox\.netsuite\.com$/);
+  if (sandbox < 0)
+  {
+    return false;
+  }
+  else
+  {
+    return true;
+  }
+}
+
+$(document).ready(function(){
+	$('.checkoutprogresstext').parent().parent().parent().parent().parent().parent().parent().css('margin', '0 20px');
+	$('#paymethhider').before('<div id="paymethnote"><p><img src="/site/common/img/big-arrow.png" alt="&gt;">Please note that payment will only be taken after you Confirm &amp; Submit your order on the next screen.</p></div><hr><p id="paytotal"></p>')
+	.parent().parent().parent().parent().css('position','relative');
+	$('#paymethhider').before('<div id="paymethbox"><p><a href="http://www.safebuy.org.uk/certificate/c70f1f2b-0540-4a53-b3c6-9c37e81c68e2.html"><img alt="SafeBuy web code of practice" src="/site/mrfothergills/img/safebuy.jpg"></a></p><p><img alt="J Fothergill - QUALITY ASSURED - FINEST SEEDS" src="/site/mrfothergills/img/finest_seeds_112x112.gif"></p></div>');
+	$('a.newsletter')
+		.attr('href', "<%=getOnlineFormUrl(25)%>&custrecord_ne_salutation=<%=getCurrentAttribute('customer','custentity_salutation')%>&custrecord_ne_firstname=<%=getCurrentAttribute('customer','firstname')%>&custrecord_ne_lastname=<%=getCurrentAttribute('customer','lastname')%>&custrecord_ne_email=<%=getCurrentAttribute('customer','email')%>")
+		.colorbox({iframe:true,innerWidth:'264px',innerHeight:'200px',scrolling:false});
+	var custSalutation = "<%=getCurrentAttribute('customer','salutation')%>";
+	var custFirstName = "<%=getCurrentAttribute('customer','firstname')%>";
+	var custLastName = "<%=getCurrentAttribute('customer','lastname')%>";
+	if (custFirstName.length > 1)
+	{
+		$('#welcomemessage').show();
+		$('#welcomename').html(custFirstName);
+	}
+	else if (custSalutation && custLastName)
+	{
+		$('#welcomemessage').show();
+		$('#welcomename').html(custSalutation + ' ' + custLastName);
+	}
+});
+<TEXTREPLACEMENT>
+</script>
+
+<script type="text/javascript" src="https://system.netsuite.com/c.<NLCOMPANYID>/suitebundle3682/HtmlDecodeStripped.js"></script>
+<script type="text/javascript" src="https://system.netsuite.com/c.<NLCOMPANYID>/site/common/js/WishList_Web.js"></script>
+<!-- JQuery Plugins -->
+<script type="text/javascript" src="/site/mrfothergills/js/getUrlVars.jquery.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/cloud-zoom.1.0.2-sitello.js" id="zoom"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/jquery.colorbox-min.js"></script>

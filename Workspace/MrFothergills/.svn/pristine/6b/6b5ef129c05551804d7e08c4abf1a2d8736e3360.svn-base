@@ -1,0 +1,72 @@
+	<hr>
+	<div id="links">
+		<div class="linkcol">
+			<p>Find your way around</p>
+			<ul>
+				<li><a href="/Flower-Seed_0/">Flower Seed</a></li>
+				<li><a href="/Vegetable-Seeds_2/">Vegetable Seeds</a></li>
+                                <li><a href="/Little-Gardeners_2/">Little Gardeners</a></li>
+				<li><a href="/World-Botanics/">World Botanics</a></li>
+				<li><a href="/World-Kitchen/">World Kitchen</a></li>
+				<li><a href="/Sarah-Raven-Seeds_2/">Sarah Raven</a></li>
+			</ul>
+		</div>
+		<div class="linkcol">
+			<ul>
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.22/.f">Catalogue Request</a></li>-->
+				<li><a href="/Quick-Order-Form_4.html">Quick Order Form</a></li>
+				<!--<li><a href="<NLREGISTRATIONURL>">Email Sign Up</a></li>-->
+				<li><NLRELOGINLINKHTML>Log in</a></li>
+				<li><NLREGISTRATIONLINKHTML>Registration</a></li>
+				<li><a href="/FAQs_3">FAQs</a></li>
+				<li><a href="/About-Us_3.html">About Us</a></li>
+				<li><a href="/Contact-Us_4.html">Customer Services</a></li>
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.26/.f">Gardening Clubs</a></li>-->
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.24/.f">Export Enquiries</a></li>-->
+			</ul>
+		</div>
+		<div class="linkcol">
+			<ul>
+				<li><a href="/Store-Locator_2">Store Locator</a></li>
+				<!--<li><a href="#">Gardening Blog</a></li>-->
+				<!--<li><a href="#">Recommend a Friend</a></li>-->
+				<!--<li><a href="#">Loyalty Scheme</a></li>-->
+			</ul>
+		</div>
+		<div class="linkcol">
+			<p>Help and Advice</p>
+			<ul>
+				<!--<li><a href="/Plant-Types_3.html">Plant Types</a></li>-->
+				<li><a href="/Growing-Guides_3">Growing Guides</a></li>
+				<li><a href="/Guide-to-Abbreviations-and-Symbols_3.html">Guide to symbols</a></li>
+			</ul>
+		</div>
+		<div class="linkcol">
+			<ul>
+				<li><a href="<%=getCurrentAttribute('site','homepageurl')%>">Home</a></li>
+				<li><a href="/Home_4/Information_3/Sitemap_4.html">Site Map</a></li>
+				<li><a href="/Postage-Packaging_2.html">P&amp;amp;P</a></li>
+				<li><a href="/100-Customer-Satisfaction_2.html">Guarantee</a></li>
+				<li><a href="/Returns_5/">Returns</a></li>
+				<li><a href="/Terms-Conditions_2.html">Terms &amp;amp; Conditions</a></li>
+				<li><a href="/Site-Security_4.html">Site Security</a></li>
+				<li><a href="/Privacy-Policy_3.html">Privacy Policy</a></li>
+			</ul>
+		</div>
+	</div>
+	<hr>
+	<div id="footer">
+		<h3><a href="/Contact-Us_4.html">Email us</a> or Telephone: 0845 658 9147</h3>
+		<div id="secure">
+			<p><img src="/site/johnsons/img/accepted_cards_new.gif" alt="Accepted Cards"></p>
+			<p><img src="/site/johnsons/img/secure.gif" alt="Padlock" id="padlock"> <a href="/Site-Security_4.html">SSL Secured Site</a></p>
+			<p><a href="http://www.safebuy.org.uk/certificate/c70f1f2b-0540-4a53-b3c6-9c37e81c68e2.html"><img src="/site/johnsons/img/safebuy.jpg" alt="SafeBuy web code of practice"></a></p>
+		</div>
+		<p><%=getCurrentAttribute('site','copyrighthtml')%><br>
+			Company Registration No. 1710774 - VAT No. GB 390 5718 35<br>
+			Registered Address Johnsons Kentford, Suffolk, CB8 7QB</p>
+		<!--<div id="social">
+			<a href="http://www.facebook.com/pages/Mr-Fothergills/210612449019355"><img src="/site/johnsons/img/facebook_32x32.gif" alt="Facebook"></a>
+			<a href="http://www.twitter.com/mrfothergill"><img src="/site/johnsons/img/twitter_32x32.gif" alt="Twitter"></a>
+		</div>-->
+	</div>

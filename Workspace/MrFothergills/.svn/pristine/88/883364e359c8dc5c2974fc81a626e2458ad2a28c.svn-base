@@ -1,0 +1,44 @@
+</form><!-- Workaround -->
+<tr>
+<td>
+
+	<div id="topmenu">
+		<p id="welcomemessage" class="leftmenu">Welcome <span id="welcomename"></span></p>
+		<p class="rightmenu"><NLUSERINFO2>
+		|&nbsp;&nbsp;<NLCUSTOMERCENTERLINKHTML>My Account</a>&nbsp;
+		|&nbsp;&nbsp;<NLCARTLINKHTML>View Basket</a>&nbsp;
+		|&nbsp;&nbsp;<a href="/My-Wish-List_3.html">View Wish List</a></p>
+	</div>
+	<div id="header">
+		<a href="<%=getCurrentAttribute('site','logolinkurl')%>">
+			<img id="logoimg" src="<%=getCurrentAttribute('site','logoimageurl','/images/store/templates/common/lgo-your_company.gif')%>" alt="Woolmans Quality Plants Since 1881">
+		</a>
+		<div id="basket">
+			<p id="baskettext"><a href="<NLCARTURL>" target="_parent">Your Shopping Basket</a><br>
+				<span id="cartitemcount"></span> items&nbsp;&nbsp;&nbsp;&nbsp;<span id="itemtotal"></span>
+<br>
+				<span class="lighter">Postage &amp;amp; Packing <span id="pandp"></span></span><br>
+				<span class="total">Total&nbsp;&nbsp;&nbsp;&nbsp;<span id="total"></span></span></p>
+			<input type="image" id="btn_checkout" class="button" value="Checkout" onclick="parent.window.location.href='<NLCARTURL>';" src="/site/woolmans/img/basket_69x78.gif">
+			<!--<input type="button" id="btn_resetcheckout" class="button" value="Clear Basket" onclick="parent.clearBasket();">-->
+		</div>
+		<div id="searchbox">
+			<p><label for="search">Search</label></p>
+			<div id="searchinput">
+				<!--<form id="searchportlettag" name="searchportlettag" onsubmit="window.location.href='/s.nl?ext=F&amp;c=<NLCOMPANYID>&amp;n=1&amp;search='+escape(document.forms['searchportlettag'].elements['search'].value);return false;">-->
+				<form id="searchportlettag" name="searchportlettag" action="/s.nl?ext=F&amp;c=<NLCOMPANYID>&amp;n=3" method="get">
+					<input type="text" id="search" name="search" class="intinput" autocomplete="off">
+					<input type="submit" class="button btn_go" value="GO">
+				</form>
+			</div>
+		</div>
+	</div>
+	<ul id="tabmenu">
+		<NLPAGETABS>
+		<li><a href="/Special-Offers_3.html">Special Offers</a></li>
+	</ul>
+	<p id="nlcrumbtrail"><NLCRUMBTRAIL></p>
+	<WLMHELPTEXT>
+
+</td>
+</tr>

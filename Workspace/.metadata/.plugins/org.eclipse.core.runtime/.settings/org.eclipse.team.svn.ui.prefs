@@ -1,0 +1,41 @@
+eclipse.preferences.version=1
+firstStartup=false
+history.comment=QWRkZWQgZXJyb3JIYW5kbGVyKCkK;YWRkZWQgZ2V0UmF0ZXMoKSBhbmQgcmF0ZU9iamVjdCgpCg\=\=;QWRkZWQgY29tbWVudHMgYW5kIHJhdGVPYmogb2JqZWN0IHZhcmlhYmxl;Z2V0RGVwb3RGcm9tUG9zdGNvZGUgZnVuY3Rpb24gYWx0ZXJlZCB0byByZXR1cm4gYSBzdHJpbmcgaW5zdGVhZCBvZiBhIGJvb2xlYW4\=
+history.compareUrl=aHR0cHM6Ly9lbmFibGluZ3NvbHV0aW9ucy5vcmc6ODQ0My9zdm4vRVNTL0dlbmVyYWxQdWJsaWNGZWF0dXJlL1N1aXRlbGV0cy9nZW5lcmFsUHVibGljRmVhdHVyZVN1aXRlbGV0RW50cnlTY3JlZW4uanM\=
+history.replaceUrl=aHR0cHM6Ly9lbmFibGluZ3NvbHV0aW9ucy5vcmc6ODQ0My9zdm4vRVNTL0dlbmVyYWxQdWJsaWNGZWF0dXJlL1N1aXRlbGV0cy9nZW5lcmFsUHVibGljRmVhdHVyZVN1aXRlbGV0RW50cnlTY3JlZW4uanM\=
+history.repositoryURL=aHR0cHM6Ly9lbmFibGluZ3NvbHV0aW9ucy5vcmc6ODQ0My9zdm4vRVNTLw\=\=;aHR0cHM6Ly9lbmFibGluZ3NvbHV0aW9ucy5vcmc6ODQ0My9zdm4vYW1vcmdhbnRpLw\=\=
+history.repositoryUser=YW1vcmdhbnRp
+org.eclipse.team.svn.ui.panel.ListSelectionPanel.height=194
+org.eclipse.team.svn.ui.panel.ListSelectionPanel.width=470
+org.eclipse.team.svn.ui.panel.callback.AskTrustSSLServerPanel.height=356
+org.eclipse.team.svn.ui.panel.callback.AskTrustSSLServerPanel.width=736
+org.eclipse.team.svn.ui.panel.common.RepositoryTreePanel.height=546
+org.eclipse.team.svn.ui.panel.common.RepositoryTreePanel.width=772
+org.eclipse.team.svn.ui.panel.common.SelectRevisionPanel.height=666
+org.eclipse.team.svn.ui.panel.common.SelectRevisionPanel.width=1018
+org.eclipse.team.svn.ui.panel.local.AddRepositoryPanel.height=115
+org.eclipse.team.svn.ui.panel.local.AddRepositoryPanel.width=470
+org.eclipse.team.svn.ui.panel.local.CommitPanel.height=406
+org.eclipse.team.svn.ui.panel.local.CommitPanel.width=600
+org.eclipse.team.svn.ui.panel.local.ReplaceWithUrlPanel.height=157
+org.eclipse.team.svn.ui.panel.local.ReplaceWithUrlPanel.width=470
+org.eclipse.team.svn.ui.panel.local.RevertPanel.height=255
+org.eclipse.team.svn.ui.panel.local.RevertPanel.width=600
+org.eclipse.team.svn.ui.panel.local.UpdateToRevisionPanel.height=211
+org.eclipse.team.svn.ui.panel.local.UpdateToRevisionPanel.width=470
+org.eclipse.team.svn.ui.panel.remote.ComparePanel.height=190
+org.eclipse.team.svn.ui.panel.remote.ComparePanel.width=470
+org.eclipse.team.svn.ui.panel.remote.CreateFolderPanel.height=193
+org.eclipse.team.svn.ui.panel.remote.CreateFolderPanel.width=525
+org.eclipse.team.svn.ui.panel.remote.CreateProjectStructurePanel.height=239
+org.eclipse.team.svn.ui.panel.remote.CreateProjectStructurePanel.width=525
+org.eclipse.team.svn.ui.panel.remote.ImportPanel.height=236
+org.eclipse.team.svn.ui.panel.remote.ImportPanel.width=525
+org.eclipse.team.svn.ui.panel.reporting.ErrorCancelPanel.height=131
+org.eclipse.team.svn.ui.panel.reporting.ErrorCancelPanel.width=640
+preference.decoration.format.file={outgoing_flag} {name} {revision}{added_flag}{date}{author}{resource_url}
+preference.decoration.format.folder={outgoing_flag} {name} {revision}{added_flag}{date}{author}{resource_url}
+preference.decoration.format.project={outgoing_flag} {name} {revision} [{location_label}{root_prefix}\: {first_branchOrTag_child}]{location_url}{last_branchOrTag_child}{fullname}{fullpath}{resource_url}{short_url}{remote_name}{date}{author}
+preference.decoration.use.fontdecor=true
+preference.repository.repositoryBrowser=false
+preference.templatesuseShiftEnter=true

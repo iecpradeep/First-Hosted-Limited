@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Search Results</title>
+<base href="/">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+
+
+
+<script language='JavaScript' type='text/javascript'>window.status='Loading...';</script>
+<script type='text/javascript' src='/javascript/NLUtil.jsp__NS_VER=2013.1.0&minver=110&locale=en_GB.nlqs'></script>
+<script language='JavaScript' type='text/javascript'>window.status='';</script>
+<link rel='stylesheet' href='http://www.mr-fothergills-test.co.uk/core/styles/pagestyles.nl?ct=100&bglt=ffffff&bgmd=64b9d3&bgdk=808080&bgon=64b9d3&bgoff=64b9d3&bgbar=64b9d3&tasktitletext=FFFFFF&crumbtext=FFFFFF&headertext=FFFFFF&ontab=FFFFFF&offtab=FFFFFF&text=000000&link=000000&bgbody=d2d0d3&bghead=ffffff&portlet=64b9d3&portletlabel=ffffff&bgbutton=64b9d3&bgrequiredfld=ffff99&font=Arial%2CHelvetica%2Csans-serif&size_site_content=11pt&size_site_title=13pt&size=1.0&nlinputstyles=T&NS_VER=2013.1.0&3'>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link href="/site/mrfothergills2/css/default.css" rel="stylesheet" type="text/css">
+<link href="/site/mrfothergills/js/cloud-zoom.css" rel="stylesheet" type="text/css">
+<link href="/site/mrfothergills/js/colorbox.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="/c.3322617/site/mrfothergills/mrfothergills.ico" type="image/x-icon">
+<link rel="shortcut icon" href="/c.3322617/site/mrfothergills/mrfothergills.ico" type="image/x-icon">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/brand-specific.js"></script>
+<script type="text/javascript" src="/site/common/js/loginhelper.js"></script>
+<script type="text/javascript" src="/site/common/js/cart.js"></script>
+<script type="text/javascript" src="/site/common/js/offershelper.js"></script>
+<script type="text/javascript" src="/site/mrfothergills2/js/sitemapmenu.js"></script>
+<script type="text/javascript" src="/site/mrfothergills2/js/pubsearch.js"></script>
+<script type="text/javascript" src="/site/common/js/carousel.js"></script>
+<script type="text/javascript" src="/site/common/js/Slides-SlidesJS-3/source/jquery.slides.min.js"></script>
+
+<script type="text/javascript">
+function getTestDriveNum() {
+   var accountNumber = "3322617"; 
+   return accountNumber;
+}
+
+function getCustomerID() {
+   var customerID = ""; 
+   return customerID;
+}
+
+function confirmLogin() {
+   var loginEmail = ""; 
+   return loginEmail;
+}
+
+function cartURL() {
+   var cartLink = "/s.nl?sc=3";
+   return cartLink;
+}
+
+function isSandbox() {
+  var sandbox = window.location.hostname.search(/^(.+\.)*sandbox\.netsuite\.com$/);
+  if (sandbox < 0)
+  {
+    return false;
+  }
+  else
+  {
+    return true;
+  }
+}
+
+$(document).ready(function(){
+	$('.checkoutprogresstext').parent().parent().parent().parent().parent().parent().parent().css('margin', '0 20px');
+	$('#paymethhider').before('<div id="paymethnote"><p><img src="/site/common/img/big-arrow.png" alt=">">Please note that payment will only be taken after you Confirm & Submit your order on the next screen.</p></div><hr><p id="paytotal"></p>')
+	.parent().parent().parent().parent().css('position','relative');
+	$('#paymethhider').before('<div id="paymethbox"><p><a href="http://www.safebuy.org.uk/certificate/c70f1f2b-0540-4a53-b3c6-9c37e81c68e2.html"><img alt="SafeBuy web code of practice" src="/site/mrfothergills/img/safebuy.jpg"></a></p><p><img alt="J Fothergill - QUALITY ASSURED - FINEST SEEDS" src="/site/mrfothergills/img/finest_seeds_112x112.gif"></p></div>');
+});
+</script>
+
+<script type="text/javascript" src="/c.3322617/suitebundle3682/HtmlDecodeStripped.js"></script>
+<script type="text/javascript" src="/c.3322617/site/common/js/WishList_Web.js"></script>
+<!-- JQuery Plugins -->
+<script type="text/javascript" src="/site/mrfothergills/js/getUrlVars.jquery.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/cloud-zoom.1.0.2-sitello.js" id="zoom"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/jquery.colorbox-min.js"></script>
+
+</head>
+<body style="" onload="page_init()">
+<div id='outerwrapper' style='width:980px;margin: 0 auto;'>
+<div id='innerwrapper'>
+<div id='div__header' 
+class='noprint' 
+leftmargin='0' topmargin='0' marginwidth='1' >
+<table border='0' cellspacing='0' cellpadding='0' width='100%'>
+<tr>
+<td>
+
+<tr>
+<td>
+
+	<div id="topmenu">
+		<p><a href='https://checkout.netsuite.com/s.nl?c=3322617&n=1&sc=3&login=T&reset=T&newcust=T&noopt=T&ck=Vhx7Rji-AYyuX47e&vid=Vhx7RjW-AfCPrDrg&cktime=114266&cart=1639&gc=clear&ext=F'>Register</a>  |  <a href='https://checkout.netsuite.com/s.nl?c=3322617&n=1&sc=3&login=T&reset=T&ck=Vhx7Rji-AYyuX47e&vid=Vhx7RjW-AfCPrDrg&cktime=114266&cart=1639&gc=clear&ext=F'>Log in</a> 
+		|&nbsp;&nbsp;<a href="https://checkout.netsuite.com/app/center/nlvisitor.nl?c=3322617&n=1&sc=6&ck=Vhx7Rji-AYyuX47e&vid=Vhx7RjW-AfCPrDrg&cktime=114266&cart=1639&gc=clear&ext=F">My Account</a>&nbsp;
+		|&nbsp;&nbsp;<a href="/s.nl/sc.3/.f">View Basket</a>&nbsp;
+		|&nbsp;&nbsp;<a href="/My-Wish-List_2.html">View Wish List</a></p>
+	</div>
+<script type="text/javascript">
+$('#topmenu a').attr('target', '_top');
+</script>
+	<div id="header">
+		<a href="/">
+			<img id="logoimg" src="/core/media/media.nl?id=9970&c=3322617&h=62376e496b34cb4cfd6f" alt="Mr. Fothergill's - TRADITIONAL FAMILY VALUES - quality and service assured">
+		</a>
+		<div id="basket">
+			<p id="baskettext"><a href="/s.nl/sc.3/.f"><img src="/site/mrfothergills2/img/basket_20x20.png" alt=""></a> <a href="/s.nl/sc.3/.f" target="_parent">Your basket</a><br>
+				<span id="cartitemcount"></span> items&nbsp;&nbsp;&nbsp;&nbsp;<span id="itemtotal"></span>
+<br>
+				<span class="lighter">Postage &amp; Packing <span id="pandp"></span></span><br>
+				<span class="total">Total&nbsp;&nbsp;&nbsp;&nbsp;<span id="total"></span></span></p>
+			<input type="button" id="btn_checkout" class="button" value="Checkout" onclick="parent.window.location.href='/s.nl/sc.3/.f';">
+			<input type="button" id="btn_resetcheckout" class="button" value="Clear Basket" onclick="parent.clearBasket();">
+		</div>
+		<div id="searchbox">
+			<p><label for="search">Search</label></p>
+			<div id="searchinput">
+				<!--<form id="searchportlettag" name="searchportlettag" onsubmit="window.location.href='/s.nl?ext=F&c=3322617&n=1&search='+escape(document.forms['searchportlettag'].elements['search'].value);return false;">-->
+				<!-- START search -->
+
+				<!-- END search -->
+			</div>
+		</div>
+		<div id="offersbox">
+			<div id="offersinput">
+				<p id="offerstext" class="intinput"><a href="/Home/Orders-Requests/Special-Offers.html">CLICK HERE FOR SPECIAL OFFERS!</a></p>
+			</div>
+		</div>
+	</div>
+	<ul id="tabmenu">
+		<li><a href='/Home/' id='46txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Home</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Flower-Seed/' id='7txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Flower Seeds</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Flower-Plants/' id='8txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Flower Plants & Bulbs</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Pea-and-Bean-Seeds/' id='9txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Pea and Bean Seeds</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Vegetable-Seeds/' id='10txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Vegetable Seeds</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Vegetable-Plants/' id='11txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Vegetable Plants</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Fruit/' id='12txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Fruit</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Potatoes/' id='13txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Potatoes</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Onions-Garlic/' id='14txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Onions, Shallots & Garlic</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+<li><a href='/Garden-Equipment/' id='15txt' class='offtab'   onMouseout="this.className='offtab';  return true;" onMouseover="this.className='ontab';  return true;"
+>Garden Equipment</a></li>
+<li class="tabseparator"><img src="/site/mrfothergills2/img/tabmenu_separator_3x45.gif" alt="|"></li>
+
+	</ul>
+	<p id="nlcrumbtrail">Shopping Basket&nbsp;&gt;&nbsp;</p>
+	<p class="helptext">Need help?<br>
+Call <span class="phone">0845 371 0518</span></p>
+
+</td>
+</tr>
+ 
+<script type="text/javascript">
+$(document).ready(function(){
+	$('<iframe id="topmenutemp" src="http://www.mr-fothergills-test.co.uk/" style="overflow:hidden;border:0;width:100%;height:25px;" />')
+		.insertAfter('#topmenu');
+	$('#topmenu').remove();
+	$('#topmenutemp').attr('id', 'topmenu');
+});
+</script>
+
+</td>
+</tr>
+</table>
+</div>
+<div id='div__title' style='margin: 0px;'>
+</div>
+<div id='div__label' class='scrollarea' style='margin: 0px; overflow:hidden;'>
+</div>
+<div id='div__body' style="margin: 0px; ">
+<table border='0' cellspacing='0' cellpadding='0' width='100%'>
+<tr>
+<td valign="top" width="0"><table style="position:absolute;top:0;left:0;opacity:0.1;display:none;"></table></td>
+<td valign="top"><table width="100%"><tr class='portletHandle' id='handle_itemMainPortlet' >
+<td width='100%' height=0 align='left' valign='top'>
+<table border=0 cellspacing=0 cellpadding=0 width='100%'>
+<tr>
+<td width=0 height=0 align='left' valign='top' style='display:none'>
+<form method='post' name='form0' id='form0' action='/s.nl?ext=F'>
+<input type='hidden' name='c' value='3322617'>
+<input type='hidden' name='n' value='1'>
+<input type='hidden' name='sc' value=''>
+<input type='hidden' name='category' value='-146'>
+<input type='hidden' name='id' value=''>
+<input type='hidden' name='it' value='A'>
+<input type='hidden' name='vid' value='Vhx7RhicAam4BuSg'>
+<input type='hidden' name='ck' value='Vhx7RhicAaW4BozN'>
+<input type='hidden' name='cktime' value='105472'>
+<input type='hidden' name='cart' value='-1'>
+
+</td>
+</tr>
+<tr>
+</form>
+<td valign='top' width='100%'>
+<table width='100%' border='0' cellspacing='0' cellpadding='2'>
+<tr valign='top' style="display:none;">
+<td align='center'><table align='center' cellpadding=0 cellspacing=0 border=0><tr><td width='100%'><table align='center' cellpadding=5 cellspacing=3 border=0><tr><td nowrap class='medtext'><script type="text/javascript">
+$(document).ready(function(){
+ page.hasPagination = true;
+ page.lowItem = 1;
+ page.highItem = 18;
+ page.totalItems = 89;
+ page.updateTotalItems();
+});
+</script></td><td><img src='/images/nav/prev_dim.gif' width='15' height='15' border='0' ALT='' align='absmiddle'></td><td align='center' valign='top' class='bglt medtextbold'>1</td><td align='center' valign='top' class='medtext'><a href='/?search=tomato&amp;range=19%2C36%2C89'>2</a></td><td align='center' valign='top' class='medtext'><a href='/?search=tomato&amp;range=37%2C54%2C89'>3</a></td><td align='center' valign='top' class='medtext'><a href='/?search=tomato&amp;range=55%2C72%2C89'>4</a></td><td align='center' valign='top' class='medtext'><a href='/?search=tomato&amp;range=73%2C89%2C89'>5</a></td><td><a href='/?search=tomato&amp;range=19%2C36%2C89'><img src='/images/nav/next.gif?v=2012.2.0' width='15' height='15' border='0' ALT='' align='absmiddle'></a></td></tr></table></td></tr></table></td></tr>
+<tr valign='top'>
+<td>
+
+<script type="text/javascript">var categoryId=-1;</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/getUrlVars.jquery.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/searchitemlist.js"></script>
+
+
+	<div id="breadcrumbs">
+		<!--<div id="sociallinks">
+			<a href="http://www.facebook.com/pages/Mr-Fothergills/210612449019355" target="_blank"><img src="/site/mrfothergills2/img/facebook_22x22.gif" alt="Facebook"></a>
+			<a href="http://www.twitter.com/mrfothergill" target="_blank"><img src="/site/mrfothergills2/img/twitter_22x22.gif" alt="Twitter"></a>
+			<a href="/s.nl/c.3322617/it.I/id.21/.f"><img src="/site/mrfothergills2/img/email_22x22.gif" alt="Email"></a>
+			<a href="http://pinterest.com/mrfothergills/" target="_blank"><img src="/site/mrfothergills2/img/pinterest_22x22.gif" alt="Pinterest"></a>
+		</div>-->
+
+<div id="cookielaw">
+
+<p><a href="/privacy.html"><b>Our Cookie Policy</b></a></p>
+
+<div id="sociallinks">
+<!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style ">
+<a class="addthis_button_preferred_1"></a>
+<a class="addthis_button_preferred_2"></a>
+<a class="addthis_button_preferred_3"></a>
+<a class="addthis_button_preferred_4"></a>
+<a class="addthis_button_compact"></a>
+<a class="addthis_counter addthis_bubble_style"></a>
+</div>
+<script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/250/addthis_widget.js#pubid=ra-50339f3f13dd8f76"></script>
+<!-- AddThis Button END -->
+</div>
+
+</div>
+	</div>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+			<!-- START facets -->
+
+			<!-- END facets -->
+		</div>
+		<div id="catright">
+			<div id="newslist">
+				<h1>Search Results</h1>
+			</div>
+
+			<div id="pagination1" class="pagination outline">
+				<!-- START paginationandsorting -->
+
+				<!-- END paginationandsorting -->
+			</div>
+			<div class="spacer5 outline"></div>
+			<div id="items" class="outline">
+				<!-- START items -->
+
+				<!-- END items -->
+			</div>
+<!-- START suggestions -->
+
+<!-- END suggestions -->
+		</div>
+	</div>
+
+</td>
+
+
+</tr>
+<tr valign='top'>
+</tr>
+</table>
+</td>
+
+
+</tr>
+</table>
+</td>
+</tr>
+</table></td>
+</tr>
+</table>
+</div>
+<div id='div__footer' class='noprint' leftmargin='0' topmargin='0' marginwidth='1' marginheight='1'>
+	<hr>
+	<div id="links">
+		<div class="linkcol">
+			<p>Find your way around:</p>
+			<ul>
+				<li><a href="/Flower-Seed/">Flower Seed</a></li>
+				<li><a href="/Flower-Plants/">Flower Plants</a></li>
+				<li><a href="/Pea-and-Bean-Seeds/">Pea and Bean Seeds</a></li>
+				<li><a href="/Vegetable-Seeds/">Vegetable Seeds</a></li>
+				<li><a href="/Vegetable-Plants/">Vegetable Plants</a></li>
+				<li><a href="/Fruit/">Fruit</a></li>
+				<li><a href="/Potatoes/">Potatoes</a></li>
+				<li><a href="/Onions-Garlic/">Onions &amp; Garlic</a></li>
+				<li><a href="/Garden-Equipment/">Garden Equipment</a></li>
+				
+			</ul>
+		</div>
+		<div class="linkcol">
+<p>Orders & Requests:</p>
+			<ul>
+				<li><a href="/Special-Offers.html">Special Offers</a></li>
+				<li><a href="/Catalogue-Request.html">Catalogue Request</a></li>
+				<li><a href="/Quick-Order-Form.html">Quick Order Form</a></li>
+				<li><a href="https://checkout.netsuite.com/s.nl?c=3322617&amp;n=1&amp;sc=46&amp;login=T&amp;reset=T&amp;newcust=T&amp;addrcountry=GB&amp;ck=Vhx7Rji-AYyuX47e&amp;vid=Vhx7RjW-AfCPrDrg&amp;cktime=114266&amp;gc=clear&amp;ext=F&ck=Vhx7Rji-AYyuX47e&vid=Vhx7RjW-AfCPrDrg&cktime=114266&cart=1639&gc=clear&ext=F">Email Sign Up</a></li>
+				
+			</ul>
+		</div>
+		<div class="linkcol">
+<p>Information:</p>
+			<ul>
+				<li><a href="/Home/FAQs/">FAQs</a></li>
+				<li><a href="/Contact-Us.html">Customer Services</a></li>
+				<li><a href="/Gardening-Clubs.html">Gardening Clubs</a></li>
+				<li><a href="/s.nl/c.3322617/it.I/id.8/.f">P&amp;P</a></li>
+				<li><a href="/Guarantee.html">Guarantee</a></li>
+				<li><a href="/Returns.html">Returns</a></li>
+				<li><a href="/terms.html">Terms &amp; Conditions</a></li>
+				<li><a href="/Site-Security.html">Site Security</a></li>
+				<li><a href="/privacy.html">Privacy Policy</a></li>
+				<li><a href="/Store-Locator.html">Store Locator</a></li>
+				
+				
+				
+				
+			</ul>
+		</div>
+		<div class="linkcol">
+			<p>Help and Advice:</p>
+			<ul>
+				<li><a href="/">Home</a></li>
+				<li><a href="https://checkout.netsuite.com/s.nl?c=3322617&amp;n=1&amp;sc=4&amp;logoff=T&amp;ckabandon=Vhx7Rji-AYyuX47e&amp;addrcountry=GB&amp;login=T&amp;ck=Vhx7Rji-AYyuX47e&amp;vid=Vhx7RjW-AfCPrDrg&amp;cktime=114266&amp;gc=clear&amp;ext=F&ck=Vhx7Rji-AYyuX47e&vid=Vhx7RjW-AfCPrDrg&cktime=114266&cart=1639&gc=clear&ext=F">Log in</a></li>
+				<li><a href="https://checkout.netsuite.com/s.nl?c=3322617&amp;n=1&amp;sc=46&amp;login=T&amp;reset=T&amp;newcust=T&amp;addrcountry=GB&amp;ck=Vhx7Rji-AYyuX47e&amp;vid=Vhx7RjW-AfCPrDrg&amp;cktime=114266&amp;gc=clear&amp;ext=F&ck=Vhx7Rji-AYyuX47e&vid=Vhx7RjW-AfCPrDrg&cktime=114266&cart=1639&gc=clear&ext=F">Registration</a></li>
+				<li><a href="/about.html">About Us</a></li>
+				<li><a href="/Plant-Types.html">Plant Types</a></li>
+				<li><a href="/Home/Growing-Guides/">Growing Guides</a></li>
+				<li><a href="/Guide-to-Abbreviations-and-Symbols.html">Guide to symbols</a></li>
+				<li><a href="/Home/Care-Cultivation/">Care &amp; Cultivation</a></li>
+				<li><a href="/Home/Pests-Disease-Advice/">Pests &amp; Disease Advice</a></li>
+				<li><a href="/Video-Guides/">Video Guides</a></li>
+				<li><a href="/Home/News-Events/">News &amp; Events</a></li>
+<!--<li><a href="/s.nl/c.3322617/it.I/id.34/.f">Affiliates</a></li>-->
+				<li><a href="/Home/Help-Advice/Sitemap.html">Site Map</a></li>
+			</ul>
+		</div>
+		<div class="linkcol">
+<p>Trade Enquiries:</p>
+			<ul>
+			<li><a href="/Export-Enquiries/">Export Enquiries</a></li>
+				<li><a href="http://www.mr-fothergills-trade.com" target="_blank">Trade Enquiries</a></li>	
+			<li><a href="/Promotional-Seed-Enquiries/">Promotional Seed Enquiries</a></li>	
+				
+			</ul>
+		</div>
+	</div>
+	<hr>
+	<div id="footer">
+		<h3><a href="/Contact-Us.html">Email us</a> or Telephone: 0845 371 0518</h3>
+		<div id="secure">
+			<p><img src="/site/mrfothergills/img/accepted_cards_new.gif" alt="Accepted Cards"></p>
+			<p><img src="/site/mrfothergills/img/secure.gif" alt="Padlock" id="padlock"> <a href="/Home/FAQs/Is-it-safe-to
+
+-use-my-credit-card-online.html">SSL Secured Site</a></p>
+			<p><a href="http://www.safebuy.org.uk/certificate/c70f1f2b-0540-4a53-b3c6-9c37e81c68e2.html"><img 
+
+src="/site/mrfothergills/img/safebuy.jpg" alt="SafeBuy web code of practice"></a></p>
+		</div>
+		<img src="/site/mrfothergills/img/finest_seeds_112x112.gif" alt="J Fothergill - QUALITY ASSURED - FINEST SEEDS" 
+
+id="qualitymark">
+		<p>&copy; 2013 Mr. Fothergill's Seeds Limited<br>
+			Company Registration No. 1710774 - VAT No. GB 390 5718 35<br>
+			Registered Address Gazeley Road, Kentford, Suffolk, CB8 7QB</p>
+		<div id="social">
+			<a href="http://www.youtube.com/user/MrFothergillsSeedLtd?feature=watch"><img src="/site/mrfothergills2/img/youtube_32x32.gif" 
+
+alt="Youtube"></a>
+			<!--<a href="http://www.facebook.com/pages/Mr-Fothergills/210612449019355"><img src="/site/mrfothergills2/img/facebook_32x32.gif" alt="Facebook"></a>-->
+			<a href="http://www.twitter.com/mrfothergill"><img src="/site/mrfothergills2/img/twitter_32x32.gif" 
+
+alt="Twitter"></a>
+		</div>
+	</div>
+</div>
+<iframe src='http://www.mr-fothergills-test.co.uk/empty.html' id='server_commands' style='visibility:hidden' height=0></iframe>
+<script language="javascript" type="text/javascript">
+var i=new Image();
+i.src='/app/site/hit/tracker.nl?c=3322617&n=1&type=store&sc=46&category=-146&it=&itemid=&referer='+escape(document.referrer);
+i.onload=function(){nsVoid();};
+function nsVoid(){return;};
+</script>
+
+</div>
+</div>
+<script language='JavaScript' type='text/javascript'>
+function page_init() {
+window.weekstart  ='2';
+window.dateformat ='DD/MM/YYYY';
+window.longdateformat ='DD Month YYYY';
+window.timeformat ='fmHH:fmMI am';
+window.timeformatwithseconds ='fmHH:fmMI:SS am';
+window.decimalseparator ='.';
+window.groupseparator =',';
+window.negativeprefix ='-';
+window.negativesuffix ='';
+window.datetime_am_string ='am';
+window.datetime_pm_string ='pm';
+window.datetime_short_months = new Array("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec","");
+window.loadcomplete = true;
+}
+</script>
+<script language="javascript" type="text/javascript">
+var i=new Image();
+i.src='/app/site/hit/tracker.nl?c=3322617&n=1&type=page&siteroot=Live+Hosting+Files&url=%2Fsite%2Fmrfothergills2%2Fslitemplates%2Fsearchresults_dynamic.html&referer='+escape(document.referrer);
+i.onload=function(){nsVoid();};
+function nsVoid(){return;};
+</script>
+
+</body>
+</html>

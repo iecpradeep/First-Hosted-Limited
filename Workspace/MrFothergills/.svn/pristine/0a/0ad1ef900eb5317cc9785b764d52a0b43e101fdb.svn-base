@@ -1,0 +1,264 @@
+/**********************************************************************************************************
+ * Name:        salesOrderQuickAddSuitelet.js
+ * Script Type: Suitelet
+ * Client:      Mr Fothergills
+ * 
+ * Version:     1.0.0 - 14/05/2013 - first release - AM
+ *  
+ * Author:      FHL
+ * 
+ * Purpose:     Easy selection of items for the Sales Order.
+ * 
+ * Script:      customscript_salesorderquickaddsuitelet
+ * Deploy:     	customdeploy_salesorderquickaddsuitelet
+ * 
+ * Library:   	offersLibrary.js
+ **********************************************************************************************************/
+
+//Global Variables 
+var selectionForm = null;
+var descriptionSearch = '';
+var itemEntered = '';
+var quantitySelect = 0;
+var quantityEntered = 0;
+var hiddencustomerBrand = 0;
+var hiddenCustomer = null;
+var customerBrand = 0;
+var custBrandParam = 0;
+var custParam = 0;
+var customer = 0;
+
+
+/**
+ * 
+ * Top-level function called by Script Deployment
+ * 
+ */
+function itemSelector(request, response)
+{
+	if (request.getMethod() == 'GET')
+	{
+		response.sendNoCache();
+		checkCustomerBrand(request, response);
+		createSelectionForm(request, response);
+		response.writePage(selectionForm);
+	}
+//	POST
+	else
+	{
+		response.sendNoCache();
+		if(getSearchCriteria()==true)
+		{
+			postItems(request, response);
+		}
+		else
+		{
+			createSelectionForm(request, response);
+			response.writePage(selectionForm);
+			//reloadSuitelet();
+		}
+	}
+}
+
+
+/**
+ * @param request
+ * @param response
+ */
+function checkCustomerBrand(request, response)
+{
+	try
+	{
+		custBrandParam = request.getParameter('custparam_brand');		
+		customer = request.getParameter('custparam_cust');
+
+		nlapiLogExecution('Error', 'Check Customer Brand customer', customer);
+		nlapiLogExecution('error', 'checkCustomerBrand custBrandParam', custBrandParam);
+
+
+//		if(parseInt(custBrandParam) == 0)
+//		{
+//			custBrandParam = nlapiLookupField('customer', customer, 'custentity_mrf_cust_brand');
+//			nlapiLogExecution('error', 'In IF custBrandParam', custBrandParam);
+//		}
+	}
+	catch (e)
+	{
+		errorHandler('checkCustomerBrand', e);
+	}
+}
+
+
+/**
+ * 
+ * Create an item selection form
+ * 
+ * @param request
+ * @param response
+ */
+function createSelectionForm(request, response)
+{
+	var quantityDefault = 0;
+
+	try
+	{
+//		Set the default quantity to 1
+		quantityDefault = 1;
+
+//		Create selection form
+		selectionForm = nlapiCreateForm('AddItem',true);
+
+//		Create fields
+		descriptionSearch = selectionForm.addField('custpage_item','text','Item Code');
+		quantitySelect = selectionForm.addField('custpage_quantity','integer','Quantity').setDefaultValue(quantityDefault);
+		hiddencustomerBrand = selectionForm.addField('custpage_hiddencustomerbrand','integer','Customer Brand Id').setDefaultValue(custBrandParam);
+//		selectionForm.getField('custpage_hiddencustomerbrand').setDisplayType('hidden');
+		hiddenCustomer = selectionForm.addField('custpage_hiddencustomer','integer','Customer Id').setDefaultValue(customer);
+//		selectionForm.getField('custpage_hiddencustomer').setDisplayType('hidden');
+		
+		selectionForm.addSubmitButton('Add Item');
+		//selectionForm.addButton('custpage_btn', 'Close', 'window.close()');
+		
+	}
+	catch(e)
+	{
+		errorHandler('createSelectionForm ', e);
+	}
+}
+
+
+/**
+ * 
+ * Get the search criteria entered by the user
+ * 
+ * @returns {Boolean}
+ */
+function getSearchCriteria()
+{
+	var retVal = false;
+	var itemId = 0;
+	var itemBrand = 0;
+
+	try
+	{
+//		Get the parameters entered
+		itemEntered = request.getParameter('custpage_item');
+		quantityEntered = request.getParameter('custpage_quantity');
+
+		customerBrand = request.getParameter('custpage_hiddencustomerbrand');
+
+		customer = request.getParameter('custpage_hiddencustomer');
+
+		itemId = genericSearch('item', 'itemid', itemEntered);
+		itemBrand = nlapiLookupField('item', itemId, 'department');
+
+		nlapiLogExecution('error', 'Item Brand', itemBrand);
+		nlapiLogExecution('error', 'Customer Brand', customerBrand);
+
+		if (customerBrand == itemBrand)
+		{
+//			Check if the parameters are empty
+			if( itemEntered.length != 0)
+			{
+				retVal = true;
+			}
+			else
+			{
+				nlapiLogExecution('error', 'Enter an item');
+			}
+		}
+		else
+		{
+			nlapiLogExecution('error', 'Enter the correct branded item');
+			retVal = false;
+		}
+	}
+	catch(e)
+	{
+		errorHandler('getSearchCriteria ', e);
+	}
+
+	return retVal;
+}
+
+
+/**
+ * 
+ * @param request
+ * @param response
+ * 
+ */
+function postItems()
+{
+	var selectedItem = null;
+	var addNewScript = '';
+	var url = '';
+
+	url = '/app/site/hosting/scriptlet.nl?script=162&deploy=1&custparam_cust='+customer+'&custparam_brand=' + customerBrand;
+	try
+	{	
+//		Search the Item Code Entered
+		selectedItem = genericSearch('item', 'itemid', itemEntered);
+
+		addNewScript = '<script type="text/javascript">';
+		addNewScript += "window.opener.nlapiSetCurrentLineItemValue(\'item\',\'item\',\'" + selectedItem + "\', true, true);";
+		addNewScript += "window.opener.nlapiSetCurrentLineItemValue(\'item\',\'custcol_itemdepartment\',\'" + selectedItem + "\', true, true);";
+		addNewScript += "window.opener.nlapiSetCurrentLineItemValue(\'item\',\'quantity\',\'" + quantityEntered + "\', true, true);";
+		addNewScript += "window.opener.nlapiCommitLineItem(\'item\');";
+		addNewScript += "window.location.href='"+url+"';";
+		addNewScript += '</script>';
+		response.write(addNewScript);	
+		nlapiLogExecution('error', 'sent');
+	}
+	catch(e)
+	{
+		errorHandler("postItems ", e);	
+	}
+}
+
+
+/**
+ * 
+ */
+function reloadSuitelet()
+{
+	var retVal = '';
+	var addNewScript = '';
+	
+	try
+	{		
+		addNewScript = '<script type="text/javascript">';
+		addNewScript += "window.location.href='"+buildSuiteletURL()+"';";
+		addNewScript += '</script>';
+		retVal = response.write(addNewScript);
+		nlapiLogExecution('error', 'buildSuiteletURL url retVal', retVal);
+	}
+	catch(e)
+	{
+		errorHandler("reloadSuitelet ", e);	
+	}
+	return retVal;
+}
+
+/**
+ * @returns {String}
+ */
+function buildSuiteletURL()
+{
+	var retVal = '';
+	
+	try
+	{
+//		Set the URL
+		url = '/app/site/hosting/scriptlet.nl?script=162&deploy=1&custparam_cust='+customer+'&custparam_brand=' + customerBrand;
+		
+		retVal = url;
+		nlapiLogExecution('error', 'buildSuiteletURL url retVal', retVal);
+	}
+	catch(e)
+	{
+		errorHandler("buildSuiteletURL ", e);	
+	}
+	
+	return retVal;
+}

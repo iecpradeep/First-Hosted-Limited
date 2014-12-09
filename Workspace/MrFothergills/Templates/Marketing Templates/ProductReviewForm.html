@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Product Review</title>
+    <script language="javascript">
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var qvars = query.split("&");
+        for (var i=0;i < qvars.length;i++) {
+            var pairs = qvars[i].split("=");
+            if (pairs[0] == variable) {
+                return pairs[1];
+            }
+        }
+    }
+     
+    function setProductID() {
+        var obj = document.getElementById('custrecord_custom_itemid');
+        obj.value = getQueryVariable('productId');
+        //alert(obj.value);
+    }
+    
+    function refreshParent() {
+        window.opener.location.href = window.opener.location.href;        
+        window.close();
+    }
+    </script>
+</head>
+<body>
+<span style="font-size: 110%; font-weight: bold;">
+Use the form below to submit your product review.<br /><br />
+</span>
+<NLFORM>    
+    <table style="width: 600px;" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>
+                <NLcustrecord_custom_itemid>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <NLcustrecord_productreview_yourname>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <NLcustrecord_productreview_youremail>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <NLcustrecord_productreview_yourtitle>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <NLcustrecord_productreview_yourreview>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <NLcustrecord_productreview_yourrating>
+            </td>
+        </tr>
+    </table>
+    <BR>
+    <input type="submit" value="Submit Review" onclick="setProductID();refreshParent();">        
+</NLFORM>
+</body>
+</html>

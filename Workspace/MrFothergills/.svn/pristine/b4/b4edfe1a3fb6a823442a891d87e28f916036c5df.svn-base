@@ -1,0 +1,14 @@
+<span id="offer<%=getCartLineField('item')%>" class="offer-description"></span>
+<script type="text/javascript">
+$(document).ready(function(){
+ if ("<%=getCartLineField('custcol_lineoffer')%>" != ""){
+  showOffer("<%=getCartLineField('custcol_lineoffer')%>", 'offer<%=getCartLineField('item')%>');
+ }
+ if ("<%=getCartLineField('custcol_isshipping')%>" == "T"){
+  var pandpText = $('#offer<%=getCartLineField('item')%>').parent().next().next().next().next().text();
+  $('#pandp').html(pandpText);
+  $('#cartitemcount').html(parseInt($('#cartitemcount').html()) - 1);
+  $('#itemtotal').html('&pound;' + (parseFloat($('#itemtotal').html().replace('£','')) - parseFloat(pandpText.replace('£',''))).toFixed(2));
+ }
+});
+</script>

@@ -1,0 +1,18 @@
+<tr class="item-drilldown"><td>
+				<div class="itemoptionright">
+					<input type="submit" name="addtocart" class="button shadowbox" value="<%=getTranslatedText('site','button','theme_buy')%>" onkeypress="window.event.cancelBubble=true;"><br>
+					<p class="wishlist"><a id="buttonWL" href="javascript:AddToWishList('<%=getCurrentAttribute('item','internalID')%>');">Add to Wish List</a></p>
+				</div>
+				<div class="itemoptionright">
+					<p class="optionqty"><label for="qty">Quantity</label> <input type="text" id="qty" name="qty" value="1" class="outline" size="1" maxlength="6"></p>
+					<%=getCurrentAttribute('item','addtocartitemid')%>
+					<table style="display:none;"><NLADDTOCARTOPTIONS></table>
+					<p class="pricelabel"><b>Price:</b></p>
+					<p class="price"><%=getCurrentAttribute('item','salesPriceHTML')%></p>
+				</div>
+</td></tr>
+<tr class="item-list" style="display:none;"><td>
+				<input type="submit" name="addtocart" class="button addtocartbtn" value="<%=getTranslatedText('site','button','theme_buy')%>" onkeypress="window.event.cancelBubble=true;">
+				<input type="hidden" id="qty" name="qty" value="1">
+				<%=getCurrentAttribute('item','addtocartitemid')%>
+</td></tr>

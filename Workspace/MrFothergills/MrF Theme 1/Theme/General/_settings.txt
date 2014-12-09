@@ -1,0 +1,11 @@
+Page cellpadding = 0
+Colour Theme = Custom : Mr. Fothergill's
+Site Font = Trebuchet
+Default Item Drilldown Template = Mr Fothergill's PRODUCTS (item drilldown)
+Default Item Drilldown Template = Mr Fothergill's TEMPLATE B (info item drilldown)
+Default Item Drilldown Template = Mr Fothergill's PRODUCTS (item layout)
+Default Item Drilldown Template = Mr Fothergill's (null layout)
+Default Item Drilldown Template = Mr Fothergill's PRODUCTS (related item layout)
+Default Item Drilldown Template = Mr Fothergill's PRODUCTS (upsell item layout)
+Default Item Drilldown Template = Mr Fothergill's WELCOME (item layout)
+Default Item Drilldown Template = Mr Fothergill's (null layout)

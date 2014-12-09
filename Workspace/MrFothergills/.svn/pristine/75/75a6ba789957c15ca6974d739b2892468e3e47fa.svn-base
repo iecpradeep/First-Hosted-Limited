@@ -1,0 +1,306 @@
+/*****************************************************************************
+ * Name:		cataloguerequest.js
+ * Script Type:	User Event
+ *
+ * Version:		1.0.0 - 12/06/2013 - Initial release - DB
+ *
+ * Author:		D.Birt FHL
+ * 
+ * Purpose:		
+ * 
+ * Script: 		customscript_cataloguerequestue
+ * Deploy: 		customdeploy1
+ * 				customdeploy2
+ * 
+ * Notes:		
+ * 
+ * Library: 	Library.js
+ *************************************************************************************/
+
+/**
+ * Before Submit
+ */
+function beforeSubmit(type)
+{
+	if (type == 'create')
+	{
+		// Find out if customer already exists
+		var email = nlapiGetFieldValue('email');
+		var brand = nlapiGetFieldValue('custentity_mrf_cust_brand');
+		
+		var existingCustomer = genericSearchTwoParams('customer', 'email', email, 'custentity_mrf_cust_brand', brand);
+		
+		// Customer exists
+		if (existingCustomer > 0)
+		{
+			// Update record
+			var customer = nlapiLoadRecord('customer', existingCustomer);
+			
+			var catalogue1 = nlapiGetFieldValue('custentity_cataloguea');
+			var catalogue2 = nlapiGetFieldValue('custentity_catalogueb');
+			var catalogue3 = nlapiGetFieldValue('custentity_cataloguec');
+			var catalogue4 = nlapiGetFieldValue('custentity_catalogued');
+			var catalogue5 = nlapiGetFieldValue('custentity_catalogueall');
+			
+			customer.setFieldValue('custentity_cataloguea', catalogue1);
+			customer.setFieldValue('custentity_catalogueb', catalogue2);
+			customer.setFieldValue('custentity_cataloguec', catalogue3);
+			customer.setFieldValue('custentity_catalogued', catalogue4);
+			customer.setFieldValue('custentity_catalogueall', catalogue5);
+			
+			nlapiSubmitRecord(customer);
+			
+			// Throw an error to abort new customer creation
+			throw nlapiCreateError(ERR_CODE.NO_ERR_ABORT_SUBMIT.Code,
+			        ERR_CODE.NO_ERR_ABORT_SUBMIT.Msg, true);
+		}
+	}
+}
+
+var ERR_CODE =
+{
+    NO_ERR_ABORT_SUBMIT : {
+        Code:'NO_ERROR_ABORT_SUBMIT', 
+        Msg:'Intentionally thrown exception to abort record submit'}
+};
+
+/**
+ * After Submit
+ * @returns
+ */
+function afterSubmit(type)
+{
+	try 
+	{
+	
+		nlapiLogExecution('DEBUG','Cat Request','afterSubmit');
+		
+		// get current record
+		
+		var updateRecord = nlapiGetNewRecord();
+		
+		// get value of catalogue check boxes from current record
+		
+		var catalogue1 = updateRecord.getFieldValue('custentity_cataloguea');
+		var catalogue2 = updateRecord.getFieldValue('custentity_catalogueb');
+		var catalogue3 = updateRecord.getFieldValue('custentity_cataloguec');
+		var catalogue4 = updateRecord.getFieldValue('custentity_catalogued');
+		var catalogue5 = updateRecord.getFieldValue('custentity_catalogueall');
+
+		
+		// get current date and convert to string in user's date format
+		
+		var d = new Date();
+		var date = nlapiDateToString(d); 
+		
+		// get customer from current record
+		
+		//var customer = updateRecord.getFieldValue('entityid');
+		var customer = updateRecord.getId();
+		var brand = updateRecord.getFieldValue('custentity_mrf_cust_brand');
+		
+		if (catalogue1 == 'T')
+		{
+
+			// get catalogue request type 1 mapping
+			switch(brand) 
+			{
+				case '1':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',1,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '2':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',6,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '3':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',11,'custrecord_crmapping_catalogue');
+				break;
+
+
+			}  //switch
+
+		
+			// create new catalogue request object
+			var newCatRequest = nlapiCreateRecord('customrecord_cataloguerequest');
+			
+			// set field values
+			
+			newCatRequest.setFieldValue('custrecord_cr_catalogue', catalogueMapping);
+			newCatRequest.setFieldValue('custrecord_cr_customer', customer);
+			newCatRequest.setFieldValue('custrecord_cr_daterequested', date);
+			
+			// submit record
+			
+			var id = nlapiSubmitRecord(newCatRequest);
+
+			// reset flag on customer record
+			nlapiSubmitField('customer',customer,'custentity_mrf_catalogue1','F');
+
+						
+		} //if
+		
+		if (catalogue2 == 'T')
+		{
+			// get catalogue request type 2 mapping
+			switch(brand) 
+			{
+				case '1':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',2,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '2':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',7,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '3':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',12,'custrecord_crmapping_catalogue');
+				break;
+
+
+			}  //switch			
+			
+			// create new catalogue request object
+			var newCatRequest = nlapiCreateRecord('customrecord_cataloguerequest');
+			
+			// set field values
+			
+			newCatRequest.setFieldValue('custrecord_cr_catalogue', catalogueMapping);
+			newCatRequest.setFieldValue('custrecord_cr_customer', customer);
+			newCatRequest.setFieldValue('custrecord_cr_daterequested', date);
+			
+			// submit record
+			
+			var id = nlapiSubmitRecord(newCatRequest);
+
+			// reset flag on customer record
+			nlapiSubmitField('customer',customer,'custentity_mrf_catalogue2','F');
+						
+		} //if
+		
+		if (catalogue3 == 'T')
+		{
+			// get catalogue request type 3 mapping
+			switch(brand) 
+			{
+				case '1':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',3,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '2':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',8,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '3':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',13,'custrecord_crmapping_catalogue');
+				break;
+
+
+			}  //switch			
+			// create new catalogue request object
+			var newCatRequest = nlapiCreateRecord('customrecord_cataloguerequest');
+			
+			// set field values
+			
+			newCatRequest.setFieldValue('custrecord_cr_catalogue', catalogueMapping);
+			newCatRequest.setFieldValue('custrecord_cr_customer', customer);
+			newCatRequest.setFieldValue('custrecord_cr_daterequested', date);
+			
+			// submit record
+			
+			var id = nlapiSubmitRecord(newCatRequest);
+
+			// reset flag on customer record
+			nlapiSubmitField('customer',customer,'custentity_mrf_catalogue3','F');
+
+						
+		} //if
+		
+		if (catalogue4 == 'T')
+		{
+			// get catalogue request type 4 mapping
+			switch(brand) 
+			{
+				case '1':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',4,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '2':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',9,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '3':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',14,'custrecord_crmapping_catalogue');
+				break;
+
+
+			}  //switch			
+			
+			// create new catalogue request object
+			var newCatRequest = nlapiCreateRecord('customrecord_cataloguerequest');
+			
+			// set field values
+			
+			newCatRequest.setFieldValue('custrecord_cr_catalogue', catalogueMapping);
+			newCatRequest.setFieldValue('custrecord_cr_customer', customer);
+			newCatRequest.setFieldValue('custrecord_cr_daterequested', date);
+			
+			// submit record
+			
+			var id = nlapiSubmitRecord(newCatRequest);
+
+			// reset flag on customer record
+			nlapiSubmitField('customer',customer,'custentity_mrf_catalogue4','F');
+						
+		} //if
+		
+		if (catalogue5 == 'T')
+		{
+			// get catalogue request type 1 mapping
+			switch(brand) 
+			{
+				case '1':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',5,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '2':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',10,'custrecord_crmapping_catalogue');
+				break;
+				
+				case '3':
+					var catalogueMapping = nlapiLookupField('customrecord_cataloguerequestmapping',15,'custrecord_crmapping_catalogue');
+				break;
+
+
+			}  //switch			
+			
+			// create new catalogue request object
+			var newCatRequest = nlapiCreateRecord('customrecord_cataloguerequest');
+			
+			// set field values
+			
+			newCatRequest.setFieldValue('custrecord_cr_catalogue', catalogueMapping);
+			newCatRequest.setFieldValue('custrecord_cr_customer', customer);
+			newCatRequest.setFieldValue('custrecord_cr_daterequested', date);
+			
+			// submit record
+			
+			var id = nlapiSubmitRecord(newCatRequest);
+
+			// reset flag on customer record
+			nlapiSubmitField('customer',customer,'custentity_dtb_fruitvegcat','F');
+						
+		} //if
+		
+
+		return true;	
+	}
+ 
+	catch (e) 
+	{
+		errorHandler('afterSubmit', e);
+	}
+
+	return true;	
+	
+}

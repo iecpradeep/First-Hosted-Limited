@@ -1,0 +1,57 @@
+<transaction>
+	<body>
+		<transactionid>121</transactionid>
+		<customerid>123</customerid>
+		<customername>Meg Newson</customername>
+		<typename>SalesOrder</typename>
+		<typeid>12</typeid>
+		<date>21/11/2013</date>
+		<duedate>21/11/2013</duedate>
+		<salesrepid>14</salesrepid>
+		<salesrepname>Bumblebee McPharterson</salesrepname>
+		
+		<paymentmethodid>233</paymentmethodid>
+		<paymentmethodname>Payment on Account</paymentmethodname>
+		
+		<paymenttermsid>2</paymenttermsid>
+		<paymenttermsname>Due on receipt</paymenttermsname>
+		
+		<currencyid></currencyid>
+		<currencyname></currencyname>
+		<transactiontotal></transactiontotal>
+
+		<billaddress>
+			<billline1></billline1>
+			<billline2></billline2>
+			<billline3></billline3>
+			<billline4></billline4>
+			<billpostcode></billpostcode>
+		</billaddress>
+
+		<shipaddress>
+			<shipline1></shipline1>
+			<shipline2></shipline2>
+			<shipline3></shipline3>
+			<shipline4></shipline4>
+			<shippostcode></shippostcode>
+		</shipaddress>
+	</body>
+
+	<items>
+		<item>
+			<itemid></itemid>
+			<itemname></itemname>
+			<itemdesc></itemdesc>
+			<itemprice></itemprice>
+			<itemqty></itemqty>
+		</item>
+		<item>
+			<itemid></itemid>
+			<itemname></itemname>
+			<itemdesc></itemdesc>
+			<itemprice></itemprice>
+			<itemqty></itemqty>
+		</item>
+	</items>
+
+</transaction>

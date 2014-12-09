@@ -1,0 +1,15 @@
+<td>
+
+			<div class="itemoption outline">
+				<div class="itemoptionleft">
+					<h2><%=getCurrentAttribute('item','storedisplayname')%></h2>
+					<p><%=getCurrentAttribute('item','custitem_mrf_store_pricedesc')%></p>
+					<p><span class="special"><%=getCurrentAttribute('item','custitem_mrf_store_promodesc')%></span></p>
+					<p><b>Code: <%=getCurrentAttribute('item','itemid')%></b><br>
+						<span><b>Last Order Date: <span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_lastorder')%></span></b><br></span>
+						<span><b>Despatch: <span class="data"><%=getCurrentAttribute('item','custitem_mrf_item_despatch')%></span></b></span></p>
+				</div>
+<%=getCurrentAttribute('item','addtocartdrilldownhtml')%>
+			</div>
+
+</td>

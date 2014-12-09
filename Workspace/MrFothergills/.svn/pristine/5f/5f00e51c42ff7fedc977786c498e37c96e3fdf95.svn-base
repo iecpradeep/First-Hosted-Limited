@@ -1,0 +1,11 @@
+Page cellpadding = 0
+Colour Theme = Custom : Johnsons
+Site Font = Arial
+Default Item Drilldown Template = Johnsons PRODUCTS (item drilldown)
+Default Item Drilldown Template = Johnsons TEMPLATE B (info item drilldown)
+Default Item Drilldown Template = Johnsons PRODUCTS (item layout)
+Default Item Drilldown Template = Johnsons (null layout)
+Default Item Drilldown Template = Johnsons PRODUCTS (related item layout)
+Default Item Drilldown Template = Johnsons PRODUCTS (upsell item layout)
+Default Item Drilldown Template = Johnsons 2 WELCOME (item layout)
+Default Item Drilldown Template = Johnsons (null layout)

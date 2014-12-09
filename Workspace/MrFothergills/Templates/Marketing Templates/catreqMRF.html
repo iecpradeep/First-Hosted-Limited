@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Catalogue Request</title>
+<link href="/c.3322617/site/mrfothergills2/css/default.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+.input,.inputreq{font-size:inherit !important;color:inherit !important;}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/c.3322617/site/common/js/WebStoreFinder.js"></script><script type="text/javascript">var pcaAccountCode="MRFOT11112"; var pcaLicenseKey="TM39-PP44-ET44-CG72"; pcaUseUKData = true;</script>
+<script type="text/javascript">
+function nsCheckbox(checkbox, value)
+{
+	$(checkbox).prop('checked', value);
+	
+	if (value)
+	{
+		$(checkbox).parent().removeClass('checkbox_unck');
+		$(checkbox).parent().addClass('checkbox_ck');
+	}
+	else
+	{
+		$(checkbox).parent().removeClass('checkbox_ck');
+		$(checkbox).parent().addClass('checkbox_unck');
+	}
+}
+
+function changeAll(){
+	if ($('#custrecord_cr_cata_fs_inp').prop('checked') &&
+		$('#custrecord_cr_catb_fs_inp').prop('checked') &&
+		$('#custrecord_cr_catc_fs_inp').prop('checked') &&
+		$('#custrecord_cr_catd_fs_inp').prop('checked'))
+	{
+		nsCheckbox($('#manselection input[type="checkbox"]'), false);
+		nsCheckbox($('#custrecord_cr_catall_fs_inp'), true);
+	}
+	else if ($('#custrecord_cr_cata_fs_inp').prop('checked') ||
+		$('#custrecord_cr_catb_fs_inp').prop('checked') ||
+		$('#custrecord_cr_catc_fs_inp').prop('checked') ||
+		$('#custrecord_cr_catd_fs_inp').prop('checked'))
+	{
+		nsCheckbox($('#custrecord_cr_catall_fs_inp'), false);
+	}
+}
+
+$(document).ready(function(){
+$('#custrecord_cr_brand').val('1');
+nsCheckbox($('#custrecord_cr_catall_fs_inp'), true);
+
+$('#custrecord_cr_catall_fs_inp').change(function(){
+	nsCheckbox($('#manselection input[type="checkbox"]'), false);
+});
+$('#custrecord_cr_catall_fs').click(function(){ // Required for Chrome
+	nsCheckbox($('#manselection input[type="checkbox"]'), false);
+});
+
+$('#manselection input[type="checkbox"]').change(changeAll);
+$('#manselection input[type="checkbox"]').parent().click(changeAll); // Required for Chrome
+
+// Get promocode and select leadsource
+var leadsourceFound = false;
+
+$('#custrecord_cr_campaigncode option').each(function(){
+	var leadsourceBeginningRegEx = /^(\d)+ /; // ID of leadsource, then a space
+	var promoCode = getCookie('MRFccode');
+
+	if ($(this).text().replace(leadsourceBeginningRegEx, '') == promoCode && 
+			promoCode != '')
+	{
+		$('#custrecord_cr_campaigncode').val($(this).val());
+		leadsourceFound = true;
+	}
+	// Select Generic Campaign by default if nothing is found
+	if (!leadsourceFound && $(this).text().replace(leadsourceBeginningRegEx, '') == 'Generic Campaign')
+	{
+		$('#custrecord_cr_campaigncode').val($(this).val());
+	}
+});
+
+// PCA compat functionality
+$('#custrecord_cr_zip').keyup(function(){
+	$('#zipcode').val($('#custrecord_cr_zip').val());
+});
+});
+
+function pcaChangeAddr1()
+{
+	$('#custrecord_cr_addr1').val($('#address1').val());
+	$('#custrecord_cr_addr2').val($('#address2').val());
+	$('#custrecord_cr_addr3').val($('#address3').val());
+	$('#custrecord_cr_city').val($('#city').val());
+	$('#custrecord_cr_state option').each(function(){
+		if ($(this).text() == $('#state').val())
+		{
+			$('#custrecord_cr_state option').prop('selected', false);
+			$(this).prop('selected', true);
+		}
+	});
+}
+
+function getCookie(c_name)
+{
+	var retVal = '';
+	var i, x, y; 
+	var ARRcookies = new Array();
+
+	ARRcookies = document.cookie.split(";");
+
+	for (i = 0; i < ARRcookies.length; i++)
+	{
+		x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
+		y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
+		x = x.replace(/^\s+|\s+$/g, "");
+		if (x == c_name)
+		{
+			retVal= unescape(y);
+			break;
+		}
+	}
+
+	return retVal;
+}
+</script>
+</head>
+<body style="background-color:transparent;">
+<div id="iframeouterwrapper">
+<div class="iframecontainer outline" style="margin:0 20px;">
+<NLFORM>
+<h1>Catalogue Request</h1>
+<table id="manselection" style="width:100%;">
+<tr>
+<td style="vertical-align:bottom;"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/MrF_Summer_into_Autumn_Plant_Catalogue_2013.jpg" alt="Summer into Autumn Plant Catalogue"></td>
+<td style="vertical-align:bottom;display:none;"><img src="/c.3322617/site/mrfothergills/img/info_item/catalogue2_159x210MrFPlant2013.jpg" alt="Plant Catalogue 2013"></td>
+<td style="vertical-align:bottom;display:none;"><img src="/c.3322617/site/mrfothergills/img/info_item/catalogue3_159x210MrFGarden2013.jpg" alt="Garden Equipment 2013 Catalogue"></td>
+<td style="vertical-align:bottom;display:none;"><img src="/c.3322617/site/mrfothergills/img/info_item/catalogue4_160x227.jpg" alt="Garden Equipment"></td>
+</tr>
+<tr>
+<td><p><NLCUSTRECORD_CR_CATA> <label for="custrecord_cr_cata_fs_inp">Tick to select</label></p></td>
+<td style="display:none;"><p><NLCUSTRECORD_CR_CATB> <label for="custrecord_cr_catb_fs_inp">Tick to select</label></p></td>
+<td style="display:none;"><p><NLCUSTRECORD_CR_CATC> <label for="custrecord_cr_catc_fs_inp">Tick to select</label></p></td>
+<td style="display:none;"><p><NLCUSTRECORD_CR_CATD> <label for="custrecord_cr_catd_fs_inp">Tick to select</label></p></td>
+</tr>
+</table>
+<p style="text-align:center;"><NLCUSTRECORD_CR_CATALL> <label for="custrecord_cr_catall_fs_inp" style="font-weight:bold;">All Catalogues</label></p>
+<p>If you would like to receive a free copy of our current catalogue(s), please complete the form below. </p>
+<p>We regret that we are only able to send catalogues to addresses with a UK postcode. </p>
+<p>If you live at an address within the EU, you can order seed through the web site. Regrettably, we cannot accept orders for non-seed items such as plants, potatoes, fruit, onions, garden equipment or other items for delivery outside the UK. There are NO exceptions to this policy. </p>
+</div>
+<div class="iframecontainer outline" style="margin:20px;">
+<table>
+<tr><td colspan="2"><h2>Name</h2></td></tr>
+<tr><td width="150"><p>Title </p></td><td><NLCUSTRECORD_CR_SALUTATION></td></tr>
+<tr><td><p>First Name </p></td><td><NLCUSTRECORD_CR_FIRSTNAME></td></tr>
+<tr><td><p>Last Name </p></td><td><NLCUSTRECORD_CR_LASTNAME></td></tr>
+<tr><td colspan="2"><h2>Address</h2></td></tr>
+<tr><td><p>Postcode </p></td><td><NLCUSTRECORD_CR_ZIP><input type="text" id="zipcode" style="display:none;"></td></tr>
+<tr><td><p>Address 1 </p></td><td><NLCUSTRECORD_CR_ADDR1></td></tr>
+<tr><td><p>Address 2 </p></td><td><NLCUSTRECORD_CR_ADDR2></td></tr>
+<tr><td><p>Address 3 </p></td><td><NLCUSTRECORD_CR_ADDR3></td></tr>
+<tr><td><p>Town/City </p></td><td><NLCUSTRECORD_CR_CITY></td></tr>
+<tr><td><p>County </p></td><td><NLCUSTRECORD_CR_STATE></td></tr>
+<tr><td><p>Telephone No. </p></td><td><NLCUSTRECORD_CR_PHONE></td></tr>
+<tr><td><p>Email </p></td><td><NLCUSTRECORD_CR_EMAIL></td></tr>
+</table>
+<div style="display:none;">
+<NLCUSTRECORD_CR_CAMPAIGNCODE>
+<NLCUSTRECORD_CR_BRAND>
+<input type="text" id="address1" onchange="pcaChangeAddr1();">
+<input type="text" id="address2">
+<input type="text" id="address3">
+<input type="text" id="city">
+<input type="text" id="state">
+</div>
+<p style="text-align:center;margin-top:10px;"><input type="submit" value="Submit" class="button shadowbox" style="padding:10px 15px;"></p>
+</form>
+</div>
+</div>
+</body>
+</html>

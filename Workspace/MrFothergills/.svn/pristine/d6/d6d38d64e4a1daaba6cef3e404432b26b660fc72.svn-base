@@ -1,0 +1,83 @@
+	<hr>
+	<div id="links">
+		<div class="linkcol">
+			<p>Find your way around</p>
+			<ul>
+				<li><a href="/Chrysanthemums/">Chrysanthemums</a></li>
+				<li><a href="/Flower-Plants_2/">Flower Plants</a></li>
+				<li><a href="/Dahlias/">Dahlias</a></li>
+				<li><a href="/Garden-Equipment_2/"> Garden Equipment</a></li>
+				<li><a href="/Special-Offers_3.html">Special Offers</a></li>
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.189/.f">Special Offers</a></li>-->
+			</ul>
+		</div>
+		<div class="linkcol">
+			<ul>
+				<li><a href="/Catalogue-Request_3.html">Catalogue Request</a></li>
+				<li><a href="/Quick-Order-Form_3.html">Quick Order Form</a></li>
+				<li><a href="<NLREGISTRATIONURL>">Email Sign Up</a></li>
+				<li><NLRELOGINLINKHTML>Log in</a></li>
+				<li><NLREGISTRATIONLINKHTML>Registration</a></li>
+				<li><a href="/FAQ.html">FAQs</a></li>
+				<li><a href="/About-Us_2.html">About Us</a></li>
+				<li><a href="/Contact-Us_3.html">Customer Services</a></li>
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.26/.f">Gardening Clubs</a></li>-->
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.24/.f">Export Enquiries</a></li>-->
+				<!--<li><a href="http://www.mr-fothergills-trade.com" target="_blank">Trade Enquiries</a></li>-->
+			</ul>
+		</div>
+		<div class="linkcol">
+			<ul>
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.23/.f">Store Locator</a></li>-->
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.288468/.f">Promotional Seed Enquiries</a></li>-->
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.33/.f">Charities</a></li>-->
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.34/.f">Affiliates</a></li>-->
+				<li><a href="/Useful-Links_3">Useful Links</a></li>
+				<!--<li><a href="#">Gardening Blog</a></li>-->
+				<!--<li><a href="#">Recommend a Friend</a></li>-->
+				<!--<li><a href="#">Loyalty Scheme</a></li>-->
+			</ul>
+		</div>
+		<div class="linkcol">
+			<p>Help and Advice</p>
+			<ul>
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.24/.f">Despatch information</a></li>-->
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.12/.f">Plant Types</a></li>-->
+				<li><a href="/Growing-Hints.html">Plant Care and Advice</a></li>
+				<li><a href="/our-plants">Our Plants</li>
+				<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.13/.f">Guide to symbols</a></li>
+				<li><a href="">Chrysanthemum Classification guide</a></li>
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.6205/.f">Care &amp;amp; Cultivation</a></li>-->
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.36/.f">Gardening Glossary</a></li>-->
+				<!--<li><a href="/s.nl/c.<NLCOMPANYID>/sc.1/category.6206/.f">Pests &amp;amp; Disease Advice</a></li>-->
+				<!--<li><a href="http://mrfothergills.thegardenchannel.tv/" target="_blank">Video Guides</a></li>-->
+				<li><a href="/News-Events_3.html">News &amp;amp; Events</a></li>
+			</ul>
+		</div>
+		<div class="linkcol">
+			<ul>
+				<li><a href="<%=getCurrentAttribute('site','homepageurl')%>">Home</a></li>
+				<li><a href="/Home_3/Information_2/Sitemap_3.html">Site Map</a></li>
+				<li><a href="/Postage-Packaging.html">P&amp;amp;P</a></li>
+				<li><a href="/Guarantee_3.html">Guarantee</a></li>
+				<li><a href="/Returns_3.html">Returns</a></li>
+				<li><a href="/Terms-and-Conditions-of-Use.html">Terms &amp;amp; Conditions</a></li>
+				<li><a href="/Site-Security_3.html">Site Security</a></li>
+				<li><a href="/Privacy-Policy_2.html">Privacy Policy</a></li>
+			</ul>
+		</div>
+	</div>
+	<hr>
+	<div id="footer">
+		<img src="/site/woolmans/img/chrysanthsociety_110x158.gif" alt="National Chrysanthemum Society Approved Partner" id="qualitymark">
+		<h3><a href="/Contact-Us_3.html">Email us</a> or order by phone call:<br><span class="big">0845 658 9137</span><br>(lines open 8am-8pm - 7 days a week)</h3>
+		<div id="secure">
+			<p><img src="/site/woolmans/img/accepted_cards_new.gif" alt="Accepted Cards"></p>
+			<p><img src="/site/woolmans/img/secure.gif" alt="Padlock" id="padlock"> <a href="/Site-Security_3">SSL Secured Site</a></p>
+			<p><a href="http://www.safebuy.org.uk/certificate/c70f1f2b-0540-4a53-b3c6-9c37e81c68e2.html"><img src="/site/woolmans/img/safebuy.jpg" alt="SafeBuy web code of practice"></a></p>
+		</div>
+		<p><%=getCurrentAttribute('site','copyrighthtml')%><br>
+			Company Registration No. 1710774 - VAT No. GB 390 5718 35<br>
+			Woolmans Plants, Rookery Farm, Joys Bank, Holbeach, St John, Spalding, Lincs PE12 8SG</p>
+	</div>
+	<img id="footerstrap" src="/site/woolmans/img/footer_strapline_980x38.jpg" alt="Growing quality chrysanthemums for over 130 years">

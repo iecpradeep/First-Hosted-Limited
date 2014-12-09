@@ -1,0 +1,146 @@
+/* SEARCH */
+.body-epw{
+	width:726px;
+	float:left;
+	position:relative;
+	left:-10px;
+}
+.main-banner{
+	width:726px;
+	float:left;
+}
+.home-description{
+	width:726px;
+	float:left;
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-size:12px;
+	color:#939597;
+	padding-top:20px;
+	padding-bottom:10px;
+}
+.featured{
+	padding-bottom:10px;
+}
+.featured, .featured-items{
+	width:726px;
+	float:left;
+}
+.featured-head{
+	width:726px;
+	height:24px;
+	padding-top:3px;
+	float:left;
+	font-family:'Times New Roman', Times, serif;
+	font-size:18px;
+	color:#fff;
+	background-color:#14325B;
+	margin-bottom:7px;
+}
+.blank{
+	width:726px;
+	height:0;
+	float:left;
+}
+
+.selOpt{
+	font-weight:bold;
+}
+
+.filter-bar{
+	text-align:right;
+	color: #939597;
+   font-family: Verdana,Geneva,Tahoma,sans-serif;
+   font-size: 12px;
+   clear:both;
+   height:35px;
+   line-height:35px;
+}
+
+.filter-bar select, .filter-bar img{
+	vertical-align:middle;
+	margin:0;
+}
+
+.filter-bar a{
+	text-decoration:none;
+	color:#20436E;
+}
+
+.filter-bar a:hover{
+	text-decoration:underline;
+}
+
+.filter-bar select{
+	height:18px;
+}
+
+.pages-desc{
+	margin: 0 20px;
+}
+
+/* SEARCH ITEM CELL */
+.f-item{
+	width:236px;
+	float:left;
+	margin-right:5px;
+	border:1px #d0d6de solid;
+	height:120px;
+	margin-bottom:6px;
+}
+.f-image{
+	width:92px;
+	height:110px;
+	float:left;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-align:center;
+}
+.f-desc{
+	width:142px;
+	float:right;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+.f-desc .f-name{
+	font-family:"Times New Roman", Times, serif;
+	font-size:15px;
+	color:#20436e;
+	padding-left:5px;
+	padding-right:5px;
+	line-height:14px;
+	padding-bottom:5px;
+}
+.f-desc .f-name a{
+	color:#20436e;
+	text-decoration:none;
+}
+.f-desc .f-price{
+	font-family:Verdana, Geneva, Tahoma, sans-serif;
+	font-size:11px;
+	color:#939598;
+	padding-left:7px;
+	padding-bottom:5px;
+}
+.f-desc .f-add-cart{
+	padding-left:7px;
+}
+
+.f-desc .f-add-cart input {
+    background-color: #FFFFFF;
+    border-color: #D0D6DE;
+    border-width: 1px;
+    font-size: 11px;
+    height: 12px;
+    width: 30px;
+    text-align:right;
+}
+
+/* Shipping */
+#shippingmethodtable {
+	display:none;
+}
+
+.input, .inputreq {
+	margin-bottom: 4px;
+	border: 1px solid #A5A9AA;
+}

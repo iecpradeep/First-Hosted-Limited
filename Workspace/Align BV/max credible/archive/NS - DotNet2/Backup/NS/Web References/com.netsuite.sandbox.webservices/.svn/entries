@@ -1,0 +1,469 @@
+10
+
+dir
+0
+https://80.248.179.66:8443/svn/Test/Align%20BV/max%20credible/NS%20-%20DotNet2/Backup/NS/Web%20References/com.netsuite.sandbox.webservices
+https://80.248.179.66:8443/svn/Test
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3243a8cc-cf6a-474f-a1a0-a7b467b37e11
+
+employeeTypes0.xsd
+file
+
+
+
+add
+
+customers.xsd
+file
+
+
+
+add
+
+common.xsd
+file
+
+
+
+add
+
+customizationTypes.xsd
+file
+
+
+
+add
+
+SessionResponse.datasource
+file
+
+
+
+add
+
+purchaseTypes.xsd
+file
+
+
+
+add
+
+bankTypes.xsd
+file
+
+
+
+add
+
+employees.xsd
+file
+
+
+
+add
+
+demandPlanningTypes.xsd
+file
+
+
+
+add
+
+communication.xsd
+file
+
+
+
+add
+
+support.xsd
+file
+
+
+
+add
+
+coreTypes.xsd
+file
+
+
+
+add
+
+marketing.xsd
+file
+
+
+
+add
+
+employees0.xsd
+file
+
+
+
+add
+
+ReadResponse.datasource
+file
+
+
+
+add
+
+customerTypes.xsd
+file
+
+
+
+add
+
+fileCabinetTypes.xsd
+file
+
+
+
+add
+
+SearchResult.datasource
+file
+
+
+
+add
+
+GetDeletedResult.datasource
+file
+
+
+
+add
+
+GetPostingTransactionSummaryResult.datasource
+file
+
+
+
+add
+
+employeeTypes.xsd
+file
+
+
+
+add
+
+WriteResponse.datasource
+file
+
+
+
+add
+
+sales.xsd
+file
+
+
+
+add
+
+messages.xsd
+file
+
+
+
+add
+
+schedulingTypes.xsd
+file
+
+
+
+add
+
+AsyncStatusResult.datasource
+file
+
+
+
+add
+
+commonTypes.xsd
+file
+
+
+
+add
+
+inventoryTypes.xsd
+file
+
+
+
+add
+
+GetSavedSearchResult.datasource
+file
+
+
+
+add
+
+relationships.xsd
+file
+
+
+
+add
+
+financial.xsd
+file
+
+
+
+add
+
+websiteTypes.xsd
+file
+
+
+
+add
+
+faults.xsd
+file
+
+
+
+add
+
+supportTypes.xsd
+file
+
+
+
+add
+
+website.xsd
+file
+
+
+
+add
+
+Reference.cs
+file
+
+
+
+add
+
+fileCabinet.xsd
+file
+
+
+
+add
+
+AsyncResult.datasource
+file
+
+
+
+add
+
+customization.xsd
+file
+
+
+
+add
+
+saleTypes.xsd
+file
+
+
+
+add
+
+general.xsd
+file
+
+
+
+add
+
+Reference.map
+file
+
+
+
+add
+
+accountingTypes.xsd
+file
+
+
+
+add
+
+GetServerTimeResult.datasource
+file
+
+
+
+add
+
+GetCustomizationIdResult.datasource
+file
+
+
+
+add
+
+GetConsolidatedExchangeRateResult.datasource
+file
+
+
+
+add
+
+GetItemAvailabilityResult.datasource
+file
+
+
+
+add
+
+GetBudgetExchangeRateResult.datasource
+file
+
+
+
+add
+
+scheduling.xsd
+file
+
+
+
+add
+
+relationshipTypes.xsd
+file
+
+
+
+add
+
+core.xsd
+file
+
+
+
+add
+
+accounting.xsd
+file
+
+
+
+add
+
+communicationTypes.xsd
+file
+
+
+
+add
+
+purchases.xsd
+file
+
+
+
+add
+
+inventory.xsd
+file
+
+
+
+add
+
+faultTypes.xsd
+file
+
+
+
+add
+
+GetAllResult.datasource
+file
+
+
+
+add
+
+marketingTypes.xsd
+file
+
+
+
+add
+
+GetSelectValueResult.datasource
+file
+
+
+
+add
+
+financialTypes.xsd
+file
+
+
+
+add
+
+netsuite.wsdl
+file
+
+
+
+add
+
+bank.xsd
+file
+
+
+
+add
+
+demandPlanning.xsd
+file
+
+
+
+add
+

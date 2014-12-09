@@ -1,0 +1,347 @@
+/*************************************************************************************
+ * Name:		Aepona Project Metrics script - projectmetrics_event.js
+ * 
+ * Script Type:	User Event
+ *
+ * Version:		1.0.0 1st release 5/6/2013 DB
+
+ * Author:		FHL
+ * 
+ * Purpose:		UE script to perform project time/cost/rev calculations
+ * 				sums total hours and cost from timebill records and adds fields for both calculations
+ * 				to the form
+ * 
+ * Script: 		customscript_projectmetrics  
+ * Deploy: 		customdeploy_projectmetrics - applies to project record
+ * 				
+ * Notes:			
+ * 
+ * Library: 	library.js
+ *************************************************************************************/
+
+var purchaseMetricsSavedSearch = '';
+var expensesMetricsSavedSearch = '';
+var projectRecord = null;
+var recordType = '';
+var currentRecordId = 0; 
+
+
+function beforeLoad(type)
+{
+
+	try
+	{
+
+		if (type == 'view')
+		{
+			initialise();
+			loadCurrentRecord();
+			calculateProjectCostAndHours();
+			calculateProjectPurchaseMetrics();
+			calculateProjectExpensesMetrics();
+			saveCurrentRecord();
+		}
+	}
+	catch(e)
+	{
+		errorHandler(e);
+	}
+}
+
+/**
+ *  initialise
+ *
+ */
+
+function initialise()
+{
+	try
+	{
+		purchaseMetricsSavedSearch = 'customsearch_projmetrics_purchases';		
+		expensesMetricsSavedSearch = 'customsearch_projmetrics_expenses';		
+	}
+	catch(e)
+	{
+		errorHandler(e);
+	}
+}
+
+/**
+ *  load current record details
+ *
+ */
+
+function loadCurrentRecord()
+{
+	try
+	{
+		recordType = nlapiGetRecordType();
+
+		currentRecordId = nlapiGetRecordId();
+		projectRecord = nlapiLoadRecord(recordType, currentRecordId);
+		//projectRecord = nlapiGetNewRecord();
+
+	}
+	catch(e)
+	{
+
+		errorHandler(e);
+	}
+
+}
+
+/**
+ *  save current record
+ *
+ */
+
+function saveCurrentRecord()
+{
+	var submitID = 0;
+
+	try
+	{
+		submitID = nlapiSubmitRecord(projectRecord, true);
+	}
+	catch(e)
+	{
+		errorHandler(e);
+	}
+
+}
+
+
+/**
+ *  calculate Project Purchase Metrics
+ *
+ */
+
+function calculateProjectPurchaseMetrics()
+{
+
+	var criteria = new Array();
+	var total = 0;
+
+	try
+	{
+		criteria=[[ 'entity', 'is', currentRecordId]];
+		total = runSavedSearchAndTotalAColumn(purchaseMetricsSavedSearch, 'transaction', 'amount', criteria);
+		projectRecord.setFieldValue('custentity_purchasestodate',total);
+
+		nlapiLogExecution('DEBUG', 'calculateProjectPurchaseMetrics: total', total);
+//		nlapiSubmitField('job', currentRecordId, 'custentity_purchasetodate', total, true); 
+
+	}
+	catch(e)
+	{
+		errorHandler(e);
+	}
+
+}
+
+/**
+ *  calculate Project Expense Metrics
+ *
+ */
+
+function calculateProjectExpensesMetrics()
+{
+
+	var criteria = new Array();
+	var total = 0;
+
+	try
+	{
+		criteria=[[ 'entity', 'is', currentRecordId]];
+		total = runSavedSearchAndTotalAColumn(expensesMetricsSavedSearch, 'transaction', 'amount', criteria);
+
+		total = Math.abs(total);
+
+		projectRecord.setFieldValue('custentity_expensestodate',total);
+
+		nlapiLogExecution('DEBUG', 'calculateProjectExpenseMetrics: total', total);
+//		nlapiSubmitField('job', currentRecordId, 'custentity_purchasetodate', total, true); 
+
+	}
+	catch(e)
+	{
+		errorHandler(e);
+	}
+
+}
+
+
+/**
+ * calculate Project Cost And Hours 
+ *
+ */
+
+function calculateProjectCostAndHours()
+{
+
+	var totalHours = 0.00;
+	var totalCost = 0.00;	
+	var filter = null;
+	var hours = 0;
+	var cost = 0;
+	var searchResults = null;
+
+	try
+	{
+		// perform a summary search for all time entries for this project
+		filter = new nlobjSearchFilter('customer', null, 'is', currentRecordId);
+		hours = new nlobjSearchColumn('durationdecimal', null, 'sum');
+		cost = new nlobjSearchColumn('custcol_tt_cost', null, 'sum');
+
+		searchResults = nlapiSearchRecord('timebill', null, filter, [hours, cost]);
+
+		// total values and update fields on project entity
+		if (searchResults)
+		{
+			totalHours = searchResults[0].getValue('durationdecimal', null, 'sum');
+			totalCost = searchResults[0].getValue('custcol_tt_cost', null, 'sum');		
+
+			projectRecord.setFieldValue('custentity_totaltimecost',totalCost);
+			projectRecord.setFieldValue('custentity_totaltimetracked',totalHours);
+
+		} //if
+
+	}
+	catch(e)
+	{
+		errorHandler(e);
+	}
+
+	return true;
+
+}
+
+
+
+
+/**
+ * run saved search and total a column 
+ *
+ */
+
+function runSavedSearchAndTotalAColumn(savedSearch, savedSearchType, columnToTotal, filter)
+{
+
+	var loadSearch = null;
+	var runSearch = null;
+	var searchResults = null;
+	var total = 0;
+	var lineAmt = 0;
+	var currentFilters = null;
+
+	try
+	{
+		// Load the saved search
+		// store the current filter
+		// set the new filter and add in the old filter, preserving the original filter
+		// run the search
+		// extract results
+		loadSearch = nlapiLoadSearch(savedSearchType, savedSearch);
+		currentFilters = loadSearch.getFilters();
+		if(currentFilters)
+		{
+			loadSearch.setFilterExpression(filter);
+			loadSearch.addFilters(currentFilters);
+		}
+		else
+		{
+			loadSearch.setFilterExpression(filter);
+		}
+
+		runSearch = loadSearch.runSearch();
+		searchResults = runSearch.getResults(0,1000);
+
+		if(searchResults)
+		{
+			for(var i=0; i<searchResults.length; i++)
+			{
+				lineAmt  = searchResults[i].getValue(columnToTotal);
+				lineAmt = parseFloat(lineAmt);
+				total = total + lineAmt;
+			}
+		}
+	}
+	catch(e)
+	{
+		errorHandler(e);
+	}
+
+	return total;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// rev rec
+
+
+var t =  genericSearch('revrecschedule','name', 'hh');
+
+var b=0;
+
+
+
+function genericSearch(table, fieldToSearch, valueToSearch)
+{
+	var internalID=0;
+
+	// Arrays
+	var searchFilters = new Array();
+	var searchColumns = new Array();
+
+//	try
+//	{
+		//search filters                  
+		searchFilters[0] = new nlobjSearchFilter(fieldToSearch, null, 'noneof','@NONE@');                          
+		searchFilters[1] = new nlobjSearchFilter('entity', null, 'startswith','D073001');                          
+
+		// return columns
+		searchColumns[0] = new nlobjSearchColumn('internalid');
+		searchColumns[1] = new nlobjSearchColumn('amount');
+		searchColumns[2] = new nlobjSearchColumn('name');
+		searchColumns[3] = new nlobjSearchColumn('srcdoc');
+		searchColumns[4] = new nlobjSearchColumn('jedoc');
+		searchColumns[5] = new nlobjSearchColumn('entity');
+
+		// perform search
+		var searchResults = nlapiSearchRecord(table, null, searchFilters, searchColumns);
+
+		if(searchResults!=null)
+		{
+			if(searchResults.length>0)
+			{
+				searchResult = searchResults[ 0 ];
+				internalID = searchResult.getValue('internalid');
+                                var revrecrecord = nlapiLoadRecord('revrecschedule', internalID );
+
+			}
+		}
+//	}
+//	catch(e)
+//	{
+//		errorHandler("genericSearch", e);
+//	}     	      
+
+	return internalID;
+}

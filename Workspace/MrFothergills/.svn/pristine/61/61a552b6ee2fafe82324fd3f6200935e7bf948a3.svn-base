@@ -1,0 +1,114 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<!-- End addition_to_head -->
+<td>
+
+<NLPROCESSONCE>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#nlcrumbtrail').remove();
+	
+	$('#slider').slidesjs({
+		width: 918,
+		height: 280,
+		navigation: false,
+		play: {
+			active: false,
+			effect: 'slide',
+			interval: 5000,
+			auto: true,
+			swap: false,
+			pauseOnHover: true,
+			restartDelay: 0
+		}
+	});
+});
+</script>
+	<div id="special"><p><%=getCurrentAttribute('sitecategory','description')%></p>
+		<MRFSOCIALHEADER2>
+	</div>
+	<div id="slider" style="display:none;">
+		<div id="slide_0" class="slide">
+			<a href="/Potatoes/"><img src="/site/mrfothergills2/img/slider/new-home-offer-bluebelle.jpg" alt="Order 5 packs or more of seed potatoes and receive 10 tubers of Potato Blue Belle ABSOLUTELY FREE! (while stocks last)"></a>
+		</div>
+		<div id="slide_1" class="slide">
+			<a href="/Vegetable-Plants/"><img src="/site/mrfothergills2/img/slider/homepage_vegetableplants.jpg" alt="Tasty amd nutricious vegetable plants!"></a>
+		</div>
+		<div id="slide_2" class="slide">
+			<a href="/Flower-Plants/"><img src="/site/mrfothergills2/img/slider/homepage_picnmix.jpg" alt="BIG SAVINGS on Mr F's Pick 'n' Mix Bedding Plants"></a>
+		</div>
+		<div id="slide_3" class="slide">
+			<a href="/Flower-Plants/Sweet-Pea-Plants/"><img src="/site/mrfothergills2/img/slider/homepage_sweetpea.jpg" alt="Mr Fothergill's Year of the Sweet Pea!"></a>
+		</div>
+	</div>
+	<div id="featured">
+		<div class="features">
+			<div class="featurebox shadowbox">
+				<a href="<%=getAttribute('infoitem',37,'storedescription')%>"><img src="<%=getAttribute('infoitem',37,'storedisplaythumbnail')%>" alt="Product of the week">
+					<div class="featurecontent">
+						<%=getAttribute('infoitem',37,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+			<div class="featurebox2 shadowbox">
+				<a href="<%=getAttribute('infoitem',38,'storedescription')%>"><img src="<%=getAttribute('infoitem',38,'storedisplaythumbnail')%>" alt="Featured Product">
+					<div class="featurecontent lighten">
+						<%=getAttribute('infoitem',38,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+			<div class="featurebox2 shadowbox">
+				<a href="<%=getAttribute('infoitem',39,'storedescription')%>"><img src="<%=getAttribute('infoitem',39,'storedisplaythumbnail')%>" alt="Featured Product">
+					<div class="featurecontent lighten">
+						<%=getAttribute('infoitem',39,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="featuretext shadowbox"><a href="/Postage-Packing.html"><img src="/site/mrfothergills2/img/home/rightside_samedaydespatch.jpg" alt="Same Day Despatch"></a></div>
+		<div class="featuretext shadowbox"><a href="/Catalogue-Request.html"><img src="/site/mrfothergills2/img/home/rightside_cataloguerequest.jpg" alt="Request Catalogue"></a></div>
+		<div class="featuretext shadowbox"><a href="/Quick-Order-Form.html"><img src="/site/mrfothergills2/img/home/rightside_quickorder.jpg" alt="Quick Order Form"></a></div>
+		<div class="featuretext shadowbox"><a href="<NLREGISTRATIONURL>"><img src="/site/mrfothergills2/img/home/rightside_newsletter.jpg" alt="Sign up to our Newsletter"></a></div>
+		<div class="featuretext shadowbox"><a href="/Postage-Packing.html"><img src="/site/mrfothergills2/img/home/rightside_freepp.jpg" alt="Free P&amp;P"></a></div>
+	</div>
+	<div id="message">
+		<%=getCurrentAttribute('sitecategory','storedetaileddescription')%>
+	</div>
+	<ul id="menu">
+		<li><a href="/Quick-Order-Form.html">Quick Order Form&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><NLREGISTRATIONLINKHTML>eNewsletter<br>Sign Up&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/Postage-Packing.html">Free P&amp;P on orders over &amp;pound;50</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/Store-Locator.html">Store Locator&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/Gardening-Clubs.html">Gardening Clubs&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/Postage-Packing.html">Same Day Despatch&gt;</a></li>
+		<!--<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li class="last"><a href="#">Gardening Blog&gt;</a></li>-->
+	</ul>
+	<ul id="menu2">
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.46/category.288466/SS.288466/ctype.SS/.f">Sowing Now</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.46/category.288467/SS.288467/ctype.SS/.f">Flower/Harvest</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/Home/News-Events/">News &amp; Events</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/Home/Hints-Tips/">Hints &amp; Tips</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/Home/Care-Cultivation/">Care &amp;amp; Cultivation</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li class="last"><a href="/Video-Guides">Video Guides</a></li>
+	</ul>
+
+	<div id="products">
+		<h2>Recommended products</h2>
+<table>
+<tr>
+<NLITEMLIST>
+</tr>
+</table>
+	</div>
+
+</td>

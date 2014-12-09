@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<!-- JQuery Plugins -->
+<script type="text/javascript" src="/site/mrfothergills/js/getUrlVars.jquery.js"></script>
+<script type="text/javascript">
+/**
+ * Set a cookie
+ * @param c_name
+ * @param value
+ * @param exdays
+ */
+function setCookie(c_name, value, exdays)
+{
+	var exdate = new Date();
+	var hostname = window.location.hostname;
+	var domain = 'netsuite.com';
+	
+	exdate.setDate(exdate.getDate() + exdays);
+	var c_value = escape(value)
+			+ ((exdays == null) ? "" : "; expires=" + exdate.toUTCString() + "; path=/; domain=" + domain);
+	document.cookie = c_name + "=" + c_value;
+}
+
+$(document).ready(function(){
+	// Set the offers cookie to the value on the URL parameter
+	setCookie($.getUrlVar('name'), $.getUrlVar('value'), 30); // Remember for 30 days
+});
+</script>
+</head>
+<body>
+</body>
+</html>

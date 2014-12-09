@@ -1,0 +1,222 @@
+/*******************************************************
+ * Name:		LibraryXML
+ * Script Type:	LibraryXML
+ *
+ * Version:	1.0.0 - 10/02/2012 - Initial code functions - LD
+ * 	
+ * Parse into XML tree array, each tree element is an array element of the form :-
+ * Node # : Element Name : Parent Element Node # : Number of Children : Inner XML or Data (if children == 0) 
+ *
+ * Author:	FHL
+ * Purpose:	To share useful XML functionality
+ *******************************************************/
+
+/* 
+ * XML tree standard definitions for string parsing of elements and data at initialise
+ */
+
+var tagXMLstart = "&lt;";
+var tagXMLend = "&gt;";
+//var tagXMLstartChar = "<";
+//var tagXMLendChar = ">";
+var tagXMLstartChar = "&lt;";
+var tagXMLendChar = "&gt;";
+var tagXMLterminator = "/";
+var elementXMLroot = "ROOT";
+var XMLtree = new Array();
+var XMLtreeSize = 0;
+var XMLDocument = null;
+
+// The indices for each array element in the tree
+var XMLtreeParent = 0;
+var XMLtreeElement = 1;
+var XMLtreeNumberofChildren = 2;
+var XMLtreeDataOrXML = 3; // Will be data if XMLtreeNumberofChildren == 0
+
+/* XML Processing routines for an XML document converted to an array of elements
+ * 
+ * This primary recursive function returns an array of elements 
+ * as a tree of nested arrays (branches with children nodes)
+ * and data strings (leaves i.e. elements with no children).
+ */
+function getXMLDocument(theXML)
+{
+
+	theXML = createTaggedXML(elementXMLroot, theXML);
+	nlapiLogExecution('DEBUG', "getXMLDocument ==> ", theXML);
+
+	try
+	{
+		//XMLDocument = nlapiStringToXML(UNencodeXML(theXML));
+		XMLDocument = nlapiStringToXML(theXML);
+		if (XMLDocument)
+			nlapiLogExecution('DEBUG', "XMLDocument.firstChild.nodeName ==> ", XMLDocument.firstChild.nodeName);		
+	}
+	catch (e)
+	{
+		errorHandler("getXMLDocument", e);
+	}
+
+		// XMLDocument.nodeName + " : " + XMLDocument.getElementsByTagName('title').length);
+	//return XMLDocument.childNodes;
+}
+
+function getXMLTree(theParent, theXML)
+{
+	var numberofChildren = 0;
+
+	var XMLremaining = theXML;
+
+	while (XMLremaining != '')
+	{
+		// Look for <element>....</element> i.e. the next start / end tag branch
+		var currentElementExp = new RegExp("^" + tagXMLstart + "[A-Z]*[0-9]*"
+				+ tagXMLend, "im"); // equates to
+									// <([A-Z][A-Z0-9]*)\b[^>]*>(.*?)</\1>
+		var currentElement = new String(currentElementExp.exec(XMLremaining));
+
+		//if (debugOn)
+		//	nlapiLogExecution('DEBUG', "currentElement ==> " + currentElement
+		//			+ " : " + nlapiEscapeXML(currentElementExp),
+		//			"XML remaining : " + XMLremaining);
+
+		var currentElementEndExp = new RegExp(currentElement.replace(
+				tagXMLstart, tagXMLstart + tagXMLterminator), "im");
+		var currentElementEnd = new String(currentElementEndExp
+				.exec(XMLremaining));
+
+		// Test for <element>....</element> existence
+		if (currentElementExp.test(XMLremaining)
+				&& currentElementEndExp.test(XMLremaining))
+		{
+
+			numberofChildren++; // Increment for each child node found
+
+			var currentElementInnerXML = XMLremaining.substring(XMLremaining
+					.indexOf(currentElement)
+					+ currentElement.length, XMLremaining
+					.indexOf(currentElementEnd));
+
+			var thisElementBranch = new Array(removeTagCharacters(theParent),
+					removeTagCharacters(currentElement), getXMLTree(
+							currentElement, currentElementInnerXML),
+					currentElementInnerXML);
+			XMLtreeSize = XMLtree.push(thisElementBranch);
+			
+			// Remove the XML just parsed ...
+			XMLremaining = XMLremaining.replace(currentElement, '').replace(
+					currentElementInnerXML, '').replace(currentElementEnd, '');
+		}
+		else
+		{
+			XMLremaining = ''; // No more elements to process
+		}
+	}
+
+	return numberofChildren; // If this is 0 then the calling parent will
+							 // terminate i.e. at a leaf / data element
+}
+
+/*
+ * Display the XML tree in execution log
+ */
+function logXMLTree()
+{
+	
+	var XMLTreeHTML = "<table style='font-size: 3mm;'>";
+	for ( var t = 0; t < XMLtree.length; t++)
+	{
+		var TreeXMLorData = XMLtree[t][3];
+		if (TreeXMLorData)
+		{
+			if (TreeXMLorData.length > 25)
+				TreeXMLorData = TreeXMLorData.slice(0, 25)
+						+ " ...";
+		}
+		XMLTreeHTML += "<tr><td>Node: " + t + "</td><td>"
+				+ XMLtree[t][0] + "</td><td>" + XMLtree[t][1]
+				+ "</td><td>" + XMLtree[t][2] + "</td><td>"
+				+ "</td><td>" + TreeXMLorData + "</td></tr>";
+	}
+
+	XMLTreeHTML += "</table>";
+	nlapiLogExecution('DEBUG', "XMLTree Order : "
+			+ orderNumber, XMLTreeHTML);
+}
+
+/*
+ * Returns the tag stripped of < > /
+ */
+function removeTagCharacters(theXMLtag) {
+	return theXMLtag.replace(tagXMLstart,'').replace(tagXMLend,'').replace(tagXMLterminator,'');
+}
+
+function createTaggedXML(theXMLtag, theInnerXML) {
+	return tagXMLstartChar + theXMLtag + tagXMLendChar + theInnerXML + tagXMLstartChar + tagXMLterminator + theXMLtag + tagXMLendChar;
+}
+
+/*
+ * Returns the data or XML content of first by default or nth occurence of tree record that matches element name
+ */
+function getXMLTreeElementDatabyName(theElementName, theIndex) {
+	var theData = null;
+	if (isNaN(theIndex))
+		theIndex = 1;
+	var currentIndex = 0;
+	for ( var t = 0; t < XMLtree.length; t++)
+		if (XMLtree[t][XMLtreeElement] == theElementName) {
+			currentIndex++;
+			if (currentIndex == theIndex) {
+				theData = XMLtree[t][XMLtreeDataOrXML];
+				break;
+			}
+		}
+	return theData;
+}
+
+/*
+ * Returns the first by default or nth occurence of tree record that matches element name
+ */
+function getXMLTreeElementbyName(theElementName, theIndex) {
+	var theElement = new Array();
+	if (isNaN(theIndex))
+		theIndex = 1;
+	var currentIndex = 0;
+	for ( var t = 0; t < XMLtree.length; t++)
+		if (XMLtree[t][XMLtreeElement] == theElementName) {
+			currentIndex++;
+			if (currentIndex == theIndex) {
+				theElement = XMLtree[t];
+				break;
+			}
+		}
+	return theElement;
+}
+
+
+/*
+ * Returns the array of child record(s) that matches element (parent) name
+ */
+function getXMLTreeChildElementsbyName(theElementName) {
+	var theElements = new Array();
+	for (var t = 0; t < XMLtree.length; t++)
+		if (XMLtree[t][XMLtreeParent] == theElementName) {
+			theElements.push(XMLtree[t]);
+		}
+	return theElements;
+}
+
+/*
+ * Returns the number of child record(s) that matches element (parent) name
+ */
+function getXMLTreeChildNumberbyName(theElementName) {
+	var theElementNumber = 0;
+	var theElements = new Array();
+	for (var t = 0; t < XMLtree.length; t++)
+		if (XMLtree[t][XMLtreeParent] == theElementName) {
+			theElements.push(XMLtree[t]);
+		}
+	if (theElements != null)
+		theElementNumber = theElements.length;
+	return theElementNumber;
+}

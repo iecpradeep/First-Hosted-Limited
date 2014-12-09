@@ -1,0 +1,30 @@
+<link rel="canonical" href="<%=getCurrentAttribute('item','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/dtbrown/js/infoitem.js"></script>
+<!-- End addition_to_head -->
+<td>
+
+	<div id="breadcrumbs">
+		<DTBSOCIALHEADER>
+	</div>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+<DTBINFOMENU>
+		</div>
+		<div id="catright">
+			<div class="infocontainer outline">
+<%=getCurrentAttribute('item','storedisplayimagehtml')%>
+
+<h1><%=getCurrentAttribute('infoitem','itemid')%></h1>
+
+<p><%=getCurrentAttribute('infoitem','storedescription')%></p>
+
+<%=getCurrentAttribute('infoitem','storedetaileddescription')%>
+
+<p><%=getCurrentAttribute('infoitem','featureddescription')%></p>
+				<div class="clear"></div>
+			</div>
+		</div>
+	</div>
+
+</td>

@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<configuration>
+
+ <!-- <system.web>
+    <httpRuntime executionTimeout="360" />
+    </system.web> -->
+
+      <configSections>
+        <sectionGroup name="applicationSettings" type="System.Configuration.ApplicationSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+            <section name="NS.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false"/>
+        </sectionGroup>
+            <sectionGroup name="userSettings" type="System.Configuration.UserSettingsGroup, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                  <section name="NS.Properties.Settings" type="System.Configuration.ClientSettingsSection, System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" allowExeDefinition="MachineToLocalUser" requirePermission="false"/>
+            </sectionGroup>
+    </configSections>
+    <applicationSettings>
+        <NS.Properties.Settings>
+            <setting name="NS_com_netsuite_webservices_NetSuiteService" serializeAs="String">
+                <value>https://webservices.netsuite.com/services/NetSuitePort_2012_1</value>
+            </setting>
+            <setting name="NS_com_netsuite_sandbox_webservices_NetSuiteService"
+                serializeAs="String">
+                <value>https://webservices.sandbox.netsuite.com/services/NetSuitePort_2012_1</value>
+            </setting>
+            <setting name="NS_com_maxcredible_www_Invoer_mc" serializeAs="String">
+                <value>https://secure2.maxcredible.com/webservices_alg/invoer_MC.asmx</value>
+            </setting>
+            <setting name="MaxCredibleExport_com_maxcredible_secure6_Invoer_mc"
+                serializeAs="String">
+                <value>https://secure6.maxcredible.com/webservices_alg_staging/invoer_MC.asmx</value>
+            </setting>
+            <setting name="MaxCredibleExport_com_maxcredible_secure5_Invoer_mc"
+                serializeAs="String">
+                <value>https://secure5.maxcredible.com/webservices_alg/invoer_MC.asmx</value>
+            </setting>
+        </NS.Properties.Settings>
+    </applicationSettings>
+    <userSettings>
+        <NS.Properties.Settings>
+            <setting name="NS_MaxCredible_Savedsearch" serializeAs="String">
+                <value>customsearch_maxcredibleinvoiceexport_v1</value>
+            </setting>
+            <setting name="NS_AccountID" serializeAs="String">
+                <value>3524453</value>
+            </setting>
+            <setting name="NS_UserEmail" serializeAs="String">
+                <value>blipeu@aligntech.com</value>
+            </setting>
+            <setting name="NS_Password" serializeAs="String">
+                <value>netsuite1</value>
+            </setting>
+            <setting name="NS_Role" serializeAs="String">
+                <value>3</value>
+            </setting>
+            <setting name="MC_CertificateFile" serializeAs="String">
+                <value>C:\MaxCredibleAlignBV.cer</value>
+            </setting>
+            <setting name="MC_XMLOutputDir" serializeAs="String">
+                <value>C:\MCXML\</value>
+            </setting>
+            <setting name="MC_XMLOutputPrefix" serializeAs="String">
+                <value>InvoicesChunkEUR_</value>
+            </setting>
+            <setting name="MC_DefaultCharLimit" serializeAs="String">
+                <value>50</value>
+            </setting>
+            <setting name="MC_DefaultProfileID" serializeAs="String">
+                <value>87</value>
+            </setting>
+            <setting name="MC_DefaultClassifyID" serializeAs="String">
+                <value>1</value>
+            </setting>
+            <setting name="MC_CurrencyExtensionsID" serializeAs="String">
+                <value>13</value>
+            </setting>
+            <setting name="MC_BaseCurrency" serializeAs="String">
+                <value>EUR</value>
+            </setting>
+            <setting name="MC_CurrencySymbolsMax" serializeAs="String">
+                <value>10</value>
+            </setting>
+            <setting name="APP_AutoSearch" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="APP_AutoUpload" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="APP_AutoFinish" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="APP_DefaultDateRange" serializeAs="String">
+                <value>-28</value>
+            </setting>
+            <setting name="MC_DefaultChunkSize" serializeAs="String">
+                <value>25</value>
+            </setting>
+            <setting name="MC_UserName" serializeAs="String">
+                <value>webservice349</value>
+            </setting>
+            <setting name="MC_Password" serializeAs="String">
+                <value>GVRE4MXF</value>
+            </setting>
+            <setting name="APP_XMLFileOnly" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="APP_LogFileName" serializeAs="String">
+                <value>MC_EXPORT.LOG</value>
+            </setting>
+            <setting name="APP_LogTimeZoneCultureInfo" serializeAs="String">
+                <value>Central European Standard Time</value>
+            </setting>
+            <setting name="APP_LogDateStamped" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="APP_DefaultDateOffset" serializeAs="String">
+                <value>0</value>
+            </setting>
+            <setting name="APP_UseLiveWebServices" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="APP_LogCanDelete" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="APP_LogEnabled" serializeAs="String">
+                <value>True</value>
+            </setting>
+            <setting name="APP_EmailSMTPServer" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="APP_EmailSMTPUser" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="APP_EmailSMTPPassword" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="APP_EmailToAddress" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="APP_EmailCcAddress" serializeAs="String">
+                <value />
+            </setting>
+            <setting name="APP_DatesEnabled" serializeAs="String">
+                <value>False</value>
+            </setting>
+            <setting name="APP_WindowsEventLogEnabled" serializeAs="String">
+                <value>False</value>
+            </setting>
+        </NS.Properties.Settings>
+    </userSettings>
+<startup><supportedRuntime version="v2.0.50727"/></startup></configuration>

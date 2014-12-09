@@ -1,0 +1,86 @@
+<html>
+<head>
+<title>Case Escalation Notification</title>
+<STYLE>
+<!--
+body,p,td {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+-->
+</STYLE>
+</head>
+<body>
+	<table width="100%" border=0 cellspacing=2 cellpadding=2>
+		<tr valign="top">
+			<td colspan=2 align=left>Case #<NLCASENUMBER> has
+				been escalated to you by <NLUSERNAME>
+				<br>
+				&nbsp;</td>
+		</tr>
+		<tr valign="top">
+			<td nowrap width="20%" valign=top><b> Case Number</b></td>
+			<td width="80%" valign=top><NLCASENUMBER></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b> Case Subject</b></td>
+			<td valign=top><NLTITLE></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b>Customer</b></td>
+			<td valign=top><NLCOMPANY></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b>Contact</b></td>
+			<td valign=top><NLCONTACT></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b> Creation Date</b></td>
+			<td valign=top><NLSTARTDATE>, <NLSTARTTIME>
+				<NLTIMEZONE></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b> Assigned To</b></td>
+			<td valign=top><NLASSIGNEDTO></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b> Case Type</b></td>
+			<td valign=top><NLCATEGORY></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b> Case Priority</b></td>
+			<td valign=top><NLPRIORITY></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b> Case Status</b></td>
+			<td valign=top><NLSTATUS></td>
+		</tr>
+		<tr valign="top">
+			<td nowrap valign=top><b> Escalation Message</b></td>
+			<td valign=top><NLESCALATIONMESSAGE></td>
+		</tr>
+		<tr valign="top">
+			<td colspan=2 valign=top><font style="FONT-SIZE: 9px; FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif"><br>
+					<img src="http://content.netsuite.com/images/icons/crm/icon_updateCase.gif" align=absbottom><A href="<NLCASEURL>">Click here to
+						update the Case online</A><font color="#666666">, or reply to
+						this e-mail
+						</p></td>
+		</tr>
+	</table>
+	<hr width="100%" size="1" noshade color="#CCCCCC">
+	<blockquote>
+		<p>
+			<b>Message History</b><br> <font color="#666666"> <NLCASEHISTORY></font>
+		</p>
+	</blockquote>
+	<!-- *************** FOOTER START *************** -->
+	<hr width="100%" size="1" noshade color="#CCCCCC">
+	<table width="100%" border=0 cellspacing=0 cellpadding=0>
+		<tr>
+			<td align=right><font style="font-size: 9px; font-family: Verdana, Arial, Helvetica, sans-serif; color: #999999;"><NLORIGIN>
+					is powered by <a href="http://www.netsuite.com/" style="color: #999999;">NetSuite</a> &#151; One System. No Limits.</font></td>
+		</tr>
+	</table>
+	<!-- *************** FOOTER END *************** -->
+</body>
+</html>

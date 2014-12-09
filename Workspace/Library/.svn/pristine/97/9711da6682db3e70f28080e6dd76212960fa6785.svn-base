@@ -1,0 +1,78 @@
+
+
+
+
+
+
+
+
+
+/**************************************************************************************************
+ * 
+ * Error Handler
+ * 
+ * @param sourceName - the name of the function which caused the error
+ * @param e - the error object itself
+ * 
+ **************************************************************************************************/
+function errorHandler(sourceName, e)
+{
+	if ( e instanceof nlobjError )
+	{
+		alert('Error:\n\nUnexpected error in ' + sourceName + '. Code: ' + e.getCode() + '\n' + e.getDetails() + '\n' + e.getStackTrace());
+		nlapiLogExecution( 'ERROR', 'system error occured in: ' + sourceName, e.getCode() + '\n' + e.getDetails() + '\n' + e.getStackTrace());
+	}
+	else
+	{
+		alert( 'Error:\n\nUnexpected error in ' + sourceName + '.\nError Message is ' + e.message);
+		nlapiLogExecution( 'ERROR', 'unexpected error in: ' + sourceName, e.message);
+	}
+}
+
+
+/*********************************************
+ * To round 42.14446 to 3 decimal places, you execute toFixed(42.14446, 3). The return value will be 42.144.
+ * To round it DOWN, you need to subtract 0.0005 (=42.14396). Executing the above would then return 42.143.
+ * To round it UP, you ADD 0.0005 (=42.14496) which, as it would still not be to the next number, still return 42.144. 
+ * @governance 0.
+ *
+ * @param  {value}   	The number being passed in.
+ * @param  {precision}   How many decimal places this number should be fixed to.
+ * @return {precision}   The rounded number is returned in its now fixed state
+ *
+ * @since  2011
+ */
+function toFixed(value, precision)
+{
+	try
+	{
+		var precision = precision || 0,
+		neg = value < 0,
+		power = Math.pow(10, precision),
+		value = Math.round(value * power),
+		integral = String((neg ? Math.ceil : Math.floor)(value / power)),
+		fraction = String((neg ? -value : value) % power),
+		padding = new Array(Math.max(precision - fraction.length, 0) + 1).join('0');
+		return precision ? integral + '.' +  padding + fraction : integral;
+	}
+	catch(e)
+	{
+		nlapiLogExecution('DEBUG', 'Failed to fix the value', e.message);
+		return value;
+	}
+}
+
+
+
+function thisyear()// returns the business year 
+{
+	var today = new Date();
+	var year = today.getFullYear();
+
+	if (today.getMonth() >= 10)
+	{
+		year = today.getFullYear()+1;
+	}
+	
+	return year;
+}

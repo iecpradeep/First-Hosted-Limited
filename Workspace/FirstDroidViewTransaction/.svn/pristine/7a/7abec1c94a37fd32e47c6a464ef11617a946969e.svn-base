@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FirstDroid View TX</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="okString">OK</string>
+    <string name="paymentMethodString">Payment Method</string>
+
+    <string-array name="paymentmethod_array">
+        <item value="3">Credit Card</item>
+        <item value="4">Cash</item>
+        <item value="5">Cheque</item>
+        <item value="6">BACS</item>
+    </string-array>
+
+</resources>

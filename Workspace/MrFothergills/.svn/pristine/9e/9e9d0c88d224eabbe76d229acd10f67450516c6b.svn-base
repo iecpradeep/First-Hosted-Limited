@@ -1,0 +1,33 @@
+<td>
+
+<script type="text/javascript">
+$(document).ready(function(){
+ if (!(page.hasPagination)){
+  page.lowItem = 1;
+  page.highItem++;
+  page.totalItems++;
+  page.updateTotalItems();
+ }
+
+ if ("<%=getCurrentAttribute('item','storeitemtemplate')%>" != ''){
+  $('#itemlistcell<%=getCurrentAttribute('item','internalID')%> .addtocartbtn').hide();
+  $('#itemlistcell<%=getCurrentAttribute('item','internalID')%> .choiceavailablebtn').show();
+ }
+ if ("<%=getCurrentAttribute('item','storeitemtemplate')%>" == "Johnsons COLLECTIONS (item drilldown)"){
+  $('#itemlistcell<%=getCurrentAttribute('item','internalID')%> h3').hide();
+ }
+ if ("<%=getCurrentAttribute('item','storeitemtemplate')%>" == "Johnsons MATRIX (item drilldown)"){
+  $('#itemlistcell<%=getCurrentAttribute('item','internalID')%> h3 .salespricehtml').hide();
+ }
+});
+</script>
+<input type="hidden" id="qty" name="qty" value="1">
+<%=getCurrentAttribute('item','addtocartitemid')%>
+<table style="display:none;"><%=getCurrentAttribute('item','addtocartoptionshtml')%></table>
+<div id="itemlistcell<%=getCurrentAttribute('item','internalID')%>" class="item outline"><a href="<%=getCurrentAttribute('item','storeurl')%>"><img src="<%=getCurrentAttribute('item','custitem_mrf_ext_itemlistthumb')%>" alt="<%=getCurrentAttribute('item','storedisplayname')%>" width="207" height="207"></a><h2><a href="<%=getCurrentAttribute('item','storeurl')%>"><%=getCurrentAttribute('item','storedisplayname')%></a></h2><p><%=getCurrentAttribute('item','storedescription')%></p><h3><%=getCurrentAttribute('item','custitem_mrf_store_pricedesc')%> <span class="salespricehtml"><%=getCurrentAttribute('item','salesPriceHTML')%></span></h3><h4><%=getCurrentAttribute('item','custitem_mrf_store_promodesc')%></h4><div class="buttons"><input type="button" class="button" value="More info" onclick="window.location.href='<%=getCurrentAttribute('item','storeurl')%>';"><input type="submit" class="button addtocartbtn" value="Add to Basket" onkeypress="window.event.cancelBubble=true;" name="addtocart"><input type="button" class="button choiceavailablebtn" style="display:none;" value="Choice Available" onclick="window.location.href='<%=getCurrentAttribute('item','storeurl')%>';"></div><p class="addwishlist"><a href="javascript:AddToWishList('<%=getCurrentAttribute('item','internalID')%>');">Add to Wish List</a></p></div>
+
+<script type="text/javascript">
+window.isvalid=true;function checkmandatory<%=getCurrentAttribute('item','internalID')%>() {if (document.forms['form<%=getCurrentAttribute('item','internalID')%>'].amount) {var amt=document.forms['form<%=getCurrentAttribute('item','internalID')%>'].amount;var max_amt=document.forms['form<%=getCurrentAttribute('item','internalID')%>'].max_amount;if (!validate_field(amt,'poscurrency',true,false,null,null,true,null)) return false;if (max_amt.value &gt; 0.00 &amp;&amp; parseFloat(amt.value) &gt; parseFloat(max_amt.value)) {alert('Invalid amount (exceeds maximum allowed)'); return false; }if (amt.value &lt; 0.01) {alert('Invalid number (must be greater than 0).'); return false; }}if (typeof Item<%=getCurrentAttribute('item','internalID')%>_prices != 'undefined' &amp;&amp; Item<%=getCurrentAttribute('item','internalID')%>_prices!=null) {if (!checkValidOptions<%=getCurrentAttribute('item','internalID')%>()) {alert('Selected option is unavailable.'); return false; }}return window.isvalid ? true : false;}
+</script>
+
+</td>

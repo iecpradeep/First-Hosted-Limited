@@ -1,0 +1,102 @@
+		<hr>
+	<div id="links">
+		<div class="linkcol">
+			<p>Find your way around:</p>
+			<ul>
+				<li><a href="/Flower-Seed/">Flower Seed</a></li>
+				<li><a href="/Flower-Plants/">Flower Plants</a></li>
+				<li><a href="/Pea-and-Bean-Seeds/">Pea and Bean Seeds</a></li>
+				<li><a href="/Vegetable-Seeds/">Vegetable Seeds</a></li>
+				<li><a href="/Vegetable-Plants/">Vegetable Plants</a></li>
+				<li><a href="/Fruit/">Fruit</a></li>
+				<li><a href="/Potatoes/">Potatoes</a></li>
+				<li><a href="/Onions-Garlic/">Onions &amp;amp; Garlic</a></li>
+				<li><a href="/Garden-Equipment/">Garden Equipment</a></li>
+				
+			</ul>
+		</div>
+		<div class="linkcol">
+<p>Orders & Requests:</p>
+			<ul>
+				<li><a href="/Special-Offers.html">Special Offers</a></li>
+				<li><a href="/Catalogue-Request.html">Catalogue Request</a></li>
+				<li><a href="/Quick-Order-Form.html">Quick Order Form</a></li>
+				<li><a href="<NLREGISTRATIONURL>">Email Sign Up</a></li>
+				
+			</ul>
+		</div>
+		<div class="linkcol">
+<p>Information:</p>
+			<ul>
+				<li><a href="/Home/FAQs/">FAQs</a></li>
+				<li><a href="/Contact-Us.html">Customer Services</a></li>
+				<li><a href="/Gardening-Clubs.html">Gardening Clubs</a></li>
+				<li><a href="http://shopping.netsuite.com/s.nl/c.<NLCOMPANYID>/it.I/id.8/.f">P&amp;amp;P</a></li>
+				<li><a href="/Guarantee.html">Guarantee</a></li>
+				<li><a href="/Returns.html">Returns</a></li>
+				<li><a href="/terms.html">Terms &amp;amp; Conditions</a></li>
+				<li><a href="/Site-Security.html">Site Security</a></li>
+				<li><a href="/privacy.html">Privacy Policy</a></li>
+				<li><a href="/Store-Locator.html">Store Locator</a></li>
+				
+				
+				
+				
+			</ul>
+		</div>
+		<div class="linkcol">
+			<p>Help and Advice:</p>
+			<ul>
+				<li><a href="<%=getCurrentAttribute('site','homepageurl')%>">Home</a></li>
+				<li><NLRELOGINLINKHTML>Log in</a></li>
+				<li><NLREGISTRATIONLINKHTML>Registration</a></li>
+				<li><a href="/about.html">About Us</a></li>
+				<li><a href="/Plant-Types.html">Plant Types</a></li>
+				<li><a href="/Home/Growing-Guides/">Growing Guides</a></li>
+				<li><a href="/Guide-to-Abbreviations-and-Symbols.html">Guide to symbols</a></li>
+				<li><a href="/Home/Care-Cultivation/">Care &amp;amp; Cultivation</a></li>
+				<li><a href="/Home/Pests-Disease-Advice/">Pests &amp;amp; Disease Advice</a></li>
+				<li><a href="/Video-Guides/">Video Guides</a></li>
+				<li><a href="/Home/News-Events/">News &amp;amp; Events</a></li>
+<!--<li><a href="/s.nl/c.<NLCOMPANYID>/it.I/id.34/.f">Affiliates</a></li>-->
+				<li><a href="/Home/Help-Advice/Sitemap.html">Site Map</a></li>
+			</ul>
+		</div>
+		<div class="linkcol">
+<p>Trade Enquiries:</p>
+			<ul>
+			<li><a href="/Export-Enquiries/">Export Enquiries</a></li>
+				<li><a href="http://www.mr-fothergills-trade.com" target="_blank">Trade Enquiries</a></li>	
+			<li><a href="/Promotional-Seed-Enquiries/">Promotional Seed Enquiries</a></li>	
+				
+			</ul>
+		</div>
+	</div>
+	<hr>
+	<div id="footer">
+		<h3><a href="/Contact-Us.html">Email us</a> or Telephone: 0845 371 0518</h3>
+		<div id="secure">
+			<p><img src="/site/mrfothergills/img/accepted_cards_new.gif" alt="Accepted Cards"></p>
+			<p><img src="/site/mrfothergills/img/secure.gif" alt="Padlock" id="padlock"> <a href="/Home/FAQs/Is-it-safe-to
+
+-use-my-credit-card-online.html">SSL Secured Site</a></p>
+			<p><a href="http://www.safebuy.org.uk/certificate/c70f1f2b-0540-4a53-b3c6-9c37e81c68e2.html"><img 
+
+src="/site/mrfothergills/img/safebuy.jpg" alt="SafeBuy web code of practice"></a></p>
+		</div>
+		<img src="/site/mrfothergills/img/finest_seeds_112x112.gif" alt="J Fothergill - QUALITY ASSURED - FINEST SEEDS" 
+
+id="qualitymark">
+		<p><%=getCurrentAttribute('site','copyrighthtml')%><br>
+			Company Registration No. 1710774 - VAT No. GB 390 5718 35<br>
+			Registered Address Gazeley Road, Kentford, Suffolk, CB8 7QB</p>
+		<div id="social">
+			<a href="http://www.youtube.com/user/MrFothergillsSeedLtd?feature=watch"><img src="/site/mrfothergills2/img/youtube_32x32.gif" 
+
+alt="Youtube"></a>
+			<!--<a href="http://www.facebook.com/pages/Mr-Fothergills/210612449019355"><img src="/site/mrfothergills2/img/facebook_32x32.gif" alt="Facebook"></a>-->
+			<a href="http://www.twitter.com/mrfothergill"><img src="/site/mrfothergills2/img/twitter_32x32.gif" 
+
+alt="Twitter"></a>
+		</div>
+	</div>

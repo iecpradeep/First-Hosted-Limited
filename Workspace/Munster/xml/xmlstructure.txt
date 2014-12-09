@@ -1,0 +1,53 @@
+<transaction>
+                <body>
+                                <transactionid>121</transactionid>
+                                <customerid>123</customerid>
+                                <customername>Meg Newson</customername>
+                                <typename>SalesOrder</typename>
+                                <typeid>12</typeid>
+                                <date>21/11/2013</date>
+                                <duedate>21/11/2013</duedate>
+                                <salesrepid>14</salesrepid>
+                                <salesrepname>Bumblebee Patterson</salesrepname>
+                                <paymentmethodid>233</paymentmethodid>
+                                <paymentmethodname>Payment on Account</paymentmethodname>
+                                <paymenttermsid>2</paymenttermsid>
+                                <paymenttermsname>Due on receipt</paymenttermsname>
+                                <currencyid>12</currencyid>
+                                <currencyname>GBP</currencyname>
+                                <transactiontotal>10445</transactiontotal>
+
+                                <billaddress>
+                                                <billline1>123 New Street</billline1>
+                                                <billline2>Newtown</billline2>
+                                                <billline3>Newland</billline3>
+                                                <billline4>United Kingdom (GB)</billline4>
+                                                <billpostcode>NL1 1NL</billpostcode>
+                                </billaddress>
+
+                                <shipaddress>
+                                                <shipline1>123 New Street</shipline1>
+                                                <shipline2>Newtown</shipline2>
+                                                <shipline3>Newland</shipline3>
+                                                <shipline4>United Kingdom (GB)</shipline4>
+                                                <shippostcode> NL1 1NL </shippostcode>
+                                </shipaddress>
+                </body>
+                <items>
+                                <item>
+                                                <itemid>123</itemid>
+                                                <itemname>item1</itemname>
+                                                <itemdesc>Number One</itemdesc>
+                                                <itemprice>12.99</itemprice>
+                                                <itemqty>2</itemqty>
+                                </item>
+                                <item>
+                                                <itemid>234</itemid>
+                                                <itemname>Item 2</itemname>
+                                                <itemdesc>Number Two</itemdesc>
+                                                <itemprice>19.99</itemprice>
+                                                <itemqty>4</itemqty>
+                                </item>
+                </items>
+</transaction>
+

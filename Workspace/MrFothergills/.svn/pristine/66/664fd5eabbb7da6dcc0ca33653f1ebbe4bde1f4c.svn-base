@@ -1,0 +1,73 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<script type="text/javascript">var categoryId=<%=getCurrentAttribute('sitecategory','internalid')%>;</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/common/js/slider.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/itemlist.js"></script>
+<!-- End addition_to_head -->
+<td>
+<NLPROCESSONCE>
+	<div id="breadcrumbs">
+		<MRFSOCIALHEADER>
+	</div>
+</NLPROCESSONCE>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+
+<table width="100%">
+<tr>
+<NLSITENAVIGATIONHTML>
+</tr>
+</table>
+
+		</div>
+		<div id="catright">
+			<%=getCurrentAttribute('sitecategory','description')%>
+			<div id="alphalist" class="outline">
+				<p>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=1&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">A</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=2&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">B</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=3&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">C</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=4&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">D</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=5&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">E</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=6&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">F</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=7&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">G</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=8&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">H</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=9&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">I</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=10&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">J</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=11&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">K</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=12&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">L</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=13&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">M</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=14&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">N</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=15&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">O</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=16&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">P</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=17&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">Q</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=18&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">R</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=19&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">S</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=20&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">T</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=21&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">U</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=22&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">V</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=23&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">W</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=24&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">X</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=25&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">Y</a>
+					<a href="/s.nl/c.3322617/it.I/id.25/.f?CUSTITEM_MRF_ITEM_ATOZ=26&Item_CATEGORY=<%=getCurrentAttribute('sitecategory','internalid')%>">Z</a>
+				</p>
+			</div>
+			<div class="spacer5 outline"></div>
+			<div id="pagination1" class="pagination outline">
+				<p><span class="pageTotalItems">1</span> item(s)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Showing Page <span class="pageCurrent">1</span> of <span class="pageTotal">1</span></p>
+				<p class="pager"><a class="pagerprev" href="#">&amp;lt;&amp;lt;Previous</a> <a class="pagernext" href="#">Next&gt;&gt;</a> <select onchange="itemListSort(this);"><option value="">-- Sort by --</option><option value="?sort1desc=F&sort1=Item_NAME">A-Z</option><option value="?sort1desc=F&sort1=Item_ONLINECUSTOMERPRICE">Price</option></select></p>
+			</div>
+			<div class="spacer5 outline"></div>
+			<div id="items" class="outline">
+
+<table width="100%">
+<tr>
+<NLITEMLIST>
+</tr>
+</table>
+
+			</div>
+		</div>
+	</div>
+
+</td>

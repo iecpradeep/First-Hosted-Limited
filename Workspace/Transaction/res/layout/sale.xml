@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+>
+
+    <!-- "HEADER INFORMATION" -->
+    
+    <TextView
+        android:id="@+id/saletype"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="sale type"
+        android:paddingTop="7dp"
+        android:paddingBottom="10dp"
+        android:textAppearance="?android:attr/textAppearanceLarge" 
+        android:textSize="25dp"
+    />
+
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="10dp"
+    >
+    
+	    <TextView
+	        android:id="@+id/customer"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="customer"
+	        android:textAppearance="?android:attr/textAppearanceMedium" 
+	    />
+	
+	    <TextView
+	        android:id="@+id/salesrep"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="sales rep"
+	        android:textAppearance="?android:attr/textAppearanceMedium" 
+	    />
+	
+	    <TextView
+	        android:id="@+id/date"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="date"
+	        android:textAppearance="?android:attr/textAppearanceMedium"
+	    />
+
+    </LinearLayout>
+    
+    <!-- Table for Items -->
+    
+    <LinearLayout 
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1.0"
+    >
+	    <TableLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content"
+		>
+		    
+		    <TableRow 
+		        android:id="@+id/tableRow77"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content" 
+	        >
+	
+	            <TextView
+	                android:id="@+id/textView76"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight=".50"
+	                android:background="@android:color/darker_gray"
+	                android:text="Item"
+	                android:textColor="@android:color/white" 
+	            />
+	
+	            <TextView
+	                android:id="@+id/textView67"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight=".30"
+	                android:background="@android:color/darker_gray"
+	                android:text="Price"
+	                android:textColor="@android:color/white" 
+	            />
+	
+	            <TextView
+	                android:id="@+id/textView56"
+	                android:layout_width="0dp"
+	                android:layout_height="wrap_content"
+	                android:layout_weight=".20"
+	                android:background="@android:color/darker_gray"
+	                android:text="Quantity"
+	                android:textColor="@android:color/white" 
+	            />        
+		    </TableRow>    
+		</TableLayout>
+    </LinearLayout>
+    
+    
+    
+    <!-- List View containing items -->
+    <LinearLayout
+		android:layout_width="match_parent"
+    	android:layout_height="100dp"
+    	android:orientation="horizontal"
+    > 
+       
+	    <ListView
+	        android:id="@+id/itemslist"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:fitsSystemWindows="true" 
+	    />		        
+    </LinearLayout>
+
+    
+    <!-- "FOOTER" information i.e. trantaction total -->
+    <LinearLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp">
+
+	    <TextView
+	        android:id="@+id/trantotal"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="Tran Total"
+	        android:layout_gravity="right"
+	        android:textAppearance="?android:attr/textAppearanceLarge" 
+	    />
+	
+	</LinearLayout>
+    
+    
+    <!-- "OK" and "REMOVE" buttons -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:orientation="horizontal"
+        android:paddingTop="5dp"
+        android:layout_marginBottom="10dp" 
+    >
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:text="OK" 
+            android:drawableLeft="@drawable/tick48"
+        />
+        
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="120dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:text="Remove" 
+            android:drawableLeft="@drawable/cross48"
+        />
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,76 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/common/js/slider.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// Format the breadcrumbs
+	$('#nlcrumbtrail').remove();
+	//$('#breadcrumbs').prepend($('#nlcrumbtrail'));
+	
+	// Featured Products Layout
+	$('.product3').each(function(){
+		$('#products').append(this);
+	});
+	$('.product3:first').addClass('vertical');
+	$('.product3:last').addClass('horizontal');
+	$('#products>table').hide();
+});
+</script>
+<!-- End addition_to_head -->
+<td>
+
+<NLPROCESSONCE>
+	<div id="breadcrumbs"><p><%=getCurrentAttribute('sitecategory','description')%></p>
+		<WLMSOCIALHEADER>
+	</div>
+	<div id="slider">
+		<div id="slide_0" class="slide">
+			<a href="/Garden-Labeller_8.html"><img src="/site/woolmans/img/slider/homebanner_brotherlabeller.jpg" alt=""></a>
+		</div>
+		<div id="slide_1" class="slide">
+			<a href="/Flower-Plants_2/Chrysanthemum-Evesham-Vale.html"><img src="/site/woolmans/img/slider/homebanner_eveshamvale.jpg" alt=""></a>
+		</div>
+		<div id="slide_2" class="slide">
+			<a href="/Flower-Plants_2/Fuchsia-Marbella-Orange-King.html"><img src="/site/woolmans/img/slider/homebanner_fuchsiamarbellaorange.jpg" alt=""></a>
+		</div>
+		<div id="slide_3" class="slide">
+			<a href="/Flower-Plants_2/Geranium-Appleblossom_2.html"><img src="/site/woolmans/img/slider/homebanner_geranium.jpg" alt=""></a>
+		</div>	
+		<div id="slide_4" class="slide">
+			<a href="#"><img src="/site/woolmans/img/slider/homebanner_penstemonpensham.jpg" alt=""></a>
+		</div>	
+		<div id="slide_5" class="slide">
+			<a href="#"><img src="/site/woolmans/img/slider/homebanner_pinkpassion.jpg" alt=""></a>
+		</div>	
+		<div id="slide_6" class="slide">
+			<a href="#"><img src="/site/woolmans/img/slider/homebanner_sweetpea.jpg" alt=""></a>
+		</div>	
+		<!--<div id="slider_control"><img src="/site/woolmans/img/slider_control_84x24.png" alt=""></div>-->
+	</div>
+	<div id="featured">
+		<h2>Our Featured products</h2>
+		<div id="products">
+<table>
+<tr>
+<NLITEMLIST>
+</tr>
+</table>
+		</div>
+		<div class="featuretext shadowbox"><a href="/Home_3/Shopping_2/Catalogue-Request_3.html"><img src="/site/woolmans/img/home/homerh_cataloguerequest.gif" alt="Request a catalogue"></a></div>
+		<div class="featuretext shadowbox"><a href="/Home_3/Guarantee_3/"><img src="/site/woolmans/img/home/homerh_guarantee.gif" alt="Our quality guarantee"></a></div>
+		<div class="featuretext shadowbox"><NLREGISTRATIONLINKHTML><img src="/site/woolmans/img/home/homerh_newsletter.gif" alt="Email newsletter sign-up"></a></div>
+		<div class="featuretext shadowbox"><a href="/Home_3/Shopping_2/Quick-Order-Form_3.html"><img src="/site/woolmans/img/home/homerh_quickorder.gif" alt="Quick order form"></a></div>
+		<div class="featuretext shadowbox"><a href="/Home_3/Growing-Hints/"><img src="/site/woolmans/img/home/homerh_advice.gif" alt="Plant Care &amp; Advice"></a></div>
+	</div>
+	<div id="message">
+		<%=getCurrentAttribute('sitecategory','storedetaileddescription')%>
+	</div>
+	<ul id="menu">
+		<li><a href="/Home_3/Shopping_2/Catalogue-Request_3.html">Request a Catalogue</a></li>
+		<li><a href="/Home_3/Guarantee_3/">Our Guarantee</a></li>
+		<li><NLREGISTRATIONLINKHTML>Newsletter Signup</a></li>
+		<li><a href="/Home_3/Shopping_2/Quick-Order-Form_3.html">Quick Order Form</a></li>
+		<li><a href="/Home_3/Growing-Hints/">Plant Care &amp; Advice</a></li>
+	</ul>
+
+</td>

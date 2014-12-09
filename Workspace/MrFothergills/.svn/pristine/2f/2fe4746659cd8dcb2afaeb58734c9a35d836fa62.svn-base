@@ -1,0 +1,366 @@
+/*************************************************************************************
+ * Name:		outOfStockInventory
+ * 
+ * Script Type:	Scheduled Script
+ *
+ * Version:		1.0.1 - 1st release 10/5/2013 - JM
+ *
+ * Author:		FHL
+ * 
+ * Purpose:		Out of stock for inventory items
+ * 
+ * Script: 		customscript_oosinventory  
+ * Deploy: 		customdeploy_oosinventoryitems  
+ * 
+ * Notes:		dependencies: 	saved search - 'customsearch_oositems'
+ *								saved search - 'customsearch_oosnextpo'	
+ *								field - custitem_stockstatus	- list (Stock Status)
+ *								field - custitem_receiptdate	- date
+ *								field - custitem_applyoos 		- check box			
+ * 				
+ * 
+ * Library: 	library.js
+ *************************************************************************************/
+
+var context = null;
+var statusInStock = '';
+var statusUnderCommitted = '';
+var statusOverCommitted = '';
+var itemRecords = null;
+var itemsSavedSearch = '';
+var nextPoSavedSearch = '';
+var poRecords = null;
+
+function outOfStockInventory()
+{
+	initialise();
+	getAndProcessItems();
+} 
+
+
+/**
+ * 
+ * loop for item processing
+ * 
+ */
+
+function getAndProcessItems()
+{
+
+	try
+	{
+		// run 10 times i.e. deal with 10000 items
+		for(var i=0; i < 9000; i = i + 1000)
+		{
+			nlapiLogExecution('DEBUG', 'getAndProcessItems i', i);
+			if(getItems(i,i+1000)==true)
+			{
+				processItems();
+			}
+		}
+	}
+	catch(e)
+	{
+		errorHandler("getAndProcessItems", e);	
+	}
+
+}
+
+
+/**
+ * 
+ * initialise
+ * 
+ */
+
+function initialise()
+{
+
+	try
+	{
+		statusInStock = '1';
+		statusUnderCommitted = '2';
+		statusOverCommitted = '3';
+		itemsSavedSearch = 'customsearch_oositems';
+		nextPoSavedSearch = 'customsearch_oosnextpo';			// called "OOS Next PO Date **Do Not Delete**"
+	}
+	catch(e)
+	{
+		errorHandler("initialise", e);	
+	}
+
+}
+
+/**
+ * 
+ * get items - run saved search
+ * 
+ */
+
+function getItems(from, to)
+{
+
+	var runSearch = null;
+	var itemRecordSearch = null;
+	var retVal = false;
+
+	try
+	{
+		itemRecordSearch = nlapiLoadSearch('item',itemsSavedSearch);
+
+		runSearch = itemRecordSearch.runSearch();
+
+		//Getting the first 1000 results
+		itemRecords = runSearch.getResults(from,to);
+
+		
+		nlapiLogExecution('DEBUG', 'getItems itemRecords.length', itemRecords.length);
+		
+		if(itemRecords)
+		{
+			retVal = true;
+		}
+
+	}
+	catch(e)
+	{
+		errorHandler("getItems", e);	
+	}
+
+	return retVal;
+}
+
+
+/**
+ * 
+ * process items
+ * 
+ */
+
+function processItems()
+{
+	try
+	{
+		for (var i=0; i < itemRecords.length; i++)
+		{
+			processIndividualItemRecord(itemRecords[i]);
+			dealWithGovernance();
+		}
+	}
+	catch(e)
+	{
+		errorHandler("processItems", e);	
+	}
+}
+
+
+/**
+ * 
+ * process individual item
+ * 
+ */
+
+
+//Disallow back orders but display out of stock messages
+//Allow back orders but display out of stock messages
+//Remove items when out of stock
+//Allow back orders with no out of stock message
+
+function processIndividualItemRecord(searchResult)
+{
+	var itemId = 0;
+	var itemRecord = null;
+	var quantityAvailable = 0;
+	var quantityOnOrder = 0;
+	var quantityBackOrdered = 0;
+	var safetyStockLevel = 0;
+	var nextReceiptDate = null;
+	var saveRequired = false;
+
+	var itemCode = '';
+	var itemDesc = '';
+
+	var submitID = 0;
+
+	try
+	{
+		// load item record
+		itemId = searchResult.getId();
+
+		itemRecord = nlapiLoadRecord('inventoryitem',itemId);
+
+		// determine item stock properties
+		quantityAvailable = FHLParseFloat(itemRecord.getFieldValue('quantityavailable'));
+		quantityOnOrder = FHLParseFloat(itemRecord.getFieldValue('quantityonorder'));
+		quantityBackOrdered = FHLParseFloat(itemRecord.getFieldValue('quantitybackordered'));
+		safetyStockLevel = FHLParseFloat(itemRecord.getFieldValue('safetystocklevel'));
+
+
+		//nlapiLogExecution('DEBUG', 'processIndividualItemRecord itemId:', itemId);
+		//nlapiLogExecution('DEBUG', 'processIndividualItemRecord quantityAvailable:', quantityAvailable);
+		//nlapiLogExecution('DEBUG', 'processIndividualItemRecord quantityOnOrder:', quantityOnOrder);
+		//nlapiLogExecution('DEBUG', 'processIndividualItemRecord quantityBackOrdered:', quantityBackOrdered);
+		//lapiLogExecution('DEBUG', 'processIndividualItemRecord safetyStockLevel:', safetyStockLevel);
+
+		if ((quantityAvailable - quantityBackOrdered) > safetyStockLevel)
+		{
+			itemRecord.setFieldValue('custitem_stockstatus',statusInStock);
+			itemRecord.setFieldValue('outofstockbehavior','Allow back orders with no out-of-stock message');
+			itemRecord.setFieldValue('custitem_mrf_item_expecteddate',null);
+			saveRequired = true;
+		} 
+		else
+		{
+			if ((quantityAvailable + quantityOnOrder - quantityBackOrdered) > safetyStockLevel)
+			{
+				itemRecord.setFieldValue('custitem_stockstatus',statusUnderCommitted);
+				itemRecord.setFieldValue('outofstockbehavior','Allow back orders but display out-of-stock message');
+				nextReceiptDate = getReceiptDate(itemId);
+				itemRecord.setFieldValue('custitem_receiptdate', nextReceiptDate);
+				saveRequired = true;
+			} 
+			else
+			{
+				itemRecord.setFieldValue('custitem_stockstatus',statusOverCommitted);
+				itemRecord.setFieldText('outofstockbehavior','Disallow back orders but display out-of-stock message');
+				itemRecord.setFieldValue('custitem_receiptdate',null);
+				saveRequired = true;
+
+				// send email - introduce a parameter on the script for 3 email addresses to send email to
+				// sendEmail(itemRecord);			
+			}
+		} 
+
+		if(saveRequired == true)
+		{
+			submitID = nlapiSubmitRecord(itemRecord, true);
+			saveRequired = false;
+		}
+
+	}
+	catch(e)
+	{
+		errorHandler("processIndividualItemRecord", e);	
+	}
+
+
+} //function processRecord(itemId)
+
+
+/**
+ * 
+ * get Receipt Date - runs a saved search to find
+ * 
+ */
+function getReceiptDate(itemId)
+{
+
+	var filters  = '';
+	var criteria = null;
+	var searchLines = null;
+	var runSearch = null;
+	var recDate = null;
+
+	// get soonest reveive by/due date from PO for that item -- customsearch_oosnextpo -- needs to be filtered by item and we need earliest date 
+
+	try
+	{
+
+		poRecords = nlapiSearchRecord(null,nextPoSavedSearch);
+
+		//filters are set like this: var criteria =[[ 'customer.salesrep', 'anyOf', -5 ],'and',[ 'department', , 'anyOf', 3 ]];
+
+		criteria = [[ 'item', 'is', itemId]];
+
+		filters = loadSearch.getFilters();
+		loadSearch.setFilterExpression(filters);
+		loadSearch.addFilters(criteria);
+
+		// Running the loaded search
+		runSearch = loadSearch.runSearch();
+
+		// Getting the first 10 results
+		searchLines = runSearch.getResults(0, 10);
+
+		if (searchLines) 
+		{
+			searchResult = searchLines[ 0 ];
+			recDate = searchResult.getValue('duedate');
+		}
+	}
+	catch(e)
+	{
+		errorHandler("getReceiptDate", e);	
+	}
+
+	return recDate;
+} 
+
+
+/**
+ * send email
+ */
+function sendEmail(itemRecord)
+{
+	var itemCode = '';
+	var itemDesc = '';
+	var recipients = '';
+	var subject = '';
+	var body = '';
+
+	try
+	{
+		//Get email addresses from parameters
+		context = nlapiGetContext();
+		recipients = context.getSetting('SCRIPT', 'custscript_oos_recipients');
+		subject = context.getSetting('SCRIPT', 'custscript_oos_subjectline');
+		body = context.getSetting('SCRIPT', 'custscript_oos_recipients');
+
+		//Get item code and description from item record
+		itemCode = itemRecord.getFieldValue('itemid');
+		itemDesc = itemRecord.getFieldValue('displayname');
+
+		//Append item code and description
+		subject = subject + ' ' + itemDesc + ' (' + itemCode + ')';
+		body = body + ' ' + itemDesc + ' (' + itemCode + ')';
+
+		//Send email
+		nlapiSendEmail(-5, recipients, subject, body);
+
+	}
+	catch(e)
+	{
+		errorHandler("sendEmail", e);	
+	}
+} 
+
+/**
+ * deal with governance i.e. yield
+ */
+
+function dealWithGovernance()
+{
+	var retVal = false;
+
+	try
+	{
+		if(setRecoveryPoint()==true)
+		{
+			retVal = true;
+		}
+		
+		if(checkGovernance()==true)
+		{
+			retVal = true;
+		}
+		
+
+	}
+	catch(e)
+	{
+		errorHandler("dealWithGovernance", e);	
+	}
+
+}
+
+

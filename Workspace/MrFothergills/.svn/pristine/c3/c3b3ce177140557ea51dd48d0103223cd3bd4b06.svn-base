@@ -1,0 +1,128 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<!-- End addition_to_head -->
+<td>
+
+<NLPROCESSONCE>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#nlcrumbtrail').remove();
+
+	// Re-format quantity pricing
+	$('.product2 table.bglt').each(function(){
+		var fromPrice = $(this).children().children(':last-child').prev().children(':last-child').html();
+		$(this).hide()
+			.siblings('.buttons').children('.price').html('from ' + fromPrice);
+	});
+	
+	$('#slider').slidesjs({
+		width: 918,
+		height: 280,
+		navigation: false,
+		play: {
+			active: false,
+			effect: 'slide',
+			interval: 5000,
+			auto: true,
+			swap: false,
+			pauseOnHover: true,
+			restartDelay: 0
+		}
+	});
+});
+</script>
+	<div id="special"><p><%=getCurrentAttribute('sitecategory','description')%></p>
+		<MRFSOCIALHEADER2>
+	</div>
+	<div id="slider" style="display:none;">
+		<div id="slide_0" class="slide">
+<a href="/Flower-Plants/Helenium-Wyndley.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/home_wyndley.jpg" alt="Helenium Wyndley"></a>
+			
+		</div>
+		<div id="slide_1" class="slide">
+			<a href="/Flower-Plants/Fragrant-Plant/Lavender-Hidcote_3.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/banner2_home_lavender.jpg" alt="Orders over £25 Lavender Hidcote"></a>
+		</div>
+		<div id="slide_2" class="slide">
+			<a href="/Flower-Plants/Clematis-Rebecca_4.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/banner3_home_clematis.jpg" alt="Orders over £39 Clematis Rebecca evipo016"></a>
+		</div>
+		<div id="slide_3" class="slide">
+			<a href="/Fruit/Fruit-Trees/Apple-Lord-Lambourne_4.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/banner4_home_lambourne.jpg" alt="Fruit Tree Special Offer"></a>
+		</div>
+<div id="slide_4" class="slide">
+			<a href="/Flower-Plants/Polyanthus-Stella-Mixed-F1.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/banner1_home_stella.jpg" alt="Polyanthus Stella Mixed F1"></a>
+		</div>
+	</div>
+	<div id="featured">
+		<div class="features">
+			<div class="featurebox shadowbox">
+				<!--<a href="<%=getAttribute('infoitem',37,'storedescription')%>"><img src="<%=getAttribute('infoitem',37,'storedisplaythumbnail')%>" alt="Product of the week">-->
+<a href="/Flower-Plants/Wallflower-Persian-Carpet-Mixed.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/pow_wallflower.jpg" alt="Wallflower Persian Carpet Mixed">
+					<div class="featurecontent">
+						<%=getAttribute('infoitem',37,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+			<div class="featurebox2 shadowbox">
+				<!--<a href="<%=getAttribute('infoitem',38,'storedescription')%>"><img src="<%=getAttribute('infoitem',38,'storedisplaythumbnail')%>" alt="Featured Product">-->
+<a href="/Flower-Plants/Pansy-Balconita-Collection-Pack.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/pow_balconita.png" alt="Pansy Balconita">
+					<div class="featurecontent lighten">
+						<%=getAttribute('infoitem',38,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+			<div class="featurebox2 shadowbox">
+				<!--<a href="<%=getAttribute('infoitem',39,'storedescription')%>"><img src="<%=getAttribute('infoitem',39,'storedisplaythumbnail')%>" alt="Featured Product">-->
+<a href="http://www.mr-fothergills-test.co.uk/Fruit/Strawberry-Malling-Centenary_3.html"><img src="http://s3-eu-west-1.amazonaws.com/seeds-plants-gardening/websitebanners/MRF/pow_strawberrycentenary.png" alt="">
+					<div class="featurecontent lighten">
+						<%=getAttribute('infoitem',39,'featureddescription')%>
+					</div>
+				</a>
+			</div>
+		</div>
+		<div class="featuretext shadowbox"><a href="/Postage-Packing.html"><img src="/site/mrfothergills2/img/home/rightside_samedaydespatch.jpg" alt="Same Day Despatch"></a></div>
+		<div class="featuretext shadowbox"><a href="/Catalogue-Request.html"><img src="/site/mrfothergills2/img/home/rightside_cataloguerequest.jpg" alt="Request Catalogue"></a></div>
+		<div class="featuretext shadowbox"><a href="/Quick-Order-Form.html"><img src="/site/mrfothergills2/img/home/rightside_quickorder.jpg" alt="Quick Order Form"></a></div>
+		<div class="featuretext shadowbox"><a href="#" class="newsletter"><img src="/site/mrfothergills2/img/home/rightside_newsletter.jpg" alt="Sign up to our Newsletter"></a></div>
+		<div class="featuretext shadowbox"><a href="/Postage-Packing.html"><img src="/site/mrfothergills2/img/home/rightside_freepp.jpg" alt="Free P&amp;P"></a></div>
+	</div>
+	<div id="message">
+		<%=getCurrentAttribute('sitecategory','storedetaileddescription')%>
+	</div>
+	<ul id="menu">
+		<li><a href="/Quick-Order-Form.html">Quick Order Form&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="#" class="newsletter">eNewsletter<br>Sign Up&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/Postage-Packing.html">Free P&amp;P on orders over &amp;pound;50</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/Store-Locator.html">Store Locator&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/Gardening-Clubs.html">Gardening Clubs&gt;</a></li>
+		<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li><a href="/Postage-Packing.html">Same Day Despatch&gt;</a></li>
+		<!--<li class="tabseparator"><img src="/site/mrfothergills2/img/menu_separator_3x45.gif" alt="|"></li>
+		<li class="last"><a href="#">Gardening Blog&gt;</a></li>-->
+	</ul>
+	<ul id="menu2">
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.46/category.288466/SS.288466/ctype.SS/.f">Sowing Now</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/s.nl/c.<NLCOMPANYID>/sc.46/category.288467/SS.288467/ctype.SS/.f">Flower/Harvest</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/Home/News-Events/">News &amp; Events</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/Home/Hints-Tips/">Hints &amp; Tips</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li><a href="/Home/Care-Cultivation/">Care &amp;amp; Cultivation</a></li>
+		<li class="tabseparator"><p>|</p></li>
+		<li class="last"><a href="/Video-Guides">Video Guides</a></li>
+	</ul>
+
+	<div id="products">
+		<h2>Recommended products</h2>
+<table>
+<tr>
+<NLITEMLIST>
+</tr>
+</table>
+	</div>
+
+</td>

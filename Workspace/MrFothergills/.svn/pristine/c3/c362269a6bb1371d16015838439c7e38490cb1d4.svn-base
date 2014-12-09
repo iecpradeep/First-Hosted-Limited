@@ -1,0 +1,286 @@
+/**********************************************************************************************************
+ * Name:        itemSelectorSuitelet.js
+ * Script Type: Suitelet
+ * Client:      Mr Fothergills
+ * 
+ * Version:     1.0.0 - 09 Jan 2013 - first release - AM
+ * 				1.0.1 - 15 Jan 2013 - Addition of function popluateItems - AM
+ * 				1.0.2 - 21 Jan 2013 - Show the user there are no items associated with particular Catalogue - AM
+ * 				1.0.3 - 11 Apr 2013 - Addition of setting size of Items field - LG
+ *  
+ * Author:      FHL
+ * Purpose:     Easy selection of catalogue items.
+ * 
+ * Script:      customscript_itemselectorsuitelet
+ * Deploy:     	customdeploy_itemselectorsuitelet
+ * 
+ * Libraries:   library.js
+ **********************************************************************************************************/
+
+// Global Variables 
+var itemSelect = null;
+var catalogueSelect = null;
+var selectionForm = null;
+var searchResults = null;
+var descriptionSearch = '';
+var descriptionEntered = '';
+var searchCriteriaCatalogue = null;
+
+/**
+ * 
+ * Top-level function called by Script Deployment
+ * 
+ */
+function itemSelector(request, response)
+{
+	var retVal = false;
+	
+	if (request.getMethod() == 'GET')
+	{
+		createSelectionForm();
+		response.writePage(selectionForm);
+	}
+	else
+	{
+		if(getSearchCriteria()==false)
+		{
+			retVal = postItems(request, response);
+		}
+		else
+		{
+			createSelectionForm();
+			
+			populateItems();
+			response.writePage(selectionForm);
+		}
+	}
+	
+	return retVal;
+}
+
+
+/**
+ * 
+ * create catalogue item selection form
+ * 
+ */
+function createSelectionForm()
+{
+	try
+	{
+		//Create selection form
+		selectionForm = nlapiCreateForm('Catalogue Item Selector',true);
+		
+		
+		selectionForm.addSubmitButton('Done');
+		
+		//Create fields
+		catalogueSelect = selectionForm.addField('custpage_catalogueid','select','Catalogue');
+		descriptionSearch = selectionForm.addField('custpage_desc','text','Description');
+		
+		itemSelect = selectionForm.addField('custpage_itemnumbers','multiselect','Items');
+		
+		itemSelect.setDisplaySize(300, 11); //1.0.3 - Addition of setting size of Items field - LG
+		
+		populateCatalogue();
+		
+		
+	}
+	catch(e)
+	{
+		errorHandler('createSelectionForm', e);
+	}
+}
+
+
+/**
+ * 
+ * search Items
+ * 
+ * 
+ */
+function getItems()
+{
+	
+	var retVal = false;
+	
+	try
+	{
+		searchCriteria = request.getParameter('custpage_itemnumbers');
+		
+		if(searchCriteria.length!=0)
+		{
+			retVal = true;
+		}
+		
+	}
+	catch(e)
+	{
+		errorHandler('searchItems ', e);
+	}
+	
+	return retVal;
+}
+
+
+/**
+ * 
+ * get the search criteria entered by the user
+ * 
+ * 
+ */
+function getSearchCriteria()
+{
+	
+	var retVal = false;
+	
+	try
+	{
+		// get the
+		searchCriteriaCatalogue = request.getParameter('custpage_catalogueid');
+		descriptionEntered = request.getParameter('custpage_desc');
+			
+		if(searchCriteriaCatalogue.length != 0 || descriptionSearch.length != 0)
+		{
+			retVal = true;
+		}
+		
+	}
+	catch(e)
+	{
+		errorHandler('getSearchCriteria', e);
+	}
+	
+	return retVal;
+}
+
+
+
+/**
+ * 
+ * Looks up locations to add to location filter field
+ * writePage
+ * 
+ * 
+ */
+function populateCatalogue()
+{
+	// Arrays
+	var searchFilters = new Array();
+	var searchColumns = new Array();
+	var searchResults = null;
+	
+	try
+	{	
+		
+		// filter
+		searchFilters[0] = new nlobjSearchFilter('custrecord_mrf_catalogue_brand', null,  'isnotempty');
+		
+		// return columns
+		searchColumns[0] = new nlobjSearchColumn('internalid');
+		searchColumns[1] = new nlobjSearchColumn('name');
+		
+		// perform search
+		searchResults = nlapiSearchRecord('customrecord_mrf_rec_catalogue', null, searchFilters, searchColumns);
+		
+		catalogueSelect.addSelectOption("", "", false);
+		
+		if(searchResults!=null)
+		{
+			for (var i = 0; i < searchResults.length; i++)
+			{
+				catalogueSelect.addSelectOption(searchResults[i].getValue(searchColumns[0]), searchResults[i].getValue(searchColumns[1]), false);			
+			}
+		}	
+	}
+	catch(e)
+	{
+		errorHandler("populateCatalogue", e);
+	}     	      
+}
+
+
+/**
+ * 
+ * Looks up locations to add to location filter field
+ * writePage
+ * 
+ * 1.0.2 - Lets the user know if there are no items linked to selected Catalogue.
+ * 
+ */
+function populateItems()
+{
+	// Arrays
+	var searchFilters = new Array();
+	var searchColumns = new Array();
+	var searchResults = null;
+	
+	try
+	{	
+		// filter
+		searchFilters[0] = new nlobjSearchFilter('custitem_mrf_item_currentcatalogue', null, 'anyof', searchCriteriaCatalogue);
+
+		if(descriptionEntered.length!=0 && descriptionEntered!=null)
+		{
+			searchFilters[1] = new nlobjSearchFilter('displayname', null, 'contains', descriptionEntered);
+		}
+		
+		// return columns
+		searchColumns[0] = new nlobjSearchColumn('internalid');
+		searchColumns[1] = new nlobjSearchColumn('displayname');
+		
+		// perform search
+		searchResults = nlapiSearchRecord('item', null, searchFilters, searchColumns);
+		
+		if(searchResults != null)
+		{
+			for (var i = 0; i < searchResults.length; i++)
+			{
+				itemSelect.addSelectOption(searchResults[i].getValue(searchColumns[0]), searchResults[i].getValue(searchColumns[1]), false);	
+			}
+		}
+		else
+		{
+			itemSelect.addSelectOption(0, 'There are no Items in this Catalogue');	// 1.0.2
+		}
+	}
+	catch(e)
+	{
+		errorHandler("populateItems", e);
+	}     	      
+}
+
+
+/**
+ * 
+ * @param request
+ * @param response
+ * 
+ */
+function postItems(request, response)
+{
+	var addNewScript = '';
+	var selectedItem = null;
+	var retVal = false;
+	 	
+	try
+	{
+		selectedItem = request.getParameter('custpage_itemnumbers');
+		
+		addNewScript = '<script type="text/javascript">';
+		addNewScript += "window.opener.nlapiSetCurrentLineItemValue(\'item\',\'item\',\'" + selectedItem + "\', true, true);";
+		addNewScript += 'close(); </script>';
+		
+		response.write(addNewScript);
+		
+		retVal = true;		
+	}
+	catch(e)
+	{
+		errorHandler("postItems", e);	
+	}
+	
+	return retVal;
+}
+
+

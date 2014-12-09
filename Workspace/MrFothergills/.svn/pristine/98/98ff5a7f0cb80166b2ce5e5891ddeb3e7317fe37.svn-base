@@ -1,0 +1,25 @@
+<link rel="canonical" href="<%=getCurrentAttribute('sitecategory','canonicalurl')%>">
+<script type="text/javascript">var categoryId=<%=getCurrentAttribute('sitecategory','internalid')%>;</script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/site/common/js/slider.js"></script>
+<script type="text/javascript" src="/site/mrfothergills/js/itemlist.js"></script>
+<!-- End addition_to_head -->
+<td>
+
+	<div id="breadcrumbs">
+		<MRFSOCIALHEADER>
+	</div>
+	<div id="catwrapper" class="outline">
+		<div id="catleft">
+<table width="100%">
+<tr>
+<NLSITENAVIGATIONHTML>
+</tr>
+</table>
+		</div>
+		<div id="catright">
+			<%=getCurrentAttribute('sitecategory','description')%>
+		</div>
+	</div>
+
+</td>

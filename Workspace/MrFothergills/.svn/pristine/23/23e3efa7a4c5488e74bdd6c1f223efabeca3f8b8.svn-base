@@ -1,0 +1,278 @@
+/*****************************************************************************
+ *	Name		:	reverseRevenueInvoice_UE.js
+ *	Script Type	:	user event - After Record Submit "Item Fulfillment". 
+ *	Applies To	: 	item Fulfilment
+ *
+ *	Client		: 	Mr. Fothergills
+ *
+ *	Version		:	1.0.0 - 07/05/2013  First Release - AS
+ *					1.0.1 - 16/05/2013 - making the journals when the status is set to 'Shipped' - AS
+ *
+ * 	Author		:	FHL 
+ * 	Purpose		:	To reverse the deferred revenue that has been reversed in Invoices
+ * 					(create journals for fulfilment line items)
+ * 
+ * 	Script		: 	customscript_reversedrfulfilment  
+ * 	Deploy		:   customdeploy_reversedrfulfilment
+ * 
+ * 	Library		: library.js
+ * 
+ ***************************************************************************/
+
+var DEFERREDREVENUEACCOUNTNUMBER = 0;
+var ItemRevenueAccountIntID = 0;
+var deferredRevenueAccountIntID = 0;
+var customerIntID = 0;
+var departmentIntID = 0;
+var locationIntID = 0;
+var fulfilmentDate = '';
+var fulfilmentID = 0;
+var createdFromrecordIntID = 0;
+var itemIntId = 0;
+var itemRate = 0.00;
+var itemQuantity = 0;
+var itemAmount = 0.00;
+
+/**********************************************************************
+ * calculateKitPackAvgCost Function - the main function
+ * 
+ **********************************************************************/
+function reverseRevenue(type)
+{
+	if(type == 'create' || type == 'edit')
+	{
+		//initialising the static variables use in the script
+		initialise();
+
+		//doing the processing
+		process();
+	}
+
+}
+
+
+/**********************************************************************
+ * initialise Function - initialising the static variables used in the script
+ * 
+ **********************************************************************/
+function initialise()
+{ 
+	var fulfilmentIntID = 0;
+	var fulfillRecord = '';
+
+	try
+	{
+		DEFERREDREVENUEACCOUNTNUMBER = '24160';
+
+		//getting the internal id of the account to be credited
+		deferredRevenueAccountIntID = genericSearch('account', 'number', DEFERREDREVENUEACCOUNTNUMBER);
+
+		//to get the transaction ID of the currently creating record
+		fulfilmentIntID = nlapiGetRecordId();
+		fulfillRecord = nlapiLoadRecord('itemfulfillment', fulfilmentIntID);
+		fulfilmentID = fulfillRecord.getFieldValue('tranid');
+
+	}
+	catch(e)
+	{
+		errorHandler('initialise', e);
+	}
+
+}
+
+
+
+/**********************************************************************
+ * process Function - doing the processing 
+ * 
+ **********************************************************************/
+function process()
+{
+	try
+	{
+		getfulfilFields();
+
+	}
+	catch(e)
+	{
+		errorHandler('process', e);
+	}
+
+}
+
+
+
+
+/**********************************************************************
+ * getfulfilFields Function - get fulfil record fields and posting journals
+ * 
+ * version 1.0.1 - 16/05/2013 - making the journals when the status is set to 'Shipped' - AS
+ * 
+ * NOTE : Status Internal IDs
+ * 		A - Picked
+ * 		B - Packed
+ * 		C - Shipped
+ * 
+ **********************************************************************/
+function getfulfilFields()
+{
+	//declaring local variables
+	var noOfLineItems = 0;
+	var status = '';
+	
+	try
+	{
+		createdFromrecordIntID = nlapiGetFieldValue('createdfrom');
+
+		customerIntID = nlapiGetFieldValue('entity');						//getting customer's internal ID
+		fulfilmentDate = nlapiGetFieldValue('trandate');					//getting fulfilment date
+		status = nlapiGetFieldValue('shipstatus');							//getting status
+		
+		noOfLineItems = nlapiGetLineItemCount('item');						//getting the no of line items 
+
+		//version 1.0.1
+		//if status is shipping
+		if(status == 'C')
+		{
+			//looping through each line item
+			for(var i = 1; i <= noOfLineItems; i++)
+			{
+				itemIntId = nlapiGetLineItemValue('item', 'item', i);			//getting  line item internal id
+				itemQuantity = nlapiGetLineItemValue('item', 'quantity', i);	//getting the amount of the line item		
+				locationIntID = nlapiGetLineItemValue('item', 'location', i);	//getting location int ID
+
+				getSOFieldsAndItemLines();						//calling the getFieldsAndItemLines Function
+				calculatePrice();								//calling calculatePrice function
+				getItemAccountInternalID(itemIntId);			//Calling getItemAccountsInternalIDs function
+				postJournals();									//calling postJournals Function
+			}
+		}
+	}
+	catch(e)
+	{
+		errorHandler('getfulfilFields', e);
+	}
+
+}
+
+
+/**********************************************************************
+ * getSOFieldsAndItemLines Function - getting sales order fields and line items
+ * 
+ **********************************************************************/
+function getSOFieldsAndItemLines()
+{
+	//declaring local variables
+	var noOfSOLineItems = 0;
+	var SOItemIntId =0;
+	var salesOrderRecord = '';
+	var retVal = '';
+
+	try
+	{
+		//loading sales order related to fulfilment
+		salesOrderRecord = nlapiLoadRecord('salesorder', createdFromrecordIntID);
+
+		departmentIntID = salesOrderRecord.getFieldValue('department');			//getting department int ID
+
+		noOfSOLineItems = salesOrderRecord.getLineItemCount('item');			//get no of line items in SO
+
+		//looping through each line item 
+		for(var i = 1; i <= noOfSOLineItems; i++)
+		{
+			SOItemIntId = salesOrderRecord.getLineItemValue('item', 'item', i);		//getting  line item internal id
+
+			//checking whether the item internal IDs are matching
+			if(SOItemIntId == itemIntId)
+			{
+				//getting item rate
+				itemRate = salesOrderRecord.getLineItemValue('item', 'rate', i);		
+				itemRate = parseFloat(itemRate);
+
+				return retVal;
+			}
+		}
+	}
+	catch(e)
+	{
+		errorHandler('getSOFieldsAndItemLines', e);
+	}
+
+}
+
+
+/**********************************************************************
+ * calculatePrice Function - calculating the amount (total amount without VAT) of the item
+ * 
+ * @param itemInternalID - internal id of the item in particular line item
+ **********************************************************************/
+function calculatePrice()
+{
+	try
+	{
+		nlapiLogExecution('audit', 'itemRate calculate Price', itemRate);
+		itemQuantity = parseInt(itemQuantity, 0);
+		itemAmount = itemQuantity * itemRate;
+		itemAmount = convertToFloat(itemAmount);
+
+	}	
+	catch(e)
+	{
+		errorHandler('calculatePrice', e);
+
+	}
+}
+
+/**********************************************************************
+ * getItemAccountInternalID Function - getting the item revenue account
+ * 
+ * @param itemInternalID - internal id of the item in particular line item
+ **********************************************************************/
+function getItemAccountInternalID(itemInternalID)
+{
+	try
+	{
+		//getting revenue account id of the particular item in the line
+		ItemRevenueAccountIntID = nlapiLookupField('item', itemInternalID, 'incomeaccount');
+
+	}	
+	catch(e)
+	{
+		errorHandler('getItemAccountsInternalIDs', e);
+
+	}
+}
+
+
+/**********************************************************************
+ * postJournals Function - creating and posting the journals into NetSuite
+ * 
+ * @param amount - amount of the particular line item (the amount to be debited and credited)
+ **********************************************************************/
+function postJournals()
+{
+	var journalDesc = '';
+
+	try
+	{
+
+		journalDesc = 'Item revenue account to deferred revenue account transfer for Fulfilment: ' +fulfilmentID;
+
+		/*
+		 * Creating the journal - Library Function
+		 * The format is  : createJournal(totalValue, creditingAccount, debitingAccount, dept, location, subsidiary, jClass, invDate, desc, entity)
+		 * 
+		 */
+		nlapiLogExecution('audit', 'itemAmount', itemAmount);
+		nlapiLogExecution('audit', 'rate', itemRate);
+
+		createJournal(itemAmount, ItemRevenueAccountIntID, deferredRevenueAccountIntID, departmentIntID, locationIntID, 0, 0, fulfilmentDate, journalDesc, customerIntID);
+	}
+	catch(e)
+	{
+
+		errorHandler('postJournals', e);
+	}
+
+
+}

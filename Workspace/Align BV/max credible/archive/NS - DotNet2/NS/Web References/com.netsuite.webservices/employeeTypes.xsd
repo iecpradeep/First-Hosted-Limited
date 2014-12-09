@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xsd:schema xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:listEmpTyp="urn:types.employees_2012_1.lists.webservices.netsuite.com" xmlns="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="urn:types.employees_2012_1.lists.webservices.netsuite.com" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <xsd:simpleType name="EmployeePayFrequency">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="_annually" />
+      <xsd:enumeration value="_custom" />
+      <xsd:enumeration value="_daily" />
+      <xsd:enumeration value="_endOfPeriod" />
+      <xsd:enumeration value="_everyFourWeeks" />
+      <xsd:enumeration value="_everyThreeYears" />
+      <xsd:enumeration value="_everyTwoMonths" />
+      <xsd:enumeration value="_everyTwoWeeks" />
+      <xsd:enumeration value="_everyTwoYears" />
+      <xsd:enumeration value="_monthly" />
+      <xsd:enumeration value="_never" />
+      <xsd:enumeration value="_oneTime" />
+      <xsd:enumeration value="_quarterly" />
+      <xsd:enumeration value="_startOfPeriod" />
+      <xsd:enumeration value="_twiceAMonth" />
+      <xsd:enumeration value="_twiceAYear" />
+      <xsd:enumeration value="_weekly" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="EmployeeUseTimeData">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="_wage" />
+      <xsd:enumeration value="_salary" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="EmployeeCommissionPaymentPreference">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="_accountsPayable" />
+      <xsd:enumeration value="_payroll" />
+      <xsd:enumeration value="_systemPreference" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="Gender">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="_omitted" />
+      <xsd:enumeration value="_female" />
+      <xsd:enumeration value="_male" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="EmployeeAccruedTimeAccrualMethod">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="_lumpSums" />
+      <xsd:enumeration value="_perHourWorked" />
+      <xsd:enumeration value="_perPayPeriod" />
+    </xsd:restriction>
+  </xsd:simpleType>
+  <xsd:simpleType name="EmployeeDirectDepositAccountStatus">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="_active" />
+      <xsd:enumeration value="_pending" />
+      <xsd:enumeration value="_verifying" />
+      <xsd:enumeration value="_failed" />
+      <xsd:enumeration value="_inactive" />
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

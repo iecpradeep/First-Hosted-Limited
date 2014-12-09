@@ -1,0 +1,63 @@
+10
+
+dir
+0
+https://80.248.179.66:8443/svn/Test/Align%20BV/max%20credible/NS%20-%20DotNet2/Backup/NS/Properties
+https://80.248.179.66:8443/svn/Test
+add
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3243a8cc-cf6a-474f-a1a0-a7b467b37e11
+
+AssemblyInfo.cs
+file
+
+
+
+add
+
+Settings.settings
+file
+
+
+
+add
+
+Settings.Designer.cs
+file
+
+
+
+add
+
+Resources.resx
+file
+
+
+
+add
+
+Resources.Designer.cs
+file
+
+
+
+add
+

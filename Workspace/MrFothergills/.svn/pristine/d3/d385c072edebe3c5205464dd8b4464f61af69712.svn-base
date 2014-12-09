@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Catalogue Request</title>
+<link href="/c.3322617/site/dtbrown/css/default.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+.input,.inputreq{font-size:inherit !important;color:inherit !important;}
+</style>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script type="text/javascript" src="/c.3322617/site/common/js/WebStoreFinder.js"></script><script type="text/javascript">var pcaAccountCode="MRFOT11112"; var pcaLicenseKey="TM39-PP44-ET44-CG72"; pcaUseUKData = true;</script>
+<script type="text/javascript">
+$(document).ready(function(){
+$('#country').val('GB');
+$('#country').attr('disabled', 'disabled');
+$('#custentity_mrf_cust_brand').val('2');
+$('#custentity_dtb_fruitvegcat_fs_inp').attr('checked', 'checked');
+$('#salutation').val($('#title-select').val());
+$('#title-select').change(function(){
+	$('#salutation').val($(this).val());
+});
+});
+</script>
+</head>
+<body style="background-color:transparent;">
+<div id="iframeouterwrapper">
+<div class="iframecontainer outline" style="margin:0 20px;">
+<NLFORM>
+<h1>Catalogue Request</h1>
+<table style="width:100%;">
+<tr>
+<td style="vertical-align:bottom;"><img src="/c.3322617/site/dtbrown/img/info_item/DTB13_FrontCover.jpg" alt="D.T. Brown Fruit &amp; Veg Catalogue"></td>
+</tr>
+<tr>
+<td><p><NLCUSTENTITY_DTB_FRUITVEGCAT> <label for="custentity_dtb_fruitvegcat_fs_inp">Tick to select</label></p></td>
+</tr>
+</table>
+<p>If you would like to receive a free copy of our current catalogue(s), please complete the form below. </p>
+<p>We regret that we are only able to send catalogues to addresses with a UK postcode. </p>
+<p>If you live at an address within the EU, you can order seed through the web site. Regrettably, we cannot accept orders for non-seed items such as plants, potatoes, fruit, onions, garden equipment or other items for delivery outside the UK. There are NO exceptions to this policy. </p>
+</div>
+<div class="iframecontainer outline" style="margin:20px;">
+<table>
+<tr><td colspan="2"><h2>Name</h2></td></tr>
+<tr style="display:none;"><td width="150"><p>Title </p></td><td><NLSALUTATION></td></tr>
+<tr><td width="150"><p>Title </p></td><td>
+<select id="title-select">
+<option value="Mr">Mr</option>
+<option value="Mrs">Mrs</option>
+<option value="Ms">Ms</option>
+<option value="Miss">Miss</option>
+</select>
+</td></tr>
+<tr><td><p>First Name </p></td><td><NLFIRSTNAME></td></tr>
+<tr><td><p>Last Name </p></td><td><NLLASTNAME></td></tr>
+<tr><td colspan="2"><h2>Address</h2></td></tr>
+<tr><td><p>Postcode </p></td><td><NLZIPCODE></td></tr>
+<tr><td><p>Address 1 </p></td><td><NLADDRESS1></td></tr>
+<tr><td><p>Address 2 </p></td><td><NLADDRESS2></td></tr>
+<tr><td><p>Address 3 </p></td><td><NLADDRESS3></td></tr>
+<tr><td><p>Town/City </p></td><td><NLCITY></td></tr>
+<tr><td><p>County </p></td><td><NLSTATE></td></tr>
+<tr><td><p>Country </p></td><td><NLCOUNTRY></td></tr>
+<tr><td><p>Telephone No. </p></td><td><NLPHONE></td></tr>
+</table>
+<NLCUSTENTITY_MRF_CUST_BRAND>
+<p style="text-align:center;margin-top:10px;"><input type="submit" value="Submit" class="button shadowbox" style="padding:10px 15px;"></p>
+</form>
+</div>
+</div>
+</body>
+</html>

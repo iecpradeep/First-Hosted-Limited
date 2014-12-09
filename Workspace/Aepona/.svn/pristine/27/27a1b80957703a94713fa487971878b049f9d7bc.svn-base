@@ -1,0 +1,188 @@
+/*************************************************************************************
+ * Name:		pr2_editSupplierSuitelet.js
+ * Script Type:	Suitlet
+ *
+ * Version:		1.0.0                     first relase - ???
+ * Version:		1.0.1   - 31/05/20013   - copied script from netsuite and created in SVN. SA
+ *
+ * Author:		[FHL]
+ * 
+ * Purpose:		clientscipt calls this suitlet, when creating PR, if issue to method and the populated information doesnot match then suitlet pop ups to update the details. 
+ * 
+ * Script: 		customscript_pr_editsupplier  
+ * Deploy: 		customdeploy_pr_editsupplier
+ * 
+ * Notes:		[todo - deployment details i.e. form associated etc]
+ * 
+ * Library: 	Libary.js
+ *************************************************************************************/
+
+function updateSupplier(request,response)
+{
+	if ( request.getMethod() == 'GET' )
+	{
+		var SupplierID = request.getParameter('SID');
+		var RequestedField = request.getParameter('UpdateField');
+		var SupplierName = nlapiLookupField('vendor', SupplierID, 'entityid');
+		var SupplierEmail = nlapiLookupField('vendor', SupplierID, 'email');
+		var SupplierPhone = nlapiLookupField('vendor', SupplierID, 'phone');
+		var SupplierFax = nlapiLookupField('vendor', SupplierID, 'fax');
+		var Subsidiary = nlapiLookupField('vendor', SupplierID, 'subsidiary');
+		var SubsidiaryCountry = nlapiLookupField('subsidiary', Subsidiary, 'country');
+		var Add1 = nlapiLookupField('vendor', SupplierID, 'billaddress1');
+		var Add2 = nlapiLookupField('vendor', SupplierID, 'billaddress2');
+		var Add3 = nlapiLookupField('vendor', SupplierID, 'billaddress3');
+		var AddCity = nlapiLookupField('vendor', SupplierID, 'billcity');
+		var AddCSP = nlapiLookupField('vendor', SupplierID, 'billstate');
+		var AddPC = nlapiLookupField('vendor', SupplierID, 'billzipcode');
+		var AddCountry = nlapiLookupField('vendor', SupplierID, 'billcountry');
+
+		var Supplierform = nlapiCreateForm("Supplier");
+		var headergroup = Supplierform.addFieldGroup( 'headerfieldgroup', 'Contact');
+		var detailsgroup = Supplierform.addFieldGroup( 'detailsfieldgroup', 'Email | Phone | Fax');
+		var addressgroup = Supplierform.addFieldGroup( 'addressfieldgroup', 'Address');
+		var frmSuppID = Supplierform.addField('custpage_supplierid', 'text', 'Supplier ID', null, 'headerfieldgroup').setDefaultValue(SupplierID);
+		var frmSuppName = Supplierform.addField('custpage_suppliername', 'text', 'Supplier', null, 'headerfieldgroup').setDefaultValue(SupplierName);
+		var frmSuppEmail = Supplierform.addField('custpage_supplieremail', 'email', 'E Mail', null, 'detailsfieldgroup').setDefaultValue(SupplierEmail);
+		var frmSuppPhone = Supplierform.addField('custpage_supplierphone', 'phone', 'Phone', null, 'detailsfieldgroup').setDefaultValue(SupplierPhone);
+		var frmSuppFax = Supplierform.addField('custpage_supplierfax', 'phone', 'Fax', null, 'detailsfieldgroup').setDefaultValue(SupplierFax);
+		var frmAddLabel = Supplierform.addField('custpage_addlabel', 'text', 'Label', null, 'addressfieldgroup');
+		var frmAddAttention = Supplierform.addField('custpage_addattention', 'text', 'Attention', null, 'addressfieldgroup');
+		var frmAddAddressee = Supplierform.addField('custpage_addaddressee', 'text', 'Addressee', null, 'addressfieldgroup').setDefaultValue(SupplierName);
+		var frmAddPhone = Supplierform.addField('custpage_addphone', 'phone', 'Phone', null, 'addressfieldgroup').setDefaultValue(SupplierPhone);
+		var frmAdd1 = Supplierform.addField('custpage_addaddress1', 'text', 'Address 1', null, 'addressfieldgroup').setDefaultValue(Add1);
+		var frmAdd2 = Supplierform.addField('custpage_addaddress2', 'text', 'Address 2', null, 'addressfieldgroup').setDefaultValue(Add2);
+		var frmAdd3 = Supplierform.addField('custpage_addaddress3', 'text', 'Address 3', null, 'addressfieldgroup').setDefaultValue(Add3);
+		var frmAddCity = Supplierform.addField('custpage_addcity', 'text', 'City', null, 'addressfieldgroup').setDefaultValue(AddCity);
+		var frmAddCSP = Supplierform.addField('custpage_addcsp', 'text', 'County/State/Province', null, 'addressfieldgroup').setDefaultValue(AddCSP);
+		var frmAddPC = Supplierform.addField('custpage_addpostcode', 'text', 'Post Code', null, 'addressfieldgroup').setDefaultValue(AddPC);
+		var frmAddCountry = Supplierform.addField('custpage_addcountry', 'select', 'Country', null, 'addressfieldgroup');
+
+
+		var countrySearchColumns = new Array();
+
+		countrySearchColumns[0] = new nlobjSearchColumn('name');
+		countrySearchColumns[1] = new nlobjSearchColumn('internalid');
+		countrySearchColumns[2] = new nlobjSearchColumn('custrecord_matchid');
+
+		var countrySearchResults = nlapiSearchRecord('customrecord_pr_countires', null, null, countrySearchColumns);
+		nlapiLogExecution('DEBUG', 'countrySearchResults', countrySearchResults.length);
+
+		if (countrySearchResults != null)
+		{                                              
+
+			for (var i = 0; i < countrySearchResults.length; i++)
+			{ 
+				frmAddCountry.addSelectOption(countrySearchResults[i].getValue(countrySearchColumns[2]),countrySearchResults[i].getValue(countrySearchColumns[0]));
+			}         
+		}
+		frmAddCountry.setDefaultValue(SubsidiaryCountry);
+		Supplierform.addSubmitButton('Update Details');
+
+		response.writePage(Supplierform);	
+	}	
+
+	else
+	{			
+		var SupplierID = request.getParameter('custpage_supplierid');
+		var SupplierEmail = request.getParameter('custpage_supplieremail');
+		var SupplierPhone = request.getParameter('custpage_supplierphone');
+		var SupplierFax = request.getParameter('custpage_supplierfax');
+		var AddLabel = request.getParameter('custpage_addlabel');
+		var AddAttention = request.getParameter('custpage_addattention');
+		var AddAddressee = request.getParameter('custpage_addaddressee');
+		var AddPhone = request.getParameter('custpage_addphone');
+		var Add1 = request.getParameter('custpage_addaddress1');
+		var Add2 = request.getParameter('custpage_addaddress2');
+		var Add3 = request.getParameter('custpage_addaddress3');
+		var AddCity = request.getParameter('custpage_addcity');
+		var AddCSP = request.getParameter('custpage_addcsp');
+		var AddPC = request.getParameter('custpage_addpostcode');
+		var AddCountry = request.getParameter('custpage_addcountry');
+
+		var AddressTxt = '';
+
+		if (Add1.length > 0)
+		{
+			AddressTxt+=Add1+'\n';
+		}
+		if (Add2.length > 0)
+		{
+			AddressTxt+=Add2+'\n';
+		}
+		if (Add3.length > 0)
+		{
+			AddressTxt+=Add3+'\n';
+		}
+		if (AddCity.length > 0)
+		{
+			AddressTxt+=AddCity+'\n';
+		}
+		if (AddCSP.length > 0)
+		{
+			AddressTxt+=AddCSP+'\n';
+		}
+		if (AddPC.length > 0)
+		{
+			AddressTxt+=AddPC+'\n';
+		}
+		if (AddCountry.length > 0)
+		{
+			AddressTxt+=AddCountry;
+		}
+
+
+		var SUrecord = nlapiLoadRecord('vendor', SupplierID);
+		SUrecord.setFieldValue('email', SupplierEmail);
+		SUrecord.setFieldValue('phone', SupplierPhone);
+		SUrecord.setFieldValue('fax', SupplierFax);
+		SUrecord.selectNewLineItem('addressbook');
+		SUrecord.setCurrentLineItemValue('addressbook','attention', AddAttention);
+		SUrecord.setCurrentLineItemValue('addressbook','label', AddLabel);
+		SUrecord.setCurrentLineItemValue('addressbook','adressee', AddAddressee);
+		SUrecord.setCurrentLineItemValue('addressbook','addr1', Add1);
+		SUrecord.setCurrentLineItemValue('addressbook','addr2', Add2);
+		SUrecord.setCurrentLineItemValue('addressbook','addr3', Add3);
+		SUrecord.setCurrentLineItemValue('addressbook','city', AddCity);
+		SUrecord.setCurrentLineItemValue('addressbook','state', AddCSP);
+		SUrecord.setCurrentLineItemValue('addressbook','zip', AddPC);
+		SUrecord.setCurrentLineItemValue('addressbook','country', 'GB');
+		SUrecord.setCurrentLineItemValue('addressbook','defaultbilling', 'T');
+		SUrecord.setCurrentLineItemValue('addressbook','defaultshipping', 'T');
+		SUrecord.commitLineItem('addressbook');
+		var SUid = nlapiSubmitRecord(SUrecord);	
+
+		AddressTxt = escapeString(AddressTxt);
+
+		var scripthtml = '<html><script>';
+
+		scripthtml+='window.opener.nlapiSetFieldValue("custbody_pr_supplier_email", "'+SupplierEmail+'");';
+		scripthtml+='window.opener.nlapiSetFieldValue("custbody_pr_supplier_phone", "'+SupplierPhone+'");';
+		scripthtml+='window.opener.nlapiSetFieldValue("custbody_pr_supplier_fax", "'+SupplierFax+'");';
+		scripthtml+='window.opener.nlapiSetFieldValue("billaddress", "'+AddressTxt+'");';
+		scripthtml+='window.close();';
+		scripthtml+='</script></html>';
+
+		response.write(scripthtml);
+	}
+
+}
+
+function escapeString(str)
+{
+
+	str=str.replace(/\n/g,'\\n');
+	str=str.replace(/\r/g,'');
+
+	return str;
+}
+
+
+
+function reduceString(str)
+{
+	str=str.replace(/\n/g,' ');
+	str=str.replace(/\r/g,'');
+
+	return str;
+}
